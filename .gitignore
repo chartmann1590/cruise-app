@@ -1,0 +1,29 @@
+# Gradle
+.gradle/
+build/
+app/build/
+**/build/
+
+# Local config
+local.properties
+*.keystore
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Screenshots and test artifacts (generated during device testing)
+/screenshot*.png
+/dump*.xml
+/H*.png
+/build*.log
+/screenshot_*.png
+
+# OS
+Thumbs.db
+
+# Keystore
+*.jks
