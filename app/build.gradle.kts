@@ -6,10 +6,10 @@ plugins {
 }
 
 android {
-    namespace = "com.cruiseapp"
+    namespace = "com.charles.cruiseapp"
     compileSdk = 35
     defaultConfig {
-        applicationId = "com.cruiseapp"
+        applicationId = "com.charles.cruiseapp"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
