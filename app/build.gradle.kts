@@ -34,6 +34,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
@@ -51,8 +52,9 @@ dependencies {
     val lifecycleVersion = "2.8.6"
     val navVersion = "2.8.4"
 
-    // Firebase BOM + Crashlytics + Performance + Analytics (required)
-    implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+    // Firebase BOM + Crashlytics + Performance + Analytics (required for Crashlytics/Perf)
+    // Using BOM 32.7.4 to stay compatible with Kotlin 1.9.22 (AGP 8.3.2). Newer 33.x requires Kotlin 2.1.
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-perf-ktx")

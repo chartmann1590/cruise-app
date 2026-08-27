@@ -8,12 +8,20 @@ app/build/
 local.properties
 *.keystore
 
+# Firebase - keep example in repo, never commit real google-services.json for public builds
+app/google-services.json
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
 # IDE
 .idea/
 *.iml
 *.ipr
 *.iws
 .DS_Store
+*.hprof
 
 # Screenshots and test artifacts (generated during device testing)
 /screenshot*.png
@@ -27,3 +35,12 @@ Thumbs.db
 
 # Keystore
 *.jks
+*.p12
+*.keystore
+release.keystore
+upload-keystore.jks
+
+# Env & secrets
+.env
+.env.local
+secrets.properties

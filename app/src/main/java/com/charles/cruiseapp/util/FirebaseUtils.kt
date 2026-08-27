@@ -75,7 +75,7 @@ object FirebaseCrashlyticsUtils {
 
 object FirebasePerfUtils {
 
-    private const val TAG = "FirebasePerf"
+    @PublishedApi internal const val TAG = "FirebasePerf"
 
     /** Start a custom trace. Caller must call trace.stop() in finally. */
     fun startTrace(name: String): Trace? {

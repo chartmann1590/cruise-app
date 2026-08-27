@@ -3,5 +3,24 @@
     "symbols": {
       "mappingFile": "app/build/outputs/mapping/release/mapping.txt"
     }
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|webp|svg)",
+        "headers": [{ "key": "Cache-Control", "value": "max-age=31536000" }]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [{ "key": "Cache-Control", "value": "max-age=86400" }]
+      }
+    ],
+    "rewrites": [
+      { "source": "/privacy", "destination": "/privacy.html" }
+    ]
   }
 }

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — Cruise Planner</title>
+<meta name="description" content="Privacy Policy for Cruise Planner (com.charles.cruiseapp) — offline-first, no server, Firebase Crashlytics & Performance disclosure.">
+<meta name="theme-color" content="#0B1E3B">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230B1E3B'/><text y='62' x='50' text-anchor='middle' font-size='56'>🚢</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<nav>
+  <div class="container nav-inner">
+    <a class="brand" href="/"><span class="brand-mark">🚢</span><span>Cruise Planner</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/#features">Features</a>
+      <a href="/#screenshots">Screenshots</a>
+      <a href="/privacy.html" style="color:var(--navy)">Privacy</a>
+    </div>
+    <div class="nav-cta"><a class="btn btn-secondary" href="/" style="padding:10px 16px;font-size:14px">← Back to app</a></div>
+  </div>
+</nav>
+
+<section style="padding-bottom:24px">
+  <div class="container prose">
+    <span class="badge">Legal • Last updated: August 27, 2026</span>
+    <h1>Privacy Policy</h1>
+    <p class="muted">For <b>Cruise Planner</b> (<code>com.charles.cruiseapp</code>) — Offline-First Cruise Companion. This policy explains what we collect, what stays on your device, and how Firebase and Open-Meteo are used.</p>
+
+    <div class="callout">
+      <div style="font-size:22px">🔒</div>
+      <div><strong>TL;DR:</strong> Your cruises, ports, events and party chats stay <b>on your device</b> (Room DB). We run no server. We use Firebase <b>Crashlytics</b> (crash reports) and <b>Performance Monitoring</b> (speed traces) — both anonymized — and Open-Meteo for weather (lat/lon only). No ads, no trackers, no sale of data.</div>
+    </div>
+
+    <div class="toc">
+      <strong>Contents</strong>
+      <ol>
+        <li><a href="#overview">Overview & contact</a></li>
+        <li><a href="#local">What stays on your device</a></li>
+        <li><a href="#firebase">Firebase Crashlytics & Performance</a></li>
+        <li><a href="#openmeteo">Open-Meteo weather & geocoding</a></li>
+        <li><a href="#nearby">Nearby Connections (offline chat)</a></li>
+        <li><a href="#permissions">Permissions we request & why</a></li>
+        <li><a href="#data">Data we collect — table</a></li>
+        <li><a href="#retention">Retention & deletion</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#rights">Your rights & choices</a></li>
+        <li><a href="#changes">Changes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </div>
+
+    <h2 id="overview">1. Overview & controller</h2>
+    <p><b>App:</b> Cruise Planner, package <code>com.charles.cruiseapp</code>, Android minSdk 26, targetSdk 35, v1.0.</p>
+    <p><b>Controller:</b> Charles (private project <a href="https://github.com/chartmann1590/cruise-app" target="_blank">chartmann1590/cruise-app</a>). This is a personal, non-commercial app distributed as APK. There is no corporate entity behind data processing.</p>
+    <p><b>Hosting:</b> This website is hosted on <b>Firebase Hosting</b> (<code>cruise-app-2026.web.app</code>). Firebase Hosting logs standard access logs (IP, user-agent) for operations — see Google's privacy policy.</p>
+    <p><b>Effective:</b> August 27, 2026. If you do not agree, do not install or use the app.</p>
+
+    <h2 id="local">2. What stays on your device (offline-first)</h2>
+    <p>The app is <b>offline-first</b>. Room database <code>cruise_db</code> v3 is the source of truth and lives only on your phone. Nothing is uploaded to our servers — because we run none.</p>
+    <ul>
+      <li><b>Cruise</b>: ship name, start/end dates (midnight-normalized).</li>
+      <li><b>PortStop</b>: name, latitude/longitude, arrival/departure, country, orderIndex.</li>
+      <li><b>PlannedEvent</b>: title, dateMillis, startTimeMillis, location, category, reminderMinutesBefore (1–60), description.</li>
+      <li><b>PartyMember</b>: displayName, isSelf, persistent <code>code</code> (UUID), endpointId, stored in <code>cruise_party_prefs</code> via SharedPreferences.</li>
+      <li><b>Message</b>: clientMessageId (UUID), senderName, text, timestamp, isFromSelf, status (PENDING→SENT→DELIVERED→READ), targetCode/targetName, retryCount. Chat text is P2P only.</li>
+      <li><b>WeatherCache</b>: portStopId, fetchedAt, json blob, tempMax/Min, weatherCode, summary — 3h TTL.</li>
+    </ul>
+    <p>Fallback is <code>fallbackToDestructiveMigration()</code>. You can clear data at any time via Android Settings → Apps → Cruise Planner → Storage → Clear Data, or uninstall. We do not back up your Room DB to Google backup by default beyond the standard <code>allowBackup:true</code> — disable backups if you prefer.</p>
+    <div class="callout"><div>ℹ️</div><div><b>No mock data:</b> Fresh install shows <i>Welcome Aboard! → Create Cruise</i> only. <code>DebugInjectorActivity</code> is an exported test helper that injects demo “Island Princess” data only when you launch it with extras — not auto-run.</div></div>
+
+    <h2 id="firebase">3. Firebase Crashlytics &amp; Performance Monitoring</h2>
+    <p>We use <b>Firebase Crashlytics</b> and <b>Firebase Performance Monitoring</b> (Google LLC) to keep the app stable and fast. Both are enabled via <code>google-services.json</code> (project <code>cruise-app-2026</code>, app <code>1:142214388007:android:adb81f9e0787ff0f8a3102</code>) with SDKs:</p>
+    <ul>
+      <li><code>firebase-bom:32.7.4</code> + <code>firebase-analytics-ktx</code> (required), <code>firebase-crashlytics-ktx</code>, <code>firebase-perf-ktx</code></li>
+      <li>Gradle plugins: <code>com.google.gms.google-services:4.4.2</code>, <code>com.google.firebase.crashlytics:2.9.9</code>, <code>firebase-perf:1.4.2</code></li>
+    </ul>
+    <h3>What they collect</h3>
+    <table>
+      <tr><th>Service</th><th>Data</th><th>Purpose</th></tr>
+      <tr><td>Crashlytics</td><td>Crash stack traces, exception messages, device model/OS version (Build.VERSION.SDK_INT), app version/build type, anonymized installation ID, breadcrumb logs (<code>FirebaseCrashlytics.log()</code>), custom keys (e.g., <code>app_version</code>, <code>party_self_code: first 8 chars</code>), user ID = your local party <code>code</code> (UUID, not email)</td><td>Diagnose crashes & non-fatals (e.g., weather fetch failure, Nearby send failure). Logged to <code>CruiseApplication.kt:11</code> and <code>FirebaseUtils.kt:1</code>.</td></tr>
+      <tr><td>Performance</td><td>App start trace (<code>app_startup</code>), custom traces (<code>weather_forecast_fetch</code>, <code>geocoding_search</code>, <code>create_cruise</code>, <code>nearby_*</code>, <code>party_*</code>), duration_ms, success/error metrics, attributes (ship_name truncated 50c, port name, etc.), HTTP metrics for <code>api.open-meteo.com</code> (URL/method/response code/payload size), automatic screen &amp; network traces.</td><td>Measure speed, success rates, where the app slows.</td></tr>
+      <tr><td>Analytics (core)</td><td>Firebase Analytics is a dependency of Crashlytics/Performance; collects anonymized usage, session, device, OS. No events with personal cruise content.</td><td>Required by SDK; we send no custom purchase/ads events.</td></tr>
+    </table>
+    <p><b>Opt-out:</b> We call <code>setCrashlyticsCollectionEnabled(true)</code> and <code>isPerformanceCollectionEnabled=true</code> in <code>CruiseApplication.kt:11</code>. Disable via Android: uninstall or block at OS level (no in-app toggle in v1.0 — planned). Data is <b>not linked to your identity</b> (no email, name, advertiser ID). User ID is a random UUID stored in <code>cruise_party_prefs</code>.</p>
+    <p><b>Processing:</b> Google processes crash/perf data under its terms (<a href="https://firebase.google.com/support/privacy" target="_blank">firebase.google.com/support/privacy</a>). Data may be stored in the US. Retention ~90 days (Crashlytics) and ~recent traces for Performance.</p>
+
+    <h2 id="openmeteo">4. Open-Meteo weather &amp; geocoding</h2>
+    <p>When you add a port or view weather, the app calls:</p>
+    <ul>
+      <li><code>https://geocoding-api.open-meteo.com/v1/search?name={your text}&amp;count=5</code> — to resolve city → lat/lon</li>
+      <li><code>https://api.open-meteo.com/v1/forecast?latitude={lat}&amp;longitude={lon}&amp;daily=temperature_2m_max,...&amp;current=temperature_2m,weather_code&amp;timezone=auto&amp;forecast_days=7</code> — no <code>apikey</code> param</li>
+    </ul>
+    <p>This is a <b>direct request from your device to Open-Meteo</b>. We do not proxy or log it. Your query text and lat/lon are sent to Open-Meteo per their privacy policy and <code>CC BY 4.0</code> attribution (shown in <code>WeatherCard.kt</code>). They may log IP &amp; request. Pull once on port Wi-Fi, then the response is cached 3h in <code>WeatherCache</code> for offline sea days. Block via firewall or skip weather if you prefer not to share location.</p>
+
+    <h2 id="nearby">5. Nearby Connections — offline party chat</h2>
+    <p>Party chat uses Google Play Services <b>Nearby Connections</b> <code>Strategy.P2P_CLUSTER</code> — an encrypted peer-to-peer mesh over Bluetooth + BLE + Wi-Fi Direct. No internet, no server, ~100m per hop.</p>
+    <ul>
+      <li>Advertising/discovery name is <code>"{displayName}|{code}"</code> or JSON <code>{"n":name,"c":code}</code>. Peers see your chosen display name only.</li>
+      <li>Payloads are <code>WireMessage</code> serialized via kotlinx.serialization, sent via <code>Payload.fromBytes()</code>. Receipts are <code>DELIVERED/READ</code>.</li>
+      <li>Messages are stored in Room <code>Message</code> with <code>retryJob</code> every 5s until delivered. No message leaves Bluetooth/Wi-Fi Direct range.</li>
+      <li>We do not relay chats through any server. Google's Nearby stack handles encryption; see <a href="https://developers.google.com/nearby/connections/overview" target="_blank">Nearby Connections overview</a>.</li>
+    </ul>
+    <p><b>QR identity:</b> Your QR is generated locally via ZXing <code>QRCodeWriter</code> (no upload). Scanning adds <code>PartyMember</code> with that code. No contacts are uploaded.</p>
+
+    <h2 id="permissions">6. Permissions we request &amp; why</h2>
+    <table>
+      <tr><th>Permission</th><th>Why</th><th>Optional?</th></tr>
+      <tr><td>INTERNET, ACCESS_NETWORK_STATE</td><td>Weather/geocoding + Firebase Crashlytics/Performance upload (when online). App works offline without them.</td><td>Denial: weather &amp; crash reporting fail, but itinerary/chat still work.</td></tr>
+      <tr><td>POST_NOTIFICATIONS</td><td>Show event reminders on <code>cruise_reminders</code> &amp; party messages (<code>PARTY_CHANNEL</code>).</td><td>Android 13+: you can deny; reminders silent.</td></tr>
+      <tr><td>SCHEDULE_EXACT_ALARM, USE_EXACT_ALARM, RECEIVE_BOOT_COMPLETED, VIBRATE</td><td><code>AlarmManager.setExactAndAllowWhileIdle</code> per event; reschedule after reboot.</td><td>Denial disables exact reminders.</td></tr>
+      <tr><td>BLUETOOTH_SCAN, BLUETOOTH_ADVERTISE, BLUETOOTH_CONNECT, NEARBY_WIFI_DEVICES, ACCESS_WIFI_STATE, CHANGE_WIFI_STATE, BLUETOOTH / BLUETOOTH_ADMIN (maxSdk 30), ACCESS_FINE/COARSE_LOCATION (maxSdk 30)</td><td>Nearby Connections needs to scan/advertise/connect over BT/BLE/Wi-Fi Direct. On Android ≤10 location was required for BT scan (we set <code>neverForLocation</code> where supported).</td><td>Denial: party chat disabled.</td></tr>
+      <tr><td>CAMERA + hardware.camera (required false)</td><td>Scan QR via <code>zxing-android-embedded:4.3.0</code> + <code>zxing:core:3.5.3</code> <code>ScanContract</code>.</td><td>Denial: add party members by typing code or manual add.</td></tr>
+    </table>
+    <p>We never request READ_CONTACTS, LOCATION (beyond Nearby legacy), or STORAGE.</p>
+
+    <h2 id="data">7. Data we collect — summary table</h2>
+    <table>
+      <tr><th>Category</th><th>Collected?</th><th>Details</th><th>Shared?</th></tr>
+      <tr><td>Cruise / ports / events / messages you create</td><td>❌ Not collected</td><td>Local Room only. Never to our server (we have none). Export only if you choose (e.g., screenshot).</td><td>No</td></tr>
+      <tr><td>Crash stack traces &amp; perf traces</td><td>✅ Yes, anonymized</td><td>Via Firebase Crashlytics/Performance as above. No email, no advertiser ID. User ID = random UUID.</td><td>Google Firebase only</td></tr>
+      <tr><td>Weather queries (text, lat/lon, IP)</td><td>✅ When you use weather</td><td>Sent directly to Open-Meteo per their policy. Cached.</td><td>Open-Meteo only</td></tr>
+      <tr><td>Bluetooth peer names/codes &amp; chat content</td><td>❌ Not collected by us</td><td>P2P encrypted between your devices; stored locally.</td><td>No</td></tr>
+      <tr><td>Hosting access logs (IP, UA) on this site</td><td>✅ By Firebase Hosting</td><td>Automatically for operations; not used for profiling.</td><td>Google</td></tr>
+    </table>
+    <p>We do not sell, rent, or trade data. No ads, no third-party trackers beyond Google Firebase and Open-Meteo as disclosed.</p>
+
+    <h2 id="retention">8. Retention &amp; deletion</h2>
+    <ul>
+      <li><b>Local Room:</b> until you clear app data or uninstall. No remote copy.</li>
+      <li><b>SharedPreferences <code>cruise_party_prefs</code>:</b> same — clearing removes self_code/self_name.</li>
+      <li><b>Firebase Crashlytics:</b> Google retains crash data ~90 days then aggregates. Request deletion by uninstalling and emailing contact to request removal of associated crash logs by installation ID (provide your UUID from Settings if exposed in future update).</li>
+      <li><b>Performance:</b> trace aggregates retained per Firebase defaults.</li>
+      <li><b>Open-Meteo:</b> per their retention; we don't store their logs.</li>
+    </ul>
+
+    <h2 id="security">9. Security</h2>
+    <p>Local DB uses Android app-private storage. Nearby Connections is encrypted by Google Play Services. Weather uses HTTPS. Firebase uses TLS. No app-level encryption of Room at rest in v1.0 — device encryption (Android file-based) is relied upon. Report issues via GitHub or contact email.</p>
+
+    <h2 id="children">10. Children</h2>
+    <p>The app is not directed to children under 13 and does not knowingly collect personal data from children. It is for travelers planning cruises (general audience). If you believe a child’s data was sent via Crashlytics (e.g., a display name containing a child's name you typed), uninstall and contact us to request deletion.</p>
+
+    <h2 id="rights">11. Your rights &amp; choices</h2>
+    <ul>
+      <li><b>Withdraw consent:</b> Uninstall or deny permissions (POST_NOTIFICATIONS, CAMERA, NEARBY). In v1.0 there is no in-app Crashlytics toggle — we plan to add one; until then, network-blocking (disable internet for the app) prevents uploads.</li>
+      <li><b>Access / correction:</b> All your cruise data is in-app and editable (add/edit/delete events, ports, messages, party members).</li>
+      <li><b>Export / deletion:</b> Clear storage or uninstall deletes everything locally. For Firebase crash logs, email us with your <code>self_code</code> (Settings → long-press QR) and we will request deletion from Firebase console.</li>
+      <li><b>Do Not Track:</b> No tracking across sites; we ignore DNT headers.</li>
+      <li><b>Region:</b> No geo-specific logic in v1.0; GDPR/CCPA rights as above. Data may be processed in US (Google).</li>
+    </ul>
+
+    <h2 id="changes">12. Changes to this policy</h2>
+    <p>We will update the date above and, for material changes, bump <code>versionName</code> and note in GitHub releases. Hosting shows this always at <code>/privacy</code>. Check occasionally.</p>
+
+    <h2 id="contact">13. Contact</h2>
+    <p>Questions, requests, or takedown: open an issue at <a href="https://github.com/chartmann1590/cruise-app/issues" target="_blank">github.com/chartmann1590/cruise-app</a> or email the maintainer via GitHub profile. For Firebase-related deletion requests, include your installation UUID (<code>self_code</code>) and app version.</p>
+    <p class="small">This policy does not replace Google's (<a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a>) or Open-Meteo's privacy policies. We are not affiliated with Open-Meteo, Google Nearby, or any cruise line.</p>
+
+    <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-primary" href="/">← Back to Cruise Planner</a>
+      <a class="btn btn-secondary" href="https://github.com/chartmann1590/cruise-app" target="_blank">View source</a>
+    </div>
+    <p class="small" style="margin-top:18px">© 2026 Cruise Planner • <code>cruise-app-2026.web.app</code> • Firebase project <code>cruise-app-2026</code> (142214388007)</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot-bottom" style="margin-top:0;border-top:none;padding-top:18px">
+    <span>© 2026 Cruise Planner <a href="/privacy.html" style="text-decoration:underline">Privacy</a> • <a href="/" style="text-decoration:underline">Home</a></span>
+    <span><a href="https://console.firebase.google.com/project/cruise-app-2026/overview" target="_blank">Firebase console</a></span>
+  </div>
+</footer>
+</body>
+</html>

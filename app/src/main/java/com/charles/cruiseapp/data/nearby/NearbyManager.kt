@@ -126,6 +126,7 @@ class NearbyManager(private val context: Context) {
     private val endpointDiscoveryCallback = object : EndpointDiscoveryCallback() {
         override fun onEndpointFound(endpointId: String, info: DiscoveredEndpointInfo) {
             val (name, code) = parseNameAndCode(info.endpointName)
+            FirebaseCrashlyticsUtils.log("Nearby discovered $name ($endpointId)")
             val current = _discovered.value
             if (current.none { it.id == endpointId }) {
                 _discovered.value = current + DiscoveredEndpoint(endpointId, name, code)
@@ -134,37 +135,54 @@ class NearbyManager(private val context: Context) {
         }
         override fun onEndpointLost(endpointId: String) {
             _discovered.value = _discovered.value.filter { it.id != endpointId }
+            FirebaseCrashlyticsUtils.log("Nearby lost endpoint $endpointId")
         }
     }
 
     private val payloadCallback = object : PayloadCallback() {
         override fun onPayloadReceived(endpointId: String, payload: Payload) {
-            payload.asBytes()?.let { bytes ->
-                val str = String(bytes)
-                // Try WireMessage first
-                try {
-                    val wire = json.decodeFromString<WireMessage>(str)
-                    // dispatch
-                    _incomingWire.value = _incomingWire.value + wire
-                    onWireReceived?.invoke(wire, endpointId)
-                    // also for UI legacy
-                    if (wire.type == "CHAT") {
-                        _messages.value = _messages.value + ChatPayloadLegacy(sender = wire.sender, text = wire.text, timestamp = wire.timestamp)
+            val trace = FirebasePerfUtils.startTrace("nearby_payload_received")
+            trace?.putAttribute("endpoint", endpointId)
+            try {
+                payload.asBytes()?.let { bytes ->
+                    val str = String(bytes)
+                    FirebaseCrashlyticsUtils.log("Nearby payload from $endpointId size=${bytes.size}")
+                    // Try WireMessage first
+                    try {
+                        val wire = json.decodeFromString<WireMessage>(str)
+                        // dispatch
+                        _incomingWire.value = _incomingWire.value + wire
+                        onWireReceived?.invoke(wire, endpointId)
+                        // also for UI legacy
+                        if (wire.type == "CHAT") {
+                            _messages.value = _messages.value + ChatPayloadLegacy(sender = wire.sender, text = wire.text, timestamp = wire.timestamp)
+                        }
+                        trace?.putMetric("wire_message", 1)
+                        trace?.putAttribute("type", wire.type)
+                        return@let
+                    } catch (e: Exception) {
+                        FirebaseCrashlyticsUtils.recordException(e)
+                        // try legacy
                     }
-                    return@let
-                } catch (_: Exception) {
-                    // try legacy
+                    try {
+                        val chat = json.decodeFromString<ChatPayloadLegacy>(str)
+                        _messages.value = _messages.value + chat
+                        // convert to wire for uniform handling
+                        val wire = WireMessage(type = "CHAT", messageId = "legacy-${System.currentTimeMillis()}", sender = chat.sender, text = chat.text, timestamp = chat.timestamp)
+                        onWireReceived?.invoke(wire, endpointId)
+                        trace?.putMetric("legacy_message", 1)
+                    } catch (e: Exception) {
+                        FirebaseCrashlyticsUtils.recordException(e)
+                        val chat = ChatPayloadLegacy(sender = endpointNames[endpointId] ?: endpointId, text = str)
+                        _messages.value = _messages.value + chat
+                        trace?.putMetric("raw_message", 1)
+                    }
                 }
-                try {
-                    val chat = json.decodeFromString<ChatPayloadLegacy>(str)
-                    _messages.value = _messages.value + chat
-                    // convert to wire for uniform handling
-                    val wire = WireMessage(type = "CHAT", messageId = "legacy-${System.currentTimeMillis()}", sender = chat.sender, text = chat.text, timestamp = chat.timestamp)
-                    onWireReceived?.invoke(wire, endpointId)
-                } catch (e: Exception) {
-                    val chat = ChatPayloadLegacy(sender = endpointNames[endpointId] ?: endpointId, text = str)
-                    _messages.value = _messages.value + chat
-                }
+            } catch (e: Exception) {
+                FirebaseCrashlyticsUtils.recordException(e)
+                trace?.putMetric("error", 1)
+            } finally {
+                try { trace?.stop() } catch (_: Exception) {}
             }
         }
         override fun onPayloadTransferUpdate(endpointId: String, update: PayloadTransferUpdate) {}
@@ -180,10 +198,23 @@ class NearbyManager(private val context: Context) {
         localName = name
         val advertiseName = if (localCode.isNotBlank()) "$name|$localCode" else name
         _status.value = "Advertising as $name..."
+        FirebaseCrashlyticsUtils.log("Nearby startAdvertising $name")
+        val trace = FirebasePerfUtils.startTrace("nearby_start_advertising")
         val options = AdvertisingOptions.Builder().setStrategy(STRATEGY).build()
         connectionsClient.startAdvertising(advertiseName, SERVICE_ID, connectionLifecycleCallback, options)
-            .addOnSuccessListener { _status.value = "Advertising as $name (visible)" }
-            .addOnFailureListener { e -> _status.value = "Advertise failed: ${e.message}" }
+            .addOnSuccessListener {
+                _status.value = "Advertising as $name (visible)"
+                trace?.putMetric("success", 1)
+                try { trace?.stop() } catch (_: Exception) {}
+            }
+            .addOnFailureListener { e ->
+                _status.value = "Advertise failed: ${e.message}"
+                FirebaseCrashlyticsUtils.recordException(e)
+                FirebaseCrashlyticsUtils.log("Advertising failed: ${e.message}")
+                trace?.putMetric("error", 1)
+                try { trace?.putAttribute("error", e.message ?: "unknown") } catch (_: Exception) {}
+                try { trace?.stop() } catch (_: Exception) {}
+            }
     }
 
     fun startAdvertisingWithCode(name: String, code: String) {
@@ -194,10 +225,21 @@ class NearbyManager(private val context: Context) {
 
     fun startDiscovery() {
         _status.value = "Discovering..."
+        FirebaseCrashlyticsUtils.log("Nearby startDiscovery")
+        val trace = FirebasePerfUtils.startTrace("nearby_start_discovery")
         val options = DiscoveryOptions.Builder().setStrategy(STRATEGY).build()
         connectionsClient.startDiscovery(SERVICE_ID, endpointDiscoveryCallback, options)
-            .addOnSuccessListener { _status.value = "Discovering nearby cruisers..." }
-            .addOnFailureListener { e -> _status.value = "Discovery failed: ${e.message}" }
+            .addOnSuccessListener {
+                _status.value = "Discovering nearby cruisers..."
+                trace?.putMetric("success", 1)
+                try { trace?.stop() } catch (_: Exception) {}
+            }
+            .addOnFailureListener { e ->
+                _status.value = "Discovery failed: ${e.message}"
+                FirebaseCrashlyticsUtils.recordException(e)
+                trace?.putMetric("error", 1)
+                try { trace?.stop() } catch (_: Exception) {}
+            }
     }
 
     fun stopAdvertising() { connectionsClient.stopAdvertising(); _status.value = "Stopped advertising" }
@@ -217,22 +259,37 @@ class NearbyManager(private val context: Context) {
     }
 
     fun sendWireMessageTo(wire: WireMessage, targetCode: String?): Boolean {
-        val targets = if (targetCode == null) {
-            _connected.value
-        } else {
-            _connected.value.filter { it.code == targetCode }
-        }
-        if (targets.isEmpty()) return false
+        val trace = FirebasePerfUtils.startTrace("nearby_send_wire")
+        trace?.putAttribute("type", wire.type)
+        trace?.putAttribute("target", targetCode ?: "broadcast")
         try {
-            val bytes = json.encodeToString(wire).toByteArray()
-            val p = Payload.fromBytes(bytes)
-            targets.forEach { endpoint ->
-                connectionsClient.sendPayload(endpoint.id, p)
+            val targets = if (targetCode == null) {
+                _connected.value
+            } else {
+                _connected.value.filter { it.code == targetCode }
             }
-            return true
-        } catch (e: Exception) {
-            _status.value = "Send failed: ${e.message}"
-            return false
+            if (targets.isEmpty()) {
+                trace?.putMetric("no_target", 1)
+                return false
+            }
+            try {
+                val bytes = json.encodeToString(wire).toByteArray()
+                val p = Payload.fromBytes(bytes)
+                targets.forEach { endpoint ->
+                    connectionsClient.sendPayload(endpoint.id, p)
+                }
+                FirebaseCrashlyticsUtils.log("Sent wire ${wire.type} ${wire.messageId} to ${targets.size} peers")
+                trace?.putMetric("sent", 1)
+                trace?.putMetric("target_count", targets.size.toLong())
+                return true
+            } catch (e: Exception) {
+                _status.value = "Send failed: ${e.message}"
+                FirebaseCrashlyticsUtils.recordException(e)
+                trace?.putMetric("error", 1)
+                return false
+            }
+        } finally {
+            try { trace?.stop() } catch (_: Exception) {}
         }
     }
 

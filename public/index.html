@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cruise Planner — Offline-First Cruise Companion</title>
+<meta name="description" content="Offline-first Android app for cruise passengers. Plan your entire voyage on the ship without Wi-Fi — itinerary, ports, weather, notifications, and Bluetooth party chat.">
+<meta property="og:title" content="Cruise Planner — Offline-First Cruise Companion">
+<meta property="og:description" content="Plan your entire voyage without Wi-Fi. Itinerary, ports, weather, notifications & offline Bluetooth chat.">
+<meta property="og:image" content="/screenshots/06_dashboard.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0B1E3B">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230B1E3B'/><text y='62' x='50' text-anchor='middle' font-size='56'>🚢</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<nav>
+  <div class="container nav-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">🚢</span>
+      <span>Cruise Planner</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#how">How it works</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="https://github.com/chartmann1590/cruise-app" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-secondary" href="#download" style="padding:10px 16px;font-size:14px">Download</a>
+      <button class="hamburger" aria-label="menu" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display==='flex' ? 'none':'flex'">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge">Offline-first • No mock data • No API key</span>
+      <h1>Plan your entire cruise <em>without Wi-Fi</em></h1>
+      <p class="lead">The companion app for cruise passengers. Create your voyage, add real port stops, plan each sea day, get live weather, get notified — and chat with your party over <b>Bluetooth / BLE / Wi-Fi Direct</b> even when the ship has no internet.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">⬇ Download APK</a>
+        <a class="btn btn-secondary" href="https://github.com/chartmann1590/cruise-app" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="btn btn-ghost" href="#screenshots">See screenshots</a>
+      </div>
+      <div class="hero-bullets">
+        <span><i>✓</i> 100% user-entered</span>
+        <span><i>✓</i> 7-day weather cached 3h</span>
+        <span><i>✓</i> QR party, no typing</span>
+        <span><i>✓</i> Encrypted P2P</span>
+      </div>
+      <div style="margin-top:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span class="small">Package <code>com.charles.cruiseapp</code> • minSdk 26 • targetSdk 35 • v1.0</span>
+        <span class="badge gold">APK 23 MB • Compose • Room v3</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen"><img src="/screenshots/06_dashboard.png" alt="Dashboard screenshot" loading="eager"></div>
+      </div>
+      <div class="float-card float-a">
+        <div class="icon" style="background:#E6FFFB;color:#0B8A89;border:1px solid rgba(14,165,163,.18)">🌦️</div>
+        <div><b>Nassau • 28.2°C</b><span>Thunderstorm • Rain 76% • 7-day</span></div>
+      </div>
+      <div class="float-card float-b">
+        <div class="icon" style="background:#FFFBEB;color:#92400E;border:1px solid rgba(245,158,11,.18)">💬</div>
+        <div><b>Party • Delivered ✓✓</b><span>Bubble • Broadcast + Private</span></div>
+      </div>
+      <div class="float-card float-c">
+        <div class="icon" style="background:#EFF6FF;color:#1E40AF;border:1px solid rgba(59,130,246,.18)">🔔</div>
+        <div><b>Welcome Dinner • 10:00</b><span>Reminder in 15 min • Exact alarm</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="hero-stats">
+      <div><b>Offline-first</b><span>Room • queue &amp; retry</span></div>
+      <div><b>~100 m</b><span>P2P Cluster hop</span></div>
+      <div><b>No key</b><span>Open-Meteo CC BY 4.0</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="badge">Features</span>
+      <h2>Everything you need on sea days</h2>
+      <p>Built for the ship, not the shore. All data is yours — no mock cruises, no cloud sync, no surprise roaming.</p>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <div class="ic">🗓️</div>
+        <h3>Cruise &amp; daily planner</h3>
+        <p>Create a cruise by ship name + calendar range. Duration auto-calculated, day-by-day planner auto-generates. Add/edit/delete events with title, time, location, category &amp; reminder.</p>
+        <ul><li>DateRangePicker &amp; DatePicker</li><li>Sea vs port badge</li><li>Category + reminder 1–60 min</li></ul>
+      </div>
+      <div class="card">
+        <div class="ic">📍</div>
+        <h3>Real port stops</h3>
+        <p>Search any city via Open-Meteo Geocoding — free, no key — and auto-fill lat/lon. Stored in Room <code>PortStop</code> with arrival/departure &amp; country.</p>
+        <ul><li>lat/lon auto-fill</li><li>Order index preserved</li><li>Arrival/departure dates</li></ul>
+      </div>
+      <div class="card">
+        <div class="ic">🌤️</div>
+        <h3>Weather — no API key</h3>
+        <p><code>api.open-meteo.com/v1/forecast</code> with <code>daily</code> + <code>current</code>. Cached in <code>WeatherCache</code> 3h TTL → works offline after first fetch.</p>
+        <ul><li>7-day daily + current</li><li>WMO code → emoji</li><li>Attribution CC BY 4.0</li></ul>
+      </div>
+      <div class="card">
+        <div class="ic">⏰</div>
+        <h3>Local notifications</h3>
+        <p><code>AlarmManager.setExactAndAllowWhileIdle</code> per event on <code>cruise_reminders</code> channel. Re-scheduled on <code>BOOT_COMPLETED</code>.</p>
+        <ul><li>High importance + vibrate</li><li>SCHEDULE_EXACT_ALARM</li><li>POST_NOTIFICATIONS (13+)</li></ul>
+      </div>
+      <div class="card">
+        <div class="ic">💬</div>
+        <h3>Offline party chat</h3>
+        <p>Google Nearby Connections <code>P2P_CLUSTER</code> — Bluetooth + BLE + Wi-Fi Direct, encrypted, no internet. Individual or broadcast with retry-until-delivered.</p>
+        <ul><li>WireMessage + receipts</li><li>PENDING → SENT → DELIVERED → READ</li><li>QR identity, no typing</li></ul>
+      </div>
+      <div class="card">
+        <div class="ic">📆</div>
+        <h3>Calendar</h3>
+        <p><code>DatePickerDialog</code> + <code>DateRangePicker</code> with clickable OutlinedCard for start/end plus -1d/+1d fine adjust. <code>startOfDay()</code> at midnight.</p>
+        <ul><li>Single &amp; range pickers</li><li>-1d/+1d nudge</li><li>Midnight normalization</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container">
+    <div class="feature-row">
+      <div class="feature-copy">
+        <span class="badge">Offline chat deep dive</span>
+        <h3>Party chat that works when the ship doesn't</h3>
+        <p>Each member gets a persistent <code>code</code> (UUID) stored in <code>cruise_party_prefs</code>. <b>My QR</b> shows <code>{"n":name,"c":code}</code> via ZXing; <b>Scan</b> adds via Camera + <code>ScanContract</code>. No typed names → guaranteed identity.</p>
+        <div class="badge-list"><span>To: Everyone</span><span>Private</span><span>Queued • retrying...</span><span>Read ✓✓ blue #4FC3F7</span></div>
+        <p class="small" style="margin-top:12px">Retry every 5s, delivery + read receipts, FlowRow chips with FilterChip selection, Scaffold bottomBar fixed — so the thread scrolls correctly.</p>
+      </div>
+      <div class="feature-visual">
+        <div class="screen-stack">
+          <img src="/screenshots/10_party.png" alt="Party chat">
+          <img src="/screenshots/11_my_qr.png" alt="My QR">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:28px">
+  <div class="container">
+    <div class="feature-row reverse">
+      <div class="feature-visual">
+        <div class="screen-stack">
+          <img src="/screenshots/09_day_detail.png" alt="Day detail">
+          <img src="/screenshots/08_weather.png" alt="Weather">
+        </div>
+      </div>
+      <div class="feature-copy">
+        <span class="badge gold">Weather • free</span>
+        <h3>Live weather, cached for offline</h3>
+        <p>Open-Meteo geocoding + forecast cached 3h in Room. <code>WeatherCard</code> maps WMO codes to emoji/description via <code>WmoCodes.kt</code> — 7-day + current + humidity + wind.</p>
+        <div class="badge-list"><span>No apikey param</span><span>timezone=auto</span><span>forecast_days=7</span></div>
+        <p class="small" style="margin-top:12px">Pull once on Wi-Fi in port, then view on sea days with no signal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="screenshots">
+  <div class="container">
+    <div class="section-head">
+      <span class="badge">Screenshots</span>
+      <h2>Real data, Pixel 8 Pro</h2>
+      <p>Injected via <code>DebugInjectorActivity</code> for docs — Island Princess + Nassau &amp; Cozumel. No hard-coded mocks on fresh install.</p>
+    </div>
+    <div class="gallery">
+      <div class="shot" data-src="/screenshots/01_welcome.png" data-title="Welcome — empty state, Create Cruise"><span class="shot-tag">01 • Welcome</span><img src="/screenshots/01_welcome.png" alt="Welcome"><div class="shot-cap"><b>Welcome Aboard</b><span>Fresh DB is empty — Create Cruise only</span></div></div>
+      <div class="shot" data-src="/screenshots/02_cruise_setup.png" data-title="Cruise setup — ship name + calendar"><span class="shot-tag">02 • Setup</span><img src="/screenshots/02_cruise_setup.png" alt="Cruise setup"><div class="shot-cap"><b>Cruise Setup</b><span>Ship + date range, duration auto</span></div></div>
+      <div class="shot" data-src="/screenshots/04_calendar_picker.png" data-title="Calendar picker — range selection"><span class="shot-tag">04 • Calendar</span><img src="/screenshots/04_calendar_picker.png" alt="Calendar picker"><div class="shot-cap"><b>Calendar Picker</b><span>DateRangePicker + -1d/+1d</span></div></div>
+      <div class="shot" data-src="/screenshots/06_dashboard.png" data-title="Dashboard — itinerary day list"><span class="shot-tag">06 • Dashboard</span><img src="/screenshots/06_dashboard.png" alt="Dashboard"><div class="shot-cap"><b>Dashboard</b><span>Day-by-day planner, sea/port badges</span></div></div>
+      <div class="shot" data-src="/screenshots/07_port_list.png" data-title="Port list — manage stops"><span class="shot-tag">07 • Ports</span><img src="/screenshots/07_port_list.png" alt="Port list"><div class="shot-cap"><b>Port List</b><span>Search via Open-Meteo, lat/lon fill</span></div></div>
+      <div class="shot" data-src="/screenshots/08_weather.png" data-title="Weather — 28.2°C Thunderstorm"><span class="shot-tag">08 • Weather</span><img src="/screenshots/08_weather.png" alt="Weather"><div class="shot-cap"><b>Weather</b><span>7-day • Rain 76% • cached</span></div></div>
+      <div class="shot" data-src="/screenshots/09_day_detail.png" data-title="Day detail — events"><span class="shot-tag">09 • Day detail</span><img src="/screenshots/09_day_detail.png" alt="Day detail"><div class="shot-cap"><b>Day Detail</b><span>Welcome Dinner 10:00 Main Dining</span></div></div>
+      <div class="shot" data-src="/screenshots/10_party.png" data-title="Party chat — broadcast & private"><span class="shot-tag">10 • Party</span><img src="/screenshots/10_party.png" alt="Party"><div class="shot-cap"><b>Party Chat</b><span>FilterChip to Everyone / Alice</span></div></div>
+      <div class="shot" data-src="/screenshots/11_my_qr.png" data-title="My QR — share identity"><span class="shot-tag">11 • My QR</span><img src="/screenshots/11_my_qr.png" alt="My QR"><div class="shot-cap"><b>My QR</b><span>ZXing, JSON {n,c} • Scan to add</span></div></div>
+      <div class="shot" data-src="/screenshots/12_dashboard_final.png" data-title="Dashboard final — polished itinerary"><span class="shot-tag">12 • Final</span><img src="/screenshots/12_dashboard_final.png" alt="Dashboard final"><div class="shot-cap"><b>Dashboard Final</b><span>Upcoming + itinerary merged</span></div></div>
+      <div class="shot" data-src="/screenshots/11_weather.png" data-title="Weather detail — attribution"><span class="shot-tag">11 • Weather+</span><img src="/screenshots/11_weather.png" alt="Weather detail"><div class="shot-cap"><b>Weather Detail</b><span>WMO → emoji, humidity/wind</span></div></div>
+      <div class="shot" data-src="/screenshots/14_add_event_dialog.png" data-title="Add event — title/time/category"><span class="shot-tag">14 • Add event</span><img src="/screenshots/14_add_event_dialog.png" alt="Add event"><div class="shot-cap"><b>Add Event</b><span>Reminder 15′ default, 1–60</span></div></div>
+    </div>
+    <p class="small" style="text-align:center;margin-top:14px">Tap any screenshot to zoom • All images from <code>screenshots/</code> on Pixel 8 Pro</p>
+  </div>
+</section>
+
+<section id="how" style="background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head">
+      <span class="badge gold">How it works</span>
+      <h2>Three taps to sea-ready</h2>
+      <p>Works entirely offline after setup — Room is source of truth.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h4>Create your cruise</h4><p>Name your ship, pick start/end on the calendar. We generate every day in between.</p></div>
+      <div class="step"><div class="step-num">2</div><h4>Add ports &amp; plans</h4><p>Search Nassau or Cozumel → Use → Add Port. Then tap any day to add Welcome Dinner, excursions, etc.</p></div>
+      <div class="step"><div class="step-num">3</div><h4>Stay in sync offline</h4><p>Share your QR with your party. Chat over Nearby — no ship Wi-Fi needed. Weather pulls once, then cached.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container specs">
+    <div>
+      <span class="badge">Architecture</span>
+      <h3 style="font-family:'Plus Jakarta Sans',Inter,sans-serif;font-size:22px;letter-spacing:-.02em;margin:10px 0;color:var(--navy)">Offline-first by design</h3>
+      <p class="muted">Room v3 <code>fallbackDestructive</code> + <code>Flow</code> + <code>viewModelScope</code>. Weather via Retrofit + OkHttp + kotlinx.serialization. Nearby via <code>P2P_CLUSTER</code>.</p>
+      <table class="spec-table" style="margin-top:16px">
+        <tr><th colspan="2">Package &amp; build</th></tr>
+        <tr><td>ApplicationId</td><td><code>com.charles.cruiseapp</code></td></tr>
+        <tr><td>Compile / Target</td><td>35 • minSdk 26</td></tr>
+        <tr><td>Compose / AGP / Kotlin</td><td>1.5.8 / 8.3.2 / 1.9.22</td></tr>
+        <tr><td>Room / Retrofit / Nearby</td><td>2.6.1 / 2.11.0 / 19.3 • ZXing 3.5.3</td></tr>
+        <tr><td>Firebase</td><td>Crashlytics + Performance • Bom 32.7.4</td></tr>
+        <tr><td>Permissions</td><td>INTERNET, POST_NOTIFICATIONS, SCHEDULE_EXACT_ALARM, BOOT_COMPLETED, NEARBY, CAMERA</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="padding:20px 22px 0"><span class="badge gold">Why no mock data?</span><h4 style="margin:10px 0 6px">Fresh install is empty</h4><p class="muted" style="font-size:14px;margin:0">Only <b>Welcome Aboard! → Create Cruise</b>. <code>DebugInjectorActivity</code> injects Island Princess + 2 real ports for screenshots — not pre-populated.</p></div>
+        <img src="/screenshots/01_welcome.png" alt="Welcome empty" style="width:100%;margin-top:16px;border-top:1px solid var(--border)">
+      </div>
+      <div class="card" style="margin-top:16px;display:flex;gap:12px;align-items:center">
+        <div style="width:44px;height:44px;border-radius:12px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:20px">🔒</div>
+        <div><b>Private &amp; encrypted</b><div class="small">Nearby Connections is encrypted, P2P, ~100m/hop. No server sees your plans or chats.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="container">
+    <div class="cta">
+      <div>
+        <span class="badge" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.18)">Download</span>
+        <h3>Ready to board?</h3>
+        <p>Install the APK on your Pixel or any Android 8+ device. Fresh, no mock data — start your own Island Princess.</p>
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge" style="background:#fff;color:var(--navy)">v1.0 • 23 MB</span>
+          <span class="badge" style="background:rgba(14,165,163,.18);color:#E6FFFB;border-color:rgba(14,165,163,.3)">Offline • No ads • No trackers</span>
+        </div>
+      </div>
+      <div class="cta-actions">
+        <a class="btn" style="background:#fff;color:var(--navy)" href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">⬇ Download APK</a>
+        <a class="btn btn-teal" href="https://github.com/chartmann1590/cruise-app" target="_blank" rel="noopener">GitHub →</a>
+        <a class="btn" style="background:transparent;border-color:rgba(255,255,255,.25);color:#fff" href="/privacy.html">Privacy</a>
+      </div>
+    </div>
+    <p class="small" style="text-align:center;margin-top:12px">Build: <code>./gradlew assembleDebug</code> • Install: <code>adb -s 37220DLJG001ML install -r app/build/outputs/apk/debug/app-debug.apk</code></p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand"><span class="brand-mark">🚢</span><span>Cruise Planner</span></div>
+        <p>Offline-first cruise companion for passengers who'd rather enjoy the sea than hunt for Wi-Fi. Built with Kotlin + Compose, hosted on Firebase.</p>
+        <p class="small" style="margin-top:10px">Weather data CC BY 4.0 Open-Meteo • Icons via Material • Fonts Inter + Plus Jakarta Sans</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#how">How it works</a>
+        <a href="#download">Download</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/privacy.html#data">Data &amp; permissions</a>
+        <a href="https://github.com/chartmann1590/cruise-app" target="_blank" rel="noopener">License (private)</a>
+      </div>
+      <div class="foot-col">
+        <h4>Firebase</h4>
+        <a href="https://console.firebase.google.com/project/cruise-app-2026/overview" target="_blank" rel="noopener">Console: cruise-app-2026</a>
+        <a href="https://cruise-app-2026.web.app" target="_blank" rel="noopener">cruise-app-2026.web.app</a>
+        <a href="https://cruise-app-2026.firebaseapp.com" target="_blank" rel="noopener">.firebaseapp.com</a>
+        <span class="small">Crashlytics + Performance enabled • Hosting cleanUrls</span>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cruise Planner • com.charles.cruiseapp • All rights reserved.</span>
+      <span>Built offline, for offline. <a href="https://github.com/chartmann1590/cruise-app" style="text-decoration:underline">chartmann1590/cruise-app</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="close">✕</button>
+  <img id="lightbox-img" alt="">
+  <div class="lightbox-cap" id="lightbox-cap"></div>
+</div>
+
+<script>
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+const lbCap = document.getElementById('lightbox-cap');
+document.querySelectorAll('.shot').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    lbImg.src = el.dataset.src;
+    lbImg.alt = el.querySelector('img').alt;
+    lbCap.textContent = el.dataset.title || el.querySelector('b')?.textContent || '';
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+});
+function closeLightbox(){
+  lb.classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLightbox(); });
+</script>
+</body>
+</html>

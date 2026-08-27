@@ -1,6 +1,7 @@
 package com.charles.cruiseapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -14,10 +15,22 @@ import androidx.navigation.navArgument
 import com.charles.cruiseapp.ui.navigation.Screen
 import com.charles.cruiseapp.ui.screens.*
 import com.charles.cruiseapp.ui.theme.CruiseTheme
+import com.charles.cruiseapp.util.FirebaseCrashlyticsUtils
+import com.charles.cruiseapp.util.FirebasePerfUtils
+import com.google.firebase.perf.FirebasePerformance
 
 class MainActivity : ComponentActivity() {
+    private var screenTrace: com.google.firebase.perf.metrics.Trace? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Screen load performance trace
+        try {
+            screenTrace = FirebasePerformance.getInstance().newTrace("main_activity_onCreate")
+            screenTrace?.start()
+            FirebaseCrashlyticsUtils.log("MainActivity onCreate")
+        } catch (e: Exception) { Log.w("MainActivity", "perf trace failed", e) }
+
         setContent {
             CruiseTheme {
                 Surface(Modifier.fillMaxSize(), color=MaterialTheme.colorScheme.background){
@@ -25,6 +38,21 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        try {
+            screenTrace?.putMetric("success", 1)
+            screenTrace?.stop()
+        } catch (_: Exception) {}
+    }
+
+    override fun onResume() {
+        super.onResume()
+        try {
+            FirebaseCrashlyticsUtils.log("MainActivity onResume")
+            val trace = FirebasePerformance.getInstance().newTrace("screen_main")
+            trace.start()
+            trace.putAttribute("screen", "Main")
+            trace.stop()
+        } catch (_: Exception) {}
     }
 }
 

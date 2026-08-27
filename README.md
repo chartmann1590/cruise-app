@@ -1,22 +1,36 @@
-# Cruise Planner — Offline-First Cruise Companion
+# 🚢 Cruise Planner — Offline-First Cruise Companion
 
-**Package:** `com.charles.cruiseapp`  
-**Platform:** Android (Kotlin + Jetpack Compose, minSdk 26, targetSdk 35)  
-**Private Repo:** https://github.com/chartmann1590/cruise-app
+[![Android](https://img.shields.io/badge/Platform-Android%208%2B-3DDC84?logo=android&logoColor=white)](#)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-7F52FF?logo=kotlin&logoColor=white)](#)
+[![Jetpack Compose](https://img.shields.io/badge/Compose-1.5.8-4285F4?logo=jetpackcompose&logoColor=white)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Firebase](https://img.shields.io/badge/Firebase-Hosting%20%7C%20Crashlytics%20%7C%20Perf-FFCA28?logo=firebase&logoColor=black)](#)
 
-Offline-first Android app for cruise passengers to plan their entire voyage **on the ship without Wi-Fi**. Create a cruise, add real port stops, plan each sea/port day, get live weather (no API key), receive local notifications, and chat with your party over **Bluetooth / BLE / Wi-Fi Direct** even when the ship has no internet.
+**Plan your entire cruise without Wi-Fi.**
 
-> **No mock data** — every cruise, port, and event is user-entered. Weather is live from Open-Meteo (free, no key, cached for offline). Chat is real peer-to-peer via Google Nearby Connections with retry-until-delivered and read receipts. Party identity is via QR code, not typed names.
+Cruise Planner is an offline-first Android app for cruise passengers. Create your voyage, add real port stops, plan each sea day, get live weather (no API key), receive local reminders, and chat with your party over **Bluetooth / BLE / Wi-Fi Direct** — even when the ship has no internet.
+
+> **Live site:** https://cruise-app-2026.web.app · **Privacy:** https://cruise-app-2026.web.app/privacy · **Package:** `com.charles.cruiseapp`
+
+No mock data. No cloud sync for your plans. Your cruises, ports, events and chats stay on your device.
 
 ---
 
-## Screenshots
+## ✨ Why Cruise Planner?
 
-| Welcome | Cruise Setup | Calendar Picker |
+* **Built for the ship, not the shore.** Room is the source of truth. Weather is cached for 3 hours, messages queue until a peer is in range.
+* **No accounts, no roaming surprises.** Party identity via QR code — scan, don't type. Chat is encrypted P2P via Google Nearby Connections (`P2P_CLUSTER`).
+* **Private by design.** No server sees your itinerary. Crash reports are anonymized.
+
+---
+
+## 📸 Screenshots — Pixel 8 Pro
+
+| Welcome | Cruise Setup | Calendar |
 |---|---|---|
 | ![Welcome](screenshots/01_welcome.png) | ![Setup](screenshots/02_cruise_setup.png) | ![Calendar](screenshots/04_calendar_picker.png) |
 
-| Dashboard (Itinerary) | Port List | Weather (Open-Meteo, no key) |
+| Dashboard | Port List | Weather |
 |---|---|---|
 | ![Dashboard](screenshots/06_dashboard.png) | ![Ports](screenshots/07_port_list.png) | ![Weather](screenshots/08_weather.png) |
 
@@ -24,97 +38,150 @@ Offline-first Android app for cruise passengers to plan their entire voyage **on
 |---|---|---|
 | ![Day](screenshots/09_day_detail.png) | ![Party](screenshots/10_party.png) | ![QR](screenshots/11_my_qr.png) |
 
-> Screenshots generated on Pixel 8 Pro (`com.charles.cruiseapp`) with real data injected via `DebugInjectorActivity` for README. No hard-coded mock cruises remain in the DB on fresh install.
+> Fresh install shows **Welcome Aboard → Create Cruise** only. Screenshots use real demo data injected via a local Debug activity — the app ships with an empty database.
 
 ---
 
-## Features
+## 🎯 Features
 
-### 🚢 Cruise & Itinerary — `com.charles.cruiseapp.ui.screens.*`
-- **Create cruise:** ship name + **calendar** (`DateRangePicker` + single `DatePicker`) for start/end. Duration auto-calculated, day-by-day planner auto-generates. Files `CruiseSetupScreen.kt:17`, `DashboardScreen.kt:25`, `DashboardViewModel.kt:36`.
-- **Daily planner:** `HorizontalPager`-like list per day, sea vs. port badge, add/edit/delete events (title, time, location, category, reminder). `DayDetailScreen.kt`, `PortListScreen.kt`.
-- **Port stops:** search real city via **Open-Meteo Geocoding** (`https://geocoding-api.open-meteo.com/v1/search`, no key) → auto-fills `lat/lon`. Stored in Room `PortStop`. `PortListScreen.kt:102`, `WeatherRepository.kt:42`.
+### 🗓️ Cruise & Daily Planner
+* Create a cruise by ship name + calendar date range. Duration is auto-calculated and every day is generated automatically.
+* Per-day view with sea/port badges, add/edit/delete events (title, time, location, category, reminder 1–60 min).
 
-### 🌦️ Weather — Free, No API Key — `com.charles.cruiseapp.data.remote.*`
-- `OpenMeteoApi` `GET https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&daily=temperature_2m_max,...&current=temperature_2m,weather_code&timezone=auto&forecast_days=7` — **no `apikey` param**, CC BY 4.0. `WeatherRepository.kt:19`, `WeatherService.kt:13`.
-- Geocoding + forecast cached in `WeatherCache` (3h TTL) → works **offline** after first fetch. `WeatherCard.kt` maps WMO codes to emoji/description `WmoCodes.kt`, shows 7-day daily + current + attribution.
+### 📍 Real Port Stops
+* Search any city via **Open-Meteo Geocoding** (free, no API key) — lat/lon auto-filled, stored locally.
+* Arrival/departure dates, country and order preserved.
 
-### 🔔 Notifications — `com.charles.cruiseapp.notifications.*`
-- `NotificationHelper.kt:12` `AlarmManager.setExactAndAllowWhileIdle(RTC_WAKEUP)` per `PlannedEvent` (`reminderMinutesBefore` 15 default, configurable 1-60). `EventReminderReceiver.kt` builds `NotificationCompat` on `cruise_reminders` channel (high importance, vibration). `BootRescheduleReceiver` re-schedules all `getFutureEvents` on `BOOT_COMPLETED`. Handles `SCHEDULE_EXACT_ALARM` + `POST_NOTIFICATIONS` (Android 13+).
+### 🌤️ Weather — Free, No API Key
+* `api.open-meteo.com/v1/forecast` + geocoding — 7-day daily + current, mapped to emoji, cached 3 h for offline use.
+* Pull once on port Wi-Fi, view on sea days with no signal. Attribution CC BY 4.0.
 
-### 💬 Offline Party Chat — Bluetooth Mesh — `com.charles.cruiseapp.data.nearby.NearbyManager.kt`
-- **Transport:** Google Play Services **Nearby Connections** `Strategy.P2P_CLUSTER` → auto-uses Bluetooth + BLE + Wi-Fi Direct, encrypted, **no internet**, ~100m/hop. Handles July 2026 change (no auto-enable radios, must prompt).
-- **Identity via QR:** Each member gets persistent `code` (`UUID`, `PartyMember.code`) stored in `cruise_party_prefs`. `PartyViewModel.getSelfCode()` / `getQrData()` JSON `{"n":name,"c":code}` → `QrUtils.generateQrBitmap` (ZXing `QRCodeWriter`). `PartyScreen` has **My QR** dialog and **Scan** via `ScanContract` (`zxing-android-embedded:4.3.0` + `zxing:core:3.5.3` + `CAMERA` permission). Scanning `name|code` or JSON adds `addMemberWithCode()` — no typing, guarantees identity. `PartyMember` `isSelf` + `code` + `endpointId` mapping to `DiscoveredEndpoint.code`.
-- **Individual vs. broadcast:** `selectedRecipient` chip row (`To: Everyone` vs. member). `sendLocalMessage()` → `targetCode=null` broadcast to all `connected`; `sendToMember(text, target)` → `targetCode=member.code` + `sendWireMessageTo(wire, targetCode)` filters `connected.filter { it.code == targetCode }`.
-- **Reliable delivery:** `WireMessage(type=CHAT|DELIVERED|READ, messageId, sender, senderCode, targetCode, refId)`. `Message.status` `PENDING→SENT→DELIVERED→READ`. `attemptSend()` → `PENDING` if no peer else `SENT`. `retryJob` every 5s `isActive` flushes `getPending()` (both `PENDING`+`SENT`) only if target is connected / broadcast has any peer. `handleIncomingWire` checks `targetCode == selfCode || null`, inserts `DELIVERED`, replies `sendDeliveredReceipt`, after 1.2s marks `READ` + `sendReadReceipt`. Sender on `DELIVERED/READ` receipt updates `updateStatus`. Status icons: `Schedule` grey pending, `Done` sent grey, `DoneAll` delivered grey, `DoneAll` read blue `#4FC3F7`.
-- **Nice window:** `PartyScreen.kt` `Scaffold(bottomBar=input)` + `LazyColumn` for headers + `items(localMessages){MessageBubble}`. `MessageBubble` rounded `18dp` bubbles (`primary` self vs. `surface` other, `widthIn 280dp`), sender `To X`, timestamp `h:mm a`, status text `Queued • retrying...`. Members shown as `LazyRow`/`FlowRow` chips with `CircleShape` avatar `take(1)`, `FilterChip` selection. Bottom bar fixed, thread scrolls, fits correctly (previously nested scroll clipped).
+### 🔔 Local Notifications
+* Exact alarms via `AlarmManager.setExactAndAllowWhileIdle` on a high-importance channel, rescheduled after reboot.
+* Supports Android 13+ `POST_NOTIFICATIONS` and `SCHEDULE_EXACT_ALARM`.
 
-### 📅 Calendar — `CruiseSetupScreen.kt:98`
-- `DatePickerDialog` + `DateRangePicker` (`rememberDateRangePickerState`) for range, `DatePicker` for single start/end taps. Also `OutlinedCard` clickable for start/end plus `-1d/+1d` fine adjust. `startOfDay()` ensures midnight.
+### 💬 Offline Party Chat — The Headliner
+* **Transport:** Google Play Services Nearby Connections `P2P_CLUSTER` → Bluetooth + BLE + Wi-Fi Direct, encrypted, no internet, ~100 m per hop.
+* **QR identity:** Each member gets a persistent UUID. **My QR** shows it via ZXing; **Scan** via Camera adds them instantly — no typing, no mix-ups.
+* **Broadcast or private:** Choose **To: Everyone** or a specific shipmate.
+* **Reliable:** `PENDING → SENT → DELIVERED → READ` with receipts, retry every 5 s until delivered, even after reboot. Blue ticks for read.
+
+### 📆 Calendar
+* Material 3 `DatePickerDialog` + `DateRangePicker` with fine −1 d/+1 d nudge, midnight-normalized.
 
 ---
 
-## Architecture
+## 🚀 How It Works
+
+1. **Create your cruise** — Name your ship, pick start/end on the calendar. We generate every day.
+2. **Add ports & plans** — Search “Nassau” → Use → Add Port. Tap any day to add “Welcome Dinner 10:00 Main Dining”.
+3. **Stay in sync offline** — Share your QR with your party. Chat over Nearby — no ship Wi-Fi needed. Weather pulls once, then cached.
+
+---
+
+## 🔒 Privacy at a Glance
+
+* **On-device only:** Cruises, ports, events, messages → Room DB `cruise_db` on your phone. We run no server.
+* **Firebase Crashlytics & Performance:** Anonymized crash traces + speed traces (enabled). User ID is a random UUID, not your email. See [Privacy Policy](public/privacy.html) for full details and opt-out.
+* **Open-Meteo:** Weather queries go directly from your device to Open-Meteo (lat/lon + IP per their policy). Cached locally.
+* **Nearby:** P2P encrypted, no relay. Your QR contains only your display name + random code.
+
+Full policy: [`/privacy`](https://cruise-app-2026.web.app/privacy) — also shipped as `public/privacy.html` for Firebase Hosting.
+
+---
+
+## 📲 Download
+
+* **APK:** [GitHub Releases](https://github.com/chartmann1590/cruise-app/releases) — v1.0, ~23 MB, Android 8+ (minSdk 26, targetSdk 35).
+* **Site:** https://cruise-app-2026.web.app
+
+---
+
+## 🛠️ Build from Source
+
+> Requires your own Firebase project. The real `google-services.json` is **not** committed (see `.gitignore`). A template is provided.
+
+```bash
+# 1. Clone
+git clone https://github.com/chartmann1590/cruise-app.git
+cd cruise-app
+
+# 2. Firebase setup
+# Create a Firebase project, add an Android app with package com.charles.cruiseapp,
+# download google-services.json and place it at:
+#   app/google-services.json
+# Or copy the template:
+cp app/google-services.json.example app/google-services.json
+# then fill in YOUR_PROJECT_ID / YOUR_API_KEY
+
+# 3. Build
+./gradlew assembleDebug
+
+# 4. Install (generic device — replace with your device)
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+adb shell am start -n com.charles.cruiseapp/.MainActivity
+```
+
+<details>
+<summary>Tech stack</summary>
+
+* **Language/UI:** Kotlin 1.9.22, Compose 1.5.8 (BOM 2024.10.00), Material 3, Navigation Compose 2.8.4, AGP 8.3.2
+* **Data:** Room 2.6.1, DataStore/SharedPreferences, `fallbackToDestructiveMigration()`
+* **Network:** Retrofit 2.11, OkHttp 4.12, kotlinx.serialization 1.6.3, Open-Meteo (no key)
+* **Nearby/QR:** Play Services Nearby 19.3, ZXing 3.5.3 + zxing-android-embedded 4.3.0
+* **Firebase:** BOM 32.7.4, Analytics + Crashlytics + Performance (restricted API key)
+* **Permissions:** INTERNET, POST_NOTIFICATIONS, SCHEDULE_EXACT_ALARM, RECEIVE_BOOT_COMPLETED, BLUETOOTH_SCAN/ADVERTISE/CONNECT, NEARBY_WIFI_DEVICES, CAMERA
+
+Verify no secrets before pushing:
+
+```bash
+git diff --cached --stat
+# should NOT show app/google-services.json
+```
+
+</details>
+
+<details>
+<summary>Project structure</summary>
 
 ```
 com.charles.cruiseapp
  ├─ CruiseApplication (Room + WeatherRepository + NotificationChannels)
- ├─ data/local (Room v3, fallbackDestructive)
- │   ├─ Cruise, PortStop, PlannedEvent, PartyMember(code), Message(status,targetCode), WeatherCache
- │   └─ Daos + CruiseDatabase
- ├─ data/remote (Retrofit + OkHttp + kotlinx.serialization)
- │   ├─ OpenMeteoApi / GeocodingApi
- │   └─ WeatherRepository (no key)
+ ├─ data/local (Room v3: Cruise, PortStop, PlannedEvent, PartyMember, Message, WeatherCache)
+ ├─ data/remote (OpenMeteoApi / GeocodingApi via Retrofit)
  ├─ data/nearby (NearbyManager, WireMessage, retry)
  ├─ notifications (AlarmManager + Receivers)
- ├─ ui/{theme, navigation, components/WeatherCard, screens/*}
- └─ util (DateUtils, WmoCodes, QrUtils)
+ ├─ ui/theme, navigation, components/WeatherCard, screens/*
+ └─ util (DateUtils, WmoCodes, QrUtils, FirebaseUtils)
 ```
 
-**DB:** `cruise_db` v3, `fallbackToDestructiveMigration()`. All writes via `viewModelScope` + `Flow`.
-
-**Offline-first:** Room is source of truth, weather cached 3h, chat queued `PENDING` and retried after reboot/reconnect.
+</details>
 
 ---
 
-## Package & Build
+## 🤝 Contributing
 
-- **Namespace / applicationId:** `com.charles.cruiseapp` (`app/build.gradle.kts:9,12`)
-- **Min 26, Target 35, Compose 1.5.8, AGP 8.3.2, Kotlin 1.9.22, Room 2.6.1, Retrofit 2.11, Nearby 19.3, ZXing 3.5.3**
-- **Permissions:** `INTERNET`, `POST_NOTIFICATIONS`, `SCHEDULE_EXACT_ALARM`, `RECEIVE_BOOT_COMPLETED`, `BLUETOOTH_SCAN/ADVERTISE/CONNECT`, `NEARBY_WIFI_DEVICES`, `CAMERA`
+Issues and PRs welcome! Please:
 
-```bash
-# Build
-./gradlew assembleDebug   # or C:\ProgramData\chocolatey\bin\gradle.exe assembleDebug
+1. Open an issue describing the change.
+2. Fork → branch → ` ./gradlew assembleDebug` should pass.
+3. Do **not** commit `app/google-services.json`, keystores (`*.jks`, `*.keystore`) or `.env` files.
 
-# Install to Pixel 8 Pro (37220DLJG001ML)
-adb -s 37220DLJG001ML install -r app/build/outputs/apk/debug/app-debug.apk
-adb -s 37220DLJG001ML shell pm clear com.charles.cruiseapp  # fresh, no mock
-adb -s 37220DLJG001ML shell am start -n com.charles.cruiseapp/.MainActivity
-
-# Inject real demo data for screenshots (optional)
-adb shell am start -n com.charles.cruiseapp/.DebugInjectorActivity \
-  --es shipName "Island Princess" --ez addPort true --ez addMessage true
-```
+See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
 
 ---
 
-## Why "No Mock Data"?
+## 📄 License
 
-Fresh install DB is empty — `Welcome Aboard! → Create Cruise` only. `DebugInjectorActivity` is a **test helper** (exported, not auto-run) to inject real `Island Princess` + two real ports (`Nassau 25.06,-77.34` + `Cozumel 20.42,-86.92`) for README screenshots; it is **not** pre-populated mock. All screenshots in `/screenshots` are from real user-entered or injected real data, weather is live Open-Meteo, chat is real Nearby payloads.
+MIT — see [LICENSE](LICENSE). Weather data © Open-Meteo CC BY 4.0. Icons via Material, fonts Inter + Plus Jakarta Sans.
 
----
-
-## Testing on Device
-
-- **Calendar:** `Cruise Setup → Calendar` → pick range → `Save Cruise — 7 days`
-- **Ports:** `Manage Ports → + → Nassau → Search (Open-Meteo) → Use → Add Port`
-- **Weather:** `Weather for Nassau` → shows `28.2°C Thunderstorm`, `Rain 76%`, 7-day, cached
-- **Itinerary:** tap `Thursday, Aug 26` → `+` → `Welcome Dinner 10:00 Main Dining` → notification in ~1 min via `dumpsys alarm | grep charles`
-- **Party:** `Party Chat` → enter `Bob` → `My QR` (show) / `Scan` (add Alice) → select `Alice` chip → `Broadcast Test` / `Private Test` → bubble shows `Queued • retrying...` → `Sent` → `Delivered ✓✓` → `Read ✓✓` blue
+Firebase project `cruise-app-2026` and hosting `cruise-app-2026.web.app` are for the official build only — forkers should use their own Firebase project.
 
 ---
 
-## License
+## 📮 Contact
 
-Private repo — all rights reserved. Weather data CC BY 4.0 Open-Meteo.
+* **GitHub Issues:** [chartmann1590/cruise-app/issues](https://github.com/chartmann1590/cruise-app/issues)
+* **Site:** https://cruise-app-2026.web.app
+
+© 2026 Cruise Planner • `com.charles.cruiseapp` • Built offline, for offline.
