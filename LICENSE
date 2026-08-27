@@ -19,10 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-Third-party notices:
-- Weather data via Open-Meteo (https://open-meteo.com) — CC BY 4.0
-- Google Play Services Nearby Connections, Firebase (Crashlytics/Performance) — subject to Google Terms
-- ZXing (Apache 2.0), AndroidX / Jetpack Compose (Apache 2.0)
