@@ -5,12 +5,14 @@
 [![Jetpack Compose](https://img.shields.io/badge/Compose-1.5.8-4285F4?logo=jetpackcompose&logoColor=white)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Firebase](https://img.shields.io/badge/Firebase-Hosting%20%7C%20Crashlytics%20%7C%20Perf-FFCA28?logo=firebase&logoColor=black)](#)
+[![Website](https://img.shields.io/badge/Website-cruise--app--2026.web.app-0B1E3B)](https://cruise-app-2026.web.app)
+[![Privacy](https://img.shields.io/badge/Privacy-Policy-0EA5A3)](https://cruise-app-2026.web.app/privacy)
 
 **Plan your entire cruise without Wi-Fi.**
 
 Cruise Planner is an offline-first Android app for cruise passengers. Create your voyage, add real port stops, plan each sea day, get live weather (no API key), receive local reminders, and chat with your party over **Bluetooth / BLE / Wi-Fi Direct** — even when the ship has no internet.
 
-> **Live site:** https://cruise-app-2026.web.app · **Privacy:** https://cruise-app-2026.web.app/privacy · **Package:** `com.charles.cruiseapp`
+> **🌐 Website:** [https://cruise-app-2026.web.app](https://cruise-app-2026.web.app) · **📄 Privacy Policy:** [https://cruise-app-2026.web.app/privacy](https://cruise-app-2026.web.app/privacy) · **📦 Package:** `com.charles.cruiseapp`
 
 No mock data. No cloud sync for your plans. Your cruises, ports, events and chats stay on your device.
 
@@ -93,7 +95,8 @@ Full policy: [`/privacy`](https://cruise-app-2026.web.app/privacy) — also ship
 ## 📲 Download
 
 * **APK:** [GitHub Releases](https://github.com/chartmann1590/cruise-app/releases) — v1.0, ~23 MB, Android 8+ (minSdk 26, targetSdk 35).
-* **Site:** https://cruise-app-2026.web.app
+* **🌐 Website:** [https://cruise-app-2026.web.app](https://cruise-app-2026.web.app)
+* **📄 Privacy Policy:** [https://cruise-app-2026.web.app/privacy](https://cruise-app-2026.web.app/privacy)
 
 ---
 
@@ -181,7 +184,8 @@ Firebase project `cruise-app-2026` and hosting `cruise-app-2026.web.app` are for
 
 ## 📮 Contact
 
+* **🌐 Website:** [https://cruise-app-2026.web.app](https://cruise-app-2026.web.app)
+* **📄 Privacy Policy:** [https://cruise-app-2026.web.app/privacy](https://cruise-app-2026.web.app/privacy)
 * **GitHub Issues:** [chartmann1590/cruise-app/issues](https://github.com/chartmann1590/cruise-app/issues)
-* **Site:** https://cruise-app-2026.web.app
 
 © 2026 Cruise Planner • `com.charles.cruiseapp` • Built offline, for offline.

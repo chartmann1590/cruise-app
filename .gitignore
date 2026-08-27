@@ -44,3 +44,8 @@ upload-keystore.jks
 .env
 .env.local
 secrets.properties
+
+# Promo artifacts (local video generation)
+promo/
+promo.log
+promo_err.log
