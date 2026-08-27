@@ -1,0 +1,7 @@
+{
+  "crashlytics": {
+    "symbols": {
+      "mappingFile": "app/build/outputs/mapping/release/mapping.txt"
+    }
+  }
+}

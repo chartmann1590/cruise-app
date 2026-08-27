@@ -9,6 +9,8 @@ import com.charles.cruiseapp.data.local.Cruise
 import com.charles.cruiseapp.data.local.PlannedEvent
 import com.charles.cruiseapp.data.local.PortStop
 import com.charles.cruiseapp.notifications.NotificationHelper
+import com.charles.cruiseapp.util.FirebaseCrashlyticsUtils
+import com.charles.cruiseapp.util.FirebasePerfUtils
 import com.charles.cruiseapp.util.addDays
 import com.charles.cruiseapp.util.startOfDay
 import kotlinx.coroutines.flow.*
@@ -35,15 +37,38 @@ class DashboardViewModel(app: Application): AndroidViewModel(app){
 
     fun createCruise(shipName: String, start: Long, end: Long){
         viewModelScope.launch {
-            db.cruiseDao().insert(Cruise(shipName=shipName, startDate=startOfDay(start), endDate=startOfDay(end)))
+            val trace = FirebasePerfUtils.startTrace("create_cruise")
+            trace?.putAttribute("ship_name", shipName.take(50))
+            try {
+                FirebaseCrashlyticsUtils.log("Creating cruise $shipName $start -> $end")
+                db.cruiseDao().insert(Cruise(shipName=shipName, startDate=startOfDay(start), endDate=startOfDay(end)))
+                trace?.putMetric("success", 1)
+                FirebaseCrashlyticsUtils.setCustomKey("last_cruise_name", shipName.take(50))
+            } catch (e: Exception) {
+                FirebaseCrashlyticsUtils.recordException(e)
+                trace?.putMetric("error", 1)
+                throw e
+            } finally {
+                try { trace?.stop() } catch (_: Exception) {}
+            }
         }
     }
 
     fun addPort(name: String, lat: Double, lon: Double, arrival: Long, departure: Long, country:String=""){
         viewModelScope.launch {
-            val c = cruise.value ?: return@launch
-            val list = db.portStopDao().getForCruiseOnce(c.id)
-            db.portStopDao().insert(PortStop(cruiseId=c.id, name=name, latitude=lat, longitude=lon, arrivalDate=arrival, departureDate=departure, country=country, orderIndex=list.size))
+            val trace = FirebasePerfUtils.startTrace("add_port")
+            trace?.putAttribute("port_name", name.take(50))
+            try {
+                FirebaseCrashlyticsUtils.log("Adding port $name $lat,$lon")
+                val c = cruise.value ?: return@launch
+                val list = db.portStopDao().getForCruiseOnce(c.id)
+                db.portStopDao().insert(PortStop(cruiseId=c.id, name=name, latitude=lat, longitude=lon, arrivalDate=arrival, departureDate=departure, country=country, orderIndex=list.size))
+                trace?.putMetric("success", 1)
+            } catch (e: Exception) {
+                FirebaseCrashlyticsUtils.recordException(e)
+                trace?.putMetric("error", 1)
+                throw e
+            } finally { try { trace?.stop() } catch (_: Exception) {} }
         }
     }
 
@@ -53,13 +78,24 @@ class DashboardViewModel(app: Application): AndroidViewModel(app){
 
     fun addEvent(title: String, dateMillis: Long, hour: Int, minute: Int, location:String, category:String, reminder: Int, description:String=""){
         viewModelScope.launch {
-            val c = cruise.value ?: return@launch
-            val cal = Calendar.getInstance().apply { timeInMillis = dateMillis; set(Calendar.HOUR_OF_DAY, hour); set(Calendar.MINUTE, minute); set(Calendar.SECOND,0); set(Calendar.MILLISECOND,0) }
-            val start = cal.timeInMillis
-            val ev = PlannedEvent(cruiseId=c.id, title=title, dateMillis=startOfDay(dateMillis), startTimeMillis=start, location=location, category=category, reminderMinutesBefore=reminder, description=description)
-            val id = db.plannedEventDao().insert(ev)
-            val saved = ev.copy(id=id)
-            NotificationHelper.scheduleEventNotification(context, saved)
+            val trace = FirebasePerfUtils.startTrace("add_planned_event")
+            trace?.putAttribute("title", title.take(50))
+            trace?.putAttribute("category", category)
+            try {
+                FirebaseCrashlyticsUtils.log("Adding event $title on $dateMillis $hour:$minute")
+                val c = cruise.value ?: return@launch
+                val cal = Calendar.getInstance().apply { timeInMillis = dateMillis; set(Calendar.HOUR_OF_DAY, hour); set(Calendar.MINUTE, minute); set(Calendar.SECOND,0); set(Calendar.MILLISECOND,0) }
+                val start = cal.timeInMillis
+                val ev = PlannedEvent(cruiseId=c.id, title=title, dateMillis=startOfDay(dateMillis), startTimeMillis=start, location=location, category=category, reminderMinutesBefore=reminder, description=description)
+                val id = db.plannedEventDao().insert(ev)
+                val saved = ev.copy(id=id)
+                NotificationHelper.scheduleEventNotification(context, saved)
+                trace?.putMetric("success", 1)
+            } catch (e: Exception) {
+                FirebaseCrashlyticsUtils.recordException(e)
+                trace?.putMetric("error", 1)
+                throw e
+            } finally { try { trace?.stop() } catch (_: Exception) {} }
         }
     }
 

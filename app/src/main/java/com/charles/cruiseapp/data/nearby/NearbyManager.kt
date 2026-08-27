@@ -1,6 +1,9 @@
 package com.charles.cruiseapp.data.nearby
 
 import android.content.Context
+import android.util.Log
+import com.charles.cruiseapp.util.FirebaseCrashlyticsUtils
+import com.charles.cruiseapp.util.FirebasePerfUtils
 import com.google.android.gms.nearby.Nearby
 import com.google.android.gms.nearby.connection.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -80,28 +83,43 @@ class NearbyManager(private val context: Context) {
     private val connectionLifecycleCallback = object : ConnectionLifecycleCallback() {
         override fun onConnectionInitiated(endpointId: String, info: ConnectionInfo) {
             _status.value = "Connection initiated with ${info.endpointName}"
+            FirebaseCrashlyticsUtils.log("Nearby onConnectionInitiated $endpointId ${info.endpointName}")
             connectionsClient.acceptConnection(endpointId, payloadCallback)
             val (name, code) = parseNameAndCode(info.endpointName)
             endpointNames[endpointId] = name
             if (code != null) endpointCodes[endpointId] = code
         }
         override fun onConnectionResult(endpointId: String, result: ConnectionResolution) {
-            if (result.status.isSuccess) {
-                val name = endpointNames[endpointId] ?: endpointId
-                val code = endpointCodes[endpointId]
-                if (_connected.value.none { it.id == endpointId }) {
-                    _connected.value = _connected.value + ConnectedEndpoint(endpointId, name, code)
+            val trace = FirebasePerfUtils.startTrace("nearby_connection_result")
+            trace?.putAttribute("endpoint", endpointId)
+            try {
+                if (result.status.isSuccess) {
+                    val name = endpointNames[endpointId] ?: endpointId
+                    val code = endpointCodes[endpointId]
+                    if (_connected.value.none { it.id == endpointId }) {
+                        _connected.value = _connected.value + ConnectedEndpoint(endpointId, name, code)
+                    }
+                    _status.value = "Connected to $name"
+                    FirebaseCrashlyticsUtils.log("Nearby connected to $name ($endpointId)")
+                    FirebaseCrashlyticsUtils.setCustomKey("nearby_connected_count", _connected.value.size)
+                    trace?.putMetric("success", 1)
+                } else {
+                    _status.value = "Connection failed: ${result.status.statusCode}"
+                    FirebaseCrashlyticsUtils.log("Nearby connection failed $endpointId code=${result.status.statusCode}")
+                    trace?.putMetric("failure", 1)
+                    trace?.putAttribute("status_code", result.status.statusCode.toString())
                 }
-                _status.value = "Connected to $name"
-            } else {
-                _status.value = "Connection failed: ${result.status.statusCode}"
-            }
+            } catch (e: Exception) {
+                FirebaseCrashlyticsUtils.recordException(e)
+                trace?.putMetric("error", 1)
+            } finally { try { trace?.stop() } catch (_: Exception) {} }
         }
         override fun onDisconnected(endpointId: String) {
             _connected.value = _connected.value.filter { it.id != endpointId }
             endpointNames.remove(endpointId)
             endpointCodes.remove(endpointId)
             _status.value = "Disconnected"
+            FirebaseCrashlyticsUtils.log("Nearby disconnected $endpointId")
         }
     }
 

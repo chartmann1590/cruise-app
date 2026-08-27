@@ -9,6 +9,8 @@ import com.charles.cruiseapp.data.local.Message
 import com.charles.cruiseapp.data.local.PartyMember
 import com.charles.cruiseapp.data.nearby.NearbyManager
 import com.charles.cruiseapp.data.nearby.WireMessage
+import com.charles.cruiseapp.util.FirebaseCrashlyticsUtils
+import com.charles.cruiseapp.util.FirebasePerfUtils
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -33,10 +35,17 @@ class PartyViewModel(app: Application): AndroidViewModel(app){
     private var retryJob: Job? = null
 
     init {
+        // Crashlytics user identification + perf init trace
+        try {
+            val code = getSelfCode()
+            FirebaseCrashlyticsUtils.setUserId(code)
+            FirebaseCrashlyticsUtils.setCustomKey("party_self_code", code.take(8))
+        } catch (_: Exception) {}
         // ensure self has code and sync to nearby
         viewModelScope.launch {
             val self = ensureSelfMember()
             nearby.setSelfInfo(self.displayName.ifBlank { "Cruiser" }, self.code)
+            FirebaseCrashlyticsUtils.setUserId(self.code)
         }
         nearby.onWireReceived = { wire, endpointId ->
             viewModelScope.launch {
@@ -125,66 +134,91 @@ class PartyViewModel(app: Application): AndroidViewModel(app){
     fun getQrDisplayString(): String = getQrData()
 
     private suspend fun handleIncomingWire(wire: WireMessage, endpointId: String) {
-        // Filter by targetCode if present: only process if for us or broadcast
-        val selfCode = getSelfCode()
-        if (wire.targetCode != null && wire.targetCode != selfCode) {
-            // not for us, ignore
-            return
-        }
-        // also ignore our own messages echoed? check senderCode == selfCode and isFromSelf? but we already filtered outgoing via isFromSelf check
-        when (wire.type) {
-            "CHAT" -> {
-                // Avoid duplicate
-                val existing = db.messageDao().getByClientId(wire.messageId)
-                if (existing == null) {
-                    // Determine sender name: use wire.sender
-                    val msg = Message(
-                        clientMessageId = wire.messageId,
-                        senderName = wire.sender,
-                        text = wire.text,
-                        timestamp = wire.timestamp,
-                        isFromSelf = false,
-                        endpointId = endpointId,
-                        status = "DELIVERED",
-                        targetCode = wire.targetCode,
-                        targetName = wire.targetName
-                    )
-                    db.messageDao().insert(msg)
-                    // update party member endpoint mapping if senderCode known
-                    wire.senderCode?.let { sc ->
-                        val member = db.partyMemberDao().getByCode(sc)
-                        if (member == null && wire.sender.isNotBlank()) {
-                            // optionally auto-add unknown sender as party member? No, QR is explicit, but we can at least track.
-                            // For now, don't auto-add, but update discovered mapping already done.
-                        } else if (member != null) {
-                            db.partyMemberDao().updateEndpoint(sc, endpointId)
+        val trace = FirebasePerfUtils.startTrace("party_handle_incoming")
+        trace?.putAttribute("type", wire.type)
+        try {
+            // Filter by targetCode if present: only process if for us or broadcast
+            val selfCode = getSelfCode()
+            if (wire.targetCode != null && wire.targetCode != selfCode) {
+                // not for us, ignore
+                trace?.putAttribute("filtered", "true")
+                return
+            }
+            FirebaseCrashlyticsUtils.log("Handling incoming ${wire.type} from ${wire.sender} id=${wire.messageId}")
+            // also ignore our own messages echoed? check senderCode == selfCode and isFromSelf? but we already filtered outgoing via isFromSelf check
+            when (wire.type) {
+                "CHAT" -> {
+                    // Avoid duplicate
+                    val existing = db.messageDao().getByClientId(wire.messageId)
+                    if (existing == null) {
+                        // Determine sender name: use wire.sender
+                        val msg = Message(
+                            clientMessageId = wire.messageId,
+                            senderName = wire.sender,
+                            text = wire.text,
+                            timestamp = wire.timestamp,
+                            isFromSelf = false,
+                            endpointId = endpointId,
+                            status = "DELIVERED",
+                            targetCode = wire.targetCode,
+                            targetName = wire.targetName
+                        )
+                        db.messageDao().insert(msg)
+                        // update party member endpoint mapping if senderCode known
+                        wire.senderCode?.let { sc ->
+                            val member = db.partyMemberDao().getByCode(sc)
+                            if (member == null && wire.sender.isNotBlank()) {
+                                // optionally auto-add unknown sender as party member? No, QR is explicit, but we can at least track.
+                                // For now, don't auto-add, but update discovered mapping already done.
+                            } else if (member != null) {
+                                db.partyMemberDao().updateEndpoint(sc, endpointId)
+                            }
                         }
+                        nearby.sendDeliveredReceipt(wire.messageId)
+                        delay(1200)
+                        val inserted = db.messageDao().getByClientId(wire.messageId)
+                        if (inserted != null) {
+                            db.messageDao().update(inserted.copy(status = "READ"))
+                        }
+                        nearby.sendReadReceipt(wire.messageId)
+                        trace?.putMetric("chat_handled", 1)
+                    } else {
+                        nearby.sendDeliveredReceipt(wire.messageId)
+                        trace?.putMetric("duplicate", 1)
                     }
-                    nearby.sendDeliveredReceipt(wire.messageId)
-                    delay(1200)
-                    val inserted = db.messageDao().getByClientId(wire.messageId)
-                    if (inserted != null) {
-                        db.messageDao().update(inserted.copy(status = "READ"))
+                }
+                "DELIVERED" -> {
+                    val ref = wire.refId
+                    if (ref == null) {
+                        trace?.putAttribute("error", "missing_refId")
+                        return
                     }
-                    nearby.sendReadReceipt(wire.messageId)
-                } else {
-                    nearby.sendDeliveredReceipt(wire.messageId)
+                    val original = db.messageDao().getByClientId(ref)
+                    if (original != null && original.status != "READ") {
+                        db.messageDao().updateStatus(ref, "DELIVERED")
+                    }
+                    trace?.putMetric("delivered_handled", 1)
+                }
+                "READ" -> {
+                    val ref = wire.refId
+                    if (ref == null) {
+                        trace?.putAttribute("error", "missing_refId")
+                        return
+                    }
+                    val original = db.messageDao().getByClientId(ref)
+                    if (original != null) {
+                        db.messageDao().updateStatus(ref, "READ")
+                    }
+                    trace?.putMetric("read_handled", 1)
                 }
             }
-            "DELIVERED" -> {
-                val ref = wire.refId ?: return
-                val original = db.messageDao().getByClientId(ref)
-                if (original != null && original.status != "READ") {
-                    db.messageDao().updateStatus(ref, "DELIVERED")
-                }
-            }
-            "READ" -> {
-                val ref = wire.refId ?: return
-                val original = db.messageDao().getByClientId(ref)
-                if (original != null) {
-                    db.messageDao().updateStatus(ref, "READ")
-                }
-            }
+        } catch (e: Exception) {
+            FirebaseCrashlyticsUtils.recordException(e)
+            FirebaseCrashlyticsUtils.log("handleIncomingWire failed: ${e.message}")
+            trace?.putMetric("error", 1)
+            try { trace?.putAttribute("error", e.message ?: "unknown") } catch (_: Exception) {}
+        } finally {
+            try { trace?.stop() } catch (_: Exception) {}
         }
     }
 
@@ -255,12 +289,25 @@ class PartyViewModel(app: Application): AndroidViewModel(app){
     }
 
     private suspend fun attemptSend(msg: Message) {
-        val senderCode = getSelfCode()
-        val sent = nearby.sendChatWithId(msg.clientMessageId, msg.senderName, msg.text, msg.timestamp, senderCode, msg.targetCode, msg.targetName)
-        if (sent) {
-            db.messageDao().updateStatus(msg.clientMessageId, "SENT")
-        } else {
-            db.messageDao().incrementRetry(msg.clientMessageId, "PENDING")
+        val trace = FirebasePerfUtils.startTrace("party_attempt_send")
+        trace?.putAttribute("target", msg.targetCode ?: "broadcast")
+        trace?.putAttribute("msgId", msg.clientMessageId.take(8))
+        try {
+            FirebaseCrashlyticsUtils.log("Attempting send ${msg.clientMessageId} to ${msg.targetCode ?: "broadcast"}")
+            val senderCode = getSelfCode()
+            val sent = nearby.sendChatWithId(msg.clientMessageId, msg.senderName, msg.text, msg.timestamp, senderCode, msg.targetCode, msg.targetName)
+            if (sent) {
+                db.messageDao().updateStatus(msg.clientMessageId, "SENT")
+                trace?.putMetric("sent", 1)
+            } else {
+                db.messageDao().incrementRetry(msg.clientMessageId, "PENDING")
+                trace?.putMetric("pending", 1)
+            }
+        } catch (e: Exception) {
+            FirebaseCrashlyticsUtils.recordException(e)
+            trace?.putMetric("error", 1)
+        } finally {
+            try { trace?.stop() } catch (_: Exception) {}
         }
     }
 
