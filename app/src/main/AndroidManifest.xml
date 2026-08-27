@@ -43,6 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DebugInjectorActivity" android:exported="true" android:theme="@android:style/Theme.Material.Light.NoActionBar" />
 
         <receiver android:name=".notifications.EventReminderReceiver" android:exported="false" />
         <receiver android:name=".notifications.BootRescheduleReceiver"
