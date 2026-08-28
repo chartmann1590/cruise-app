@@ -36,7 +36,12 @@ import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class, androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 @Composable
-fun PartyScreen(partyVm: PartyViewModel, onBack:()->Unit){
+fun PartyScreen(
+    partyVm: PartyViewModel,
+    onBack:()->Unit,
+    onNavigateToHome: (() -> Unit)? = null,
+    onNavigateToPorts: (() -> Unit)? = null
+){
     val members by partyVm.members.collectAsState()
     val localMessages by partyVm.localMessages.collectAsState()
     val status by partyVm.nearbyStatus.collectAsState()
@@ -120,6 +125,7 @@ fun PartyScreen(partyVm: PartyViewModel, onBack:()->Unit){
     val timeFmt = remember { SimpleDateFormat("h:mm a", Locale.getDefault()) }
 
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar={
             TopAppBar(
                 title={
@@ -136,58 +142,88 @@ fun PartyScreen(partyVm: PartyViewModel, onBack:()->Unit){
             )
         },
         bottomBar = {
-            Surface(shadowElevation = 8.dp, tonalElevation = 2.dp, color = MaterialTheme.colorScheme.surface) {
-                Column {
-                    if (members.isNotEmpty()) {
-                        Row(
-                            Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 6.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            Text("To:", style = MaterialTheme.typography.labelMedium)
-                            FilterChip(
-                                selected = selectedRecipient == null,
-                                onClick = { selectedRecipient = null },
-                                label = { Text("Everyone") },
-                                leadingIcon = { Icon(Icons.Default.Group, null, Modifier.size(16.dp)) }
-                            )
-                            members.filter { !it.isSelf }.forEach { m ->
+            Column(
+                modifier = Modifier
+                    .navigationBarsPadding()
+                    .imePadding()
+            ) {
+                Surface(
+                    shadowElevation = 8.dp, tonalElevation = 2.dp, color = MaterialTheme.colorScheme.surface
+                ) {
+                    Column {
+                        if (members.isNotEmpty()) {
+                            Row(
+                                Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Text("To:", style = MaterialTheme.typography.labelMedium)
                                 FilterChip(
-                                    selected = selectedRecipient?.id == m.id,
-                                    onClick = { selectedRecipient = if (selectedRecipient?.id == m.id) null else m },
-                                    label = { Text(m.displayName, maxLines = 1) },
-                                    leadingIcon = { Box(Modifier.size(18.dp).clip(CircleShape).background(MaterialTheme.colorScheme.tertiaryContainer), contentAlignment = Alignment.Center){ Text(m.displayName.take(1).uppercase(), fontSize = 9.sp, fontWeight = FontWeight.Bold) } }
+                                    selected = selectedRecipient == null,
+                                    onClick = { selectedRecipient = null },
+                                    label = { Text("Everyone") },
+                                    leadingIcon = { Icon(Icons.Default.Group, null, Modifier.size(16.dp)) }
                                 )
-                            }
-                        }
-                        HorizontalDivider()
-                    }
-                    Row(Modifier.fillMaxWidth().padding(8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)){
-                        OutlinedTextField(
-                            value=chatText, onValueChange={chatText=it},
-                            placeholder={ Text(if (selectedRecipient == null) "Message everyone..." else "To ${selectedRecipient?.displayName}...")},
-                            modifier=Modifier.weight(1f),
-                            shape= RoundedCornerShape(24.dp),
-                            maxLines = 4
-                        )
-                        FilledIconButton(
-                            onClick={
-                                if(chatText.isNotBlank()){
-                                    val target = selectedRecipient
-                                    if (target == null) partyVm.sendLocalMessage(chatText)
-                                    else partyVm.sendToMember(chatText, target)
-                                    chatText=""
+                                members.filter { !it.isSelf }.forEach { m ->
+                                    FilterChip(
+                                        selected = selectedRecipient?.id == m.id,
+                                        onClick = { selectedRecipient = if (selectedRecipient?.id == m.id) null else m },
+                                        label = { Text(m.displayName, maxLines = 1) },
+                                        leadingIcon = { Box(Modifier.size(18.dp).clip(CircleShape).background(MaterialTheme.colorScheme.tertiaryContainer), contentAlignment = Alignment.Center){ Text(m.displayName.take(1).uppercase(), fontSize = 9.sp, fontWeight = FontWeight.Bold) } }
+                                    )
                                 }
-                            },
-                            modifier=Modifier.size(48.dp),
-                            colors= IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.primary)
-                        ){
-                            Icon(Icons.Default.Send, null, tint=Color.White)
+                            }
+                            HorizontalDivider()
+                        }
+                        Row(Modifier.fillMaxWidth().padding(8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)){
+                            OutlinedTextField(
+                                value=chatText, onValueChange={chatText=it},
+                                placeholder={ Text(if (selectedRecipient == null) "Message everyone..." else "To ${selectedRecipient?.displayName}...")},
+                                modifier=Modifier.weight(1f),
+                                shape= RoundedCornerShape(24.dp),
+                                maxLines = 4
+                            )
+                            FilledIconButton(
+                                onClick={
+                                    if(chatText.isNotBlank()){
+                                        val target = selectedRecipient
+                                        if (target == null) partyVm.sendLocalMessage(chatText)
+                                        else partyVm.sendToMember(chatText, target)
+                                        chatText=""
+                                    }
+                                },
+                                modifier=Modifier.size(48.dp),
+                                colors= IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.primary)
+                            ){
+                                Icon(Icons.Default.Send, null, tint=Color.White)
+                            }
                         }
                     }
                 }
+                // App bottom navigation bar - always visible above keyboard, chat input stays above it
+                NavigationBar(windowInsets = WindowInsets(0)) {
+                    NavigationBarItem(
+                        selected = false,
+                        onClick = { if (onNavigateToHome != null) onNavigateToHome() else onBack() },
+                        icon = { Icon(Icons.Default.Home, contentDescription = "Dashboard") },
+                        label = { Text("Dashboard") }
+                    )
+                    NavigationBarItem(
+                        selected = false,
+                        onClick = { onNavigateToPorts?.invoke() },
+                        icon = { Icon(Icons.Default.Place, contentDescription = "Ports") },
+                        label = { Text("Ports") }
+                    )
+                    NavigationBarItem(
+                        selected = true,
+                        onClick = { },
+                        icon = { Icon(Icons.Default.Group, contentDescription = "Party") },
+                        label = { Text("Party") }
+                    )
+                }
             }
         },
+        contentWindowInsets = WindowInsets(0),
         containerColor = MaterialTheme.colorScheme.surface
     ){ pad ->
         LazyColumn(

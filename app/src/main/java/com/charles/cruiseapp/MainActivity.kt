@@ -116,7 +116,21 @@ fun AppNav(){
             WeatherDetailScreen(portId=portId, portsFlow=dashboardVm.ports, weatherVm=weatherVm, onBack={ navController.popBackStack() })
         }
         composable(Screen.Party.route){
-            PartyScreen(partyVm=partyVm, onBack={ navController.popBackStack()})
+            PartyScreen(
+                partyVm=partyVm,
+                onBack={ navController.popBackStack()},
+                onNavigateToHome={
+                    navController.navigate(Screen.Dashboard.route){
+                        popUpTo(Screen.Dashboard.route){ inclusive = false }
+                        launchSingleTop = true
+                    }
+                },
+                onNavigateToPorts={
+                    navController.navigate(Screen.PortList.route){
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
     }
 }
