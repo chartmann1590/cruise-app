@@ -53,3 +53,6 @@ promo_err.log
 # Claude Code / Opencode agent instructions (local only)
 CLAUDE.md
 .claude/
+
+# Local webchat planning docs (not for public repo)
+webchat-plan/
