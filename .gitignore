@@ -49,3 +49,7 @@ secrets.properties
 promo/
 promo.log
 promo_err.log
+
+# Claude Code / Opencode agent instructions (local only)
+CLAUDE.md
+.claude/
