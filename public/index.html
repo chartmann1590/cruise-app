@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cruise Planner — Your cruise, perfectly planned</title>
-<meta name="description" content="Cruise Planner helps you plan your entire voyage — ports, days, weather and staying in touch with your group, even without Wi-Fi.">
-<meta property="og:title" content="Cruise Planner">
-<meta property="og:description" content="Plan your entire voyage without Wi-Fi. Ports, days, weather and group chat in one place.">
-<meta property="og:image" content="/screenshots/06_dashboard.png">
+<title>CruiseLoom — Your cruise, perfectly planned</title>
+<meta name="description" content="CruiseLoom — plan your voyage offline: ports, days, weather, and group chat. NEW: Guest Wi-Fi Chat lets anyone nearby join from their browser — no app, no internet, no refresh.">
+<meta property="og:title" content="CruiseLoom — Guest Wi-Fi Chat">
+<meta property="og:description" content="Plan your entire voyage without Wi-Fi. Ports, days, weather and group chat — now with Guest Wi-Fi: guests join your hotspot and chat in their browser, live.">
+<meta property="og:image" content="/cruiseloom-feature.png">
 <meta name="theme-color" content="#0B1E3B">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230B1E3B'/><text y='62' x='50' text-anchor='middle' font-size='56'>🚢</text></svg>">
+<link rel="icon" type="image/png" href="/cruiseloom-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
@@ -18,10 +18,11 @@
 <body>
 <nav>
   <div class="container nav-inner">
-    <a class="brand" href="/"><span class="brand-mark">🚢</span><span>Cruise Planner</span></a>
+    <a class="brand" href="/"><span class="brand-mark">🚢</span><span>CruiseLoom</span></a>
     <div class="nav-links">
       <a href="#promo">Video</a>
       <a href="#features">Features</a>
+      <a href="#guest-wifi">Guest Wi-Fi</a>
       <a href="#screenshots">Screenshots</a>
       <a href="/privacy.html">Privacy</a>
     </div>
@@ -37,7 +38,7 @@
     <div>
       <span class="badge">Works without Wi-Fi</span>
       <h1>Your cruise, <em>perfectly planned</em></h1>
-      <p class="lead">Everything for your voyage in one place — your itinerary, port stops, weather and staying in touch with your group. Made to work on the ship, even when there's no internet.</p>
+      <p class="lead">Everything for your voyage in one place — your itinerary, port stops, weather and staying in touch with your group. <b>NEW:</b> Guest Wi-Fi Chat — guests join your hotspot and chat in their browser, no app, no internet, live.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">Download for Android</a>
         <a class="btn btn-ghost" href="#promo">Watch video</a>
@@ -45,7 +46,7 @@
       <div class="hero-bullets">
         <span><i>✓</i> Works offline</span>
         <span><i>✓</i> Real weather</span>
-        <span><i>✓</i> Private group chat</span>
+        <span><i>✓</i> Group + Guest Wi-Fi chat</span>
       </div>
     </div>
     <div class="hero-visual">
@@ -59,7 +60,7 @@
       </div>
       <div class="float-card float-b">
         <div class="icon" style="background:#FFFBEB;color:#92400E;border:1px solid rgba(245,158,11,.18)">💬</div>
-        <div><b>Party chat</b><span>Even offline</span></div>
+        <div><b>Party chat + Guest Wi-Fi</b><span>Browser guests, no app</span></div>
       </div>
       <div class="float-card float-c">
         <div class="icon" style="background:#EFF6FF;color:#1E40AF;border:1px solid rgba(59,130,246,.18)">🔔</div>
@@ -126,15 +127,66 @@
         <h3>Reminders</h3>
         <p>Set a reminder for anything on your itinerary and get notified at the right time, even after you restart your phone.</p>
       </div>
-      <div class="card">
+      <div class="card" style="border-color:rgba(14,165,163,.28);background:linear-gradient(180deg,rgba(14,165,163,.06),#fff)">
         <div class="ic">💬</div>
-        <h3>Chat with your group</h3>
-        <p>Stay in touch with your party without needing ship Wi-Fi. Share a QR code to connect — it works nearby over Bluetooth.</p>
+        <h3>Chat with your group <span style="font-size:11px;background:#0EA5A3;color:#fff;padding:2px 6px;border-radius:999px;vertical-align:middle">NEW Guest Wi-Fi</span></h3>
+        <p>Bluetooth Nearby for app users + <b>Guest Wi-Fi Chat</b> for everyone else. Host taps <b>Start Guest Chat</b> → phone creates a local-only hotspot (no internet) + web server on <code>:8085</code>. Guests scan a <code>WIFI:</code> QR to join, then open <code>http://&lt;host-ip&gt;:8085/</code> in any browser. Captive-portal probe (<code>generate_204</code>) auto-opens the chat like hotel Wi-Fi. One shared thread, live WebSocket, no refresh.</p>
       </div>
       <div class="card">
         <div class="ic">📆</div>
         <h3>Easy to use</h3>
         <p>A clean calendar and simple screens help you get set up quickly, so you can get back to enjoying the trip.</p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+<section id="guest-wifi" style="background:linear-gradient(180deg,#F8FAFC 0%, #ECFEFF 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head">
+      <span class="badge" style="background:rgba(14,165,163,.12);color:#0B8A89;border-color:rgba(14,165,163,.22)">New · No app needed</span>
+      <h2>Guest Wi-Fi Chat — no app, no internet, no refresh</h2>
+      <p>One phone hosts a local-only hotspot + tiny web server. Guests join the Wi-Fi and chat in any browser. Captive-portal auto-opens like hotel Wi-Fi.</p>
+    </div>
+    <div class="feature-row">
+      <div class="feature-copy">
+        <span class="badge">How it works</span>
+        <h3>Two QR codes, 30 seconds</h3>
+        <p>Host taps <b>Start Guest Chat</b> in Party. Phone creates a local hotspot (no internet) on <code>:8085</code> and shows:</p>
+        <ol style="margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6">
+          <li><b>Step 1 — Join Wi-Fi:</b> scan <code>WIFI:T:WPA;S:&lt;ssid&gt;;P:&lt;password&gt;;;</code> QR or enter manually</li>
+          <li><b>Step 2 — Open chat:</b> scan URL QR or type <code>http://&lt;host-ip&gt;:8085/</code> — OS captive-portal check (<code>generate_204</code> / <code>captive.apple.com</code>) auto-opens the page; no typing if you use the QR</li>
+        </ol>
+        <div class="badge-list" style="margin-top:14px">
+          <span>Text-only</span><span>2000 chars</span><span>One host</span><span>Live WebSocket</span><span>History on join</span>
+        </div>
+        <p style="margin-top:14px;color:var(--muted);font-size:13px">One shared thread: <code>app ↔ host ↔ browser</code> via <code>PartyChatRepository</code> + <code>ChatWebServer</code> (<code>ws://&lt;host&gt;:8085/ws</code>). Guest name (40 chars) + <code>localStorage</code> UUID → <code>PartyMember</code>. Host messages fan-out via <code>onMessagePersisted</code>; guest messages → <code>receiveFromWebGuest</code> → Nearby relay.</p>
+        <p style="margin-top:10px;color:var(--muted);font-size:13px"><b>Stay live:</b> WebSocket <code>timeout=0</code> + 25s <code>ping</code> keepalive, debounced offline dot, history merge — no manual refresh. <b>Organized Party screen:</b> collapsible <i>Connections & members</i>, <i>Bluetooth Nearby</i>, <i>Guest Wi-Fi</i>, <i>Party Members</i>, <i>Tools</i> above chat, chat at bottom above composer.</p>
+      </div>
+      <div class="feature-visual" style="flex-direction:column;gap:14px">
+        <div style="display:flex;gap:14px;align-items:flex-end">
+          <div style="width:150px;background:#fff;border:1px solid var(--border);border-radius:18px;padding:10px;box-shadow:0 12px 30px rgba(11,30,59,.12);text-align:center">
+            <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700">Step 1</div>
+            <div style="width:110px;height:110px;background:#fff;border:1px solid var(--border);border-radius:12px;margin:8px auto;display:grid;place-items:center;font-size:10px;color:var(--muted)">WIFI QR<br><span style="font-size:9px">WIFI:T:WPA;S:…</span></div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy)">Join Wi-Fi</div>
+            <div style="font-size:11px;color:var(--muted)">Scan to join</div>
+          </div>
+          <div style="width:150px;background:#fff;border:1px solid var(--border);border-radius:18px;padding:10px;box-shadow:0 12px 30px rgba(11,30,59,.12);text-align:center">
+            <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700">Step 2</div>
+            <div style="width:110px;height:110px;background:#fff;border:1px solid var(--border);border-radius:12px;margin:8px auto;display:grid;place-items:center;font-size:10px;color:var(--muted)">URL QR<br><span style="font-size:9px">http://172.24…:8085/</span></div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy)">Open chat</div>
+            <div style="font-size:11px;color:var(--muted)">Auto-opens</div>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow);width:100%;max-width:320px">
+          <span style="width:28px;height:28px;border-radius:999px;background:#0B1E3B;color:#fff;display:grid;place-items:center;font-size:14px">🚢</span>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:700;color:var(--navy)">Cruise Chat — Guest</div>
+            <div style="font-size:12px;color:var(--muted)">Connected • No refresh needed</div>
+          </div>
+          <span style="width:10px;height:10px;border-radius:999px;background:#16A34A;box-shadow:0 0 0 4px rgba(22,163,74,.18)"></span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);text-align:center;max-width:320px">Guests see full history on join; host sees them as <code>PartyMember</code> in the member list. One shared thread across Bluetooth + Wi-Fi Direct + browser.</div>
       </div>
     </div>
   </div>
@@ -175,7 +227,7 @@
     <div class="steps">
       <div class="step"><div class="step-num">1</div><h4>Create your cruise</h4><p>Name your ship and choose your travel dates. We'll lay out the days for you.</p></div>
       <div class="step"><div class="step-num">2</div><h4>Add ports and plans</h4><p>Search for Nassau or Cozumel and add it to your trip. Then add dinners, excursions and reminders to any day.</p></div>
-      <div class="step"><div class="step-num">3</div><h4>Use it anywhere</h4><p>Check the weather once in port and view it later at sea. Chat with your group nearby — no internet needed.</p></div>
+      <div class="step"><div class="step-num">3</div><h4>Use it anywhere</h4><p>Check the weather once in port and view it later at sea. Chat over Bluetooth, or host a <b>Guest Wi-Fi</b> — guests join your hotspot via QR and chat in their browser, no app needed. No internet, no refresh.</p></div>
     </div>
   </div>
 </section>
@@ -185,7 +237,7 @@
     <div class="cta">
       <div>
         <h3>Ready to get started?</h3>
-        <p>Get Cruise Planner for your Android phone. It works on Android 8 and newer.</p>
+        <p>Get CruiseLoom for your Android phone. It works on Android 8 and newer. Host Guest Wi-Fi, share two QR codes, and your whole group chats — even without the app.</p>
       </div>
       <div class="cta-actions">
         <a class="btn" style="background:#fff;color:var(--navy)" href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">Download for Android</a>
@@ -199,7 +251,7 @@
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <div class="brand"><span class="brand-mark">🚢</span><span>Cruise Planner</span></div>
+        <div class="brand"><span class="brand-mark">🚢</span><span>CruiseLoom</span></div>
         <p>A simple companion for cruise days. Plan your trip, check the weather and stay in touch — all without needing Wi-Fi.</p>
       </div>
       <div class="foot-col">
@@ -220,7 +272,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 Cruise Planner • All rights reserved</span>
+      <span>© 2026 CruiseLoom • All rights reserved</span>
       <span><a href="/privacy.html" style="text-decoration:underline">Privacy</a> • <a href="https://github.com/chartmann1590/cruise-app" style="text-decoration:underline">GitHub</a></span>
     </div>
   </div>

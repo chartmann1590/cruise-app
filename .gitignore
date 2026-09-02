@@ -44,6 +44,11 @@ upload-keystore.jks
 .env
 .env.local
 secrets.properties
+admob.properties
+app/admob.properties
+app/secrets.properties
+keystore.properties
+app/keystore.properties
 
 # Promo artifacts (local video generation)
 promo/
@@ -53,6 +58,23 @@ promo_err.log
 # Claude Code / Opencode agent instructions (local only)
 CLAUDE.md
 .claude/
+
+# Local dev artifacts at repo root (device captures, temp diffs/logs - keep public/screenshots and fastlane)
+# Root-level png/jpg from local device captures are ignored; subfolder assets (public/, fastlane/, screenshots/, play-store/) remain tracked
+/*.png
+/*.jpg
+/*.jpeg
+/*.log
+/*.diff
+*.log
+*.diff
+pid.txt
+tmp*.txt
+win.txt
+status.log
+stop.log
+combined.log
+diffstat.log
 
 # Local webchat planning docs (not for public repo)
 webchat-plan/

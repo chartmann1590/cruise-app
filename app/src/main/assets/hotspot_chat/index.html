@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cruise Chat — Guest</title>
+<meta name="theme-color" content="#0B1E3B">
+<meta name="description" content="Guest chat for CruiseLoom — no app needed">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div id="app">
+  <!-- Name entry state -->
+  <div id="state-join" class="state">
+    <div class="join-card">
+      <div class="brand-mark" aria-hidden="true">🚢</div>
+      <h1>Join the group chat</h1>
+      <p class="muted">Enter your name to start chatting. This stays on the host's phone — no internet needed.</p>
+      <div class="field">
+        <label for="nameInput" class="sr-only">Your display name</label>
+        <input id="nameInput" type="text" placeholder="Your name (e.g. Alex)" maxlength="40" autocomplete="nickname" />
+      </div>
+      <button id="joinBtn" class="btn btn-primary" type="button">Join chat</button>
+      <p id="joinError" class="error hidden" role="alert"></p>
+      <p class="small muted" style="margin-top:14px">By joining you agree to be kind and keep it relevant to the trip. The host can see your messages.</p>
+    </div>
+  </div>
+
+  <!-- Connecting state -->
+  <div id="state-connecting" class="state hidden">
+    <div class="connecting-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <p class="muted"><span id="connectingText">Connecting…</span></p>
+    </div>
+  </div>
+
+  <!-- Chat state -->
+  <div id="state-chat" class="state hidden">
+    <header class="chat-header">
+      <div class="header-left">
+        <span class="brand-mark small">🚢</span>
+        <span class="header-title">Cruise Chat</span>
+      </div>
+      <div class="header-right">
+        <span id="connDot" class="conn-dot offline" title="offline"></span>
+        <span id="connText" class="conn-text">Offline</span>
+      </div>
+    </header>
+
+    <div id="messageList" class="message-list" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+    <div id="statusBar" class="status-bar hidden"></div>
+
+    <form id="composer" class="composer" autocomplete="off">
+      <input id="chatInput" type="text" placeholder="Message everyone…" maxlength="2000" aria-label="Message" />
+      <button id="sendBtn" class="btn btn-send" type="submit" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+<script src="./chat.js"></script>
+</body>
+</html>

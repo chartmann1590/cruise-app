@@ -112,3 +112,11 @@ interface WeatherCacheDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(cache: WeatherCache)
 }
+
+@Dao
+interface PlaceCacheDao {
+    @Query("SELECT * FROM place_cache WHERE portStopId = :portId")
+    suspend fun getForPort(portId: Long): PlaceCache?
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(cache: PlaceCache)
+}

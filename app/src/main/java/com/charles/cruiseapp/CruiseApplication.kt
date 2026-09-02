@@ -5,23 +5,39 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 import android.util.Log
+import coil.ImageLoader
+import coil.ImageLoaderFactory
+import com.charles.cruiseapp.ads.AdConfig
+import com.charles.cruiseapp.ads.GlobalInterstitial
 import com.charles.cruiseapp.data.local.CruiseDatabase
+import com.charles.cruiseapp.data.party.PartyChatRepository
+import com.charles.cruiseapp.data.remote.PlacesRepository
 import com.charles.cruiseapp.data.remote.WeatherRepository
 import com.charles.cruiseapp.notifications.NotificationHelper
 import com.charles.cruiseapp.util.FirebaseCrashlyticsUtils
 import com.charles.cruiseapp.util.FirebasePerfUtils
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.perf.FirebasePerformance
+import okhttp3.OkHttpClient
+import java.util.concurrent.atomic.AtomicBoolean
 
-class CruiseApplication : Application() {
+class CruiseApplication : Application(), ImageLoaderFactory {
+    private val adsInitialized = AtomicBoolean(false)
     val database by lazy { CruiseDatabase.getDatabase(this) }
     val weatherRepository by lazy { WeatherRepository() }
+    val placesRepository by lazy { PlacesRepository() }
+    val partyChatRepository by lazy { PartyChatRepository(applicationContext, database) }
+    // HotspotController is app-scoped for HotspotChatService + UI to share same state (Phase 4)
+    // Lazy so it only initializes if/when the guest chat feature is used.
+    val hotspotController by lazy { com.charles.cruiseapp.data.hotspot.HotspotController(applicationContext) }
 
     override fun onCreate() {
         super.onCreate()
         initFirebase()
         createNotificationChannels()
+        initOsm()
         // App startup performance trace
         try {
             val startupTrace = FirebasePerformance.getInstance().newTrace("app_startup")
@@ -96,6 +112,81 @@ class CruiseApplication : Application() {
                 enableVibration(true)
             }
             mgr.createNotificationChannel(partyChannel)
+
+            val hotspotChannel = NotificationChannel(
+                NotificationHelper.HOTSPOT_CHANNEL_ID,
+                "Guest Wi-Fi Chat",
+                NotificationManager.IMPORTANCE_LOW
+            ).apply {
+                description = "Shown while guest Wi-Fi chat is running"
+            }
+            mgr.createNotificationChannel(hotspotChannel)
+
+            val countdownChannel = NotificationChannel(
+                NotificationHelper.COUNTDOWN_CHANNEL_ID,
+                "Cruise Countdown",
+                NotificationManager.IMPORTANCE_LOW
+            ).apply {
+                description = "Daily countdown to your next cruise"
+            }
+            mgr.createNotificationChannel(countdownChannel)
+        }
+    }
+
+    override fun newImageLoader(): ImageLoader {
+        // Wikimedia's image CDN (upload.wikimedia.org) returns 403 for requests with a
+        // generic/missing User-Agent — Coil's default OkHttp client gets blocked without this.
+        return ImageLoader.Builder(this)
+            .okHttpClient {
+                OkHttpClient.Builder()
+                    .addInterceptor { chain ->
+                        val req = chain.request().newBuilder()
+                            .header("User-Agent", "CruiseLoomApp/1.0 (offline cruise itinerary app; no contact url)")
+                            .build()
+                        chain.proceed(req)
+                    }
+                    .build()
+            }
+            .build()
+    }
+
+    private fun initOsm() {
+        try {
+            val cfg = org.osmdroid.config.Configuration.getInstance()
+            val prefs = getSharedPreferences("osmdroid", MODE_PRIVATE)
+            cfg.load(this, prefs)
+            cfg.userAgentValue = BuildConfig.APPLICATION_ID
+            cfg.osmdroidBasePath = getExternalFilesDir(null) ?: filesDir
+            cfg.osmdroidTileCache = java.io.File(cfg.osmdroidBasePath, "osmdroid/tiles")
+            // Ensure cache dir exists
+            cfg.osmdroidTileCache.mkdirs()
+        } catch (e: Exception) {
+            Log.w("CruiseApp", "OSM init failed", e)
+        }
+    }
+
+    fun initializeAdsAfterConsent() {
+        if (!adsInitialized.compareAndSet(false, true)) return
+        try {
+            if (!AdConfig.shouldShowAds(BuildConfig.DEBUG)) {
+                Log.i("CruiseApp", "Ads disabled via AdConfig — skipping MobileAds init")
+                return
+            }
+            // MobileAds init is async and safe to call early; no ad will show until a banner/interstitial is requested.
+            MobileAds.initialize(this) { status ->
+                val map = status.adapterStatusMap
+                Log.i("CruiseApp", "MobileAds init complete: ${map.keys.joinToString()}")
+                map.forEach { (adapter, st) ->
+                    Log.d("CruiseApp", "  adapter $adapter latency=${st.latency} state=${st.initializationState} desc=${st.description}")
+                }
+                // Preload the first interstitial so it's ready by first natural break
+                try { GlobalInterstitial.manager.preload(this) } catch (e: Exception) {
+                    Log.w("CruiseApp", "Interstitial preload failed", e)
+                }
+            }
+        } catch (e: Exception) {
+            Log.w("CruiseApp", "MobileAds init failed", e)
+            try { FirebaseCrashlyticsUtils.recordException(e) } catch (_: Exception) {}
         }
     }
 }

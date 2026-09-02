@@ -38,10 +38,16 @@ class DashboardViewModel(app: Application): AndroidViewModel(app){
     fun createCruise(shipName: String, start: Long, end: Long){
         viewModelScope.launch {
             val trace = FirebasePerfUtils.startTrace("create_cruise")
-            trace?.putAttribute("ship_name", shipName.take(50))
             try {
                 FirebaseCrashlyticsUtils.log("Creating cruise $shipName $start -> $end")
-                db.cruiseDao().insert(Cruise(shipName=shipName, startDate=startOfDay(start), endDate=startOfDay(end)))
+                val s = startOfDay(start); val e = startOfDay(end)
+                val id = db.cruiseDao().insert(Cruise(shipName=shipName, startDate=s, endDate=e))
+                // Schedule countdown if future
+                if (s > startOfDay(System.currentTimeMillis())) {
+                    NotificationHelper.scheduleDailyCountdown(context, id, shipName, s)
+                } else {
+                    NotificationHelper.cancelDailyCountdown(context)
+                }
                 trace?.putMetric("success", 1)
                 FirebaseCrashlyticsUtils.setCustomKey("last_cruise_name", shipName.take(50))
             } catch (e: Exception) {
@@ -54,10 +60,20 @@ class DashboardViewModel(app: Application): AndroidViewModel(app){
         }
     }
 
+    fun rescheduleCountdownForCurrentCruise() {
+        viewModelScope.launch {
+            val c = cruise.value ?: return@launch
+            if (c.startDate > startOfDay(System.currentTimeMillis())) {
+                NotificationHelper.scheduleDailyCountdown(context, c.id, c.shipName, c.startDate)
+            } else {
+                NotificationHelper.cancelDailyCountdown(context)
+            }
+        }
+    }
+
     fun addPort(name: String, lat: Double, lon: Double, arrival: Long, departure: Long, country:String=""){
         viewModelScope.launch {
             val trace = FirebasePerfUtils.startTrace("add_port")
-            trace?.putAttribute("port_name", name.take(50))
             try {
                 FirebaseCrashlyticsUtils.log("Adding port $name $lat,$lon")
                 val c = cruise.value ?: return@launch
@@ -79,7 +95,6 @@ class DashboardViewModel(app: Application): AndroidViewModel(app){
     fun addEvent(title: String, dateMillis: Long, hour: Int, minute: Int, location:String, category:String, reminder: Int, description:String=""){
         viewModelScope.launch {
             val trace = FirebasePerfUtils.startTrace("add_planned_event")
-            trace?.putAttribute("title", title.take(50))
             trace?.putAttribute("category", category)
             try {
                 FirebaseCrashlyticsUtils.log("Adding event $title on $dateMillis $hour:$minute")

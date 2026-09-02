@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Required for AdMob with play-services-ads 23+ / Android Ad Services -->
+<ad-services-config>
+    <attribution allowAllToAccess="true" />
+</ad-services-config>

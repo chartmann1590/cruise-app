@@ -1,0 +1,27 @@
+CruiseLoom keeps the moving parts of your voyage woven together in one calm, offline-first cruise companion.
+
+PLAN THE WHOLE VOYAGE
+• Set your ship and sailing dates
+• See sea days, port days, and upcoming plans at a glance
+• Add dinners, shows, excursions, and local reminders
+• Keep your itinerary available without a connection
+
+GET READY FOR EVERY PORT
+• Search and organize real port stops
+• Check current conditions and a seven-day forecast
+• Cache recent weather for unreliable connections at sea
+• View your itinerary on an OpenStreetMap-powered route map
+• Download optional ship-deck schematics for supported ships
+
+KEEP YOUR PARTY TOGETHER
+• Add shipmates with a locally generated QR code
+• Chat nearby over Bluetooth and Wi-Fi Direct
+• Use broadcast or private messages
+• Host temporary guest Wi-Fi chat for companions without the app
+
+BUILT FOR LIFE AT SEA
+CruiseLoom stores cruise plans and chat history locally on your device. Android cloud backup is disabled. Online services are used only for features such as weather, maps, optional deck downloads, diagnostics, and advertising, as explained in the privacy policy.
+
+CruiseLoom contains ads. Some features require optional camera, nearby-device, location, or notification permission. Core itinerary planning remains useful offline.
+
+CruiseLoom is an independent app and is not affiliated with or endorsed by any cruise line.

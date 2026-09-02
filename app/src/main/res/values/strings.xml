@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cruise Planner</string>
+    <string name="app_name">CruiseLoom</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <!-- AdMob App ID — fallback TEST ID for open-source builds.
+         Production ID is injected at build time from app/admob.properties (gitignored)
+         via BuildConfig + resValue in app/build.gradle.kts. See app/admob.properties.example.
+         This value here is overridden by the generated resValue at build time when
+         admob.properties is present, so it never needs to be edited with your real ID.
+         Test ID: ca-app-pub-3940256099942544~3347511713 -->
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
 </resources>

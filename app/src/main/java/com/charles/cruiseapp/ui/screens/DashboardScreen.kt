@@ -3,6 +3,8 @@ package com.charles.cruiseapp.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -12,10 +14,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.charles.cruiseapp.ads.BannerAd
 import com.charles.cruiseapp.data.local.Cruise
 import com.charles.cruiseapp.data.local.PlannedEvent
 import com.charles.cruiseapp.data.local.PortStop
+import com.charles.cruiseapp.ui.components.EmptyState
+import com.charles.cruiseapp.ui.components.GradientHeroBanner
+import com.charles.cruiseapp.ui.components.PopIn
 import com.charles.cruiseapp.util.formatDate
 import com.charles.cruiseapp.util.formatTime
 import kotlinx.coroutines.flow.StateFlow
@@ -34,7 +42,11 @@ fun DashboardScreen(
     onDeleteEvent: (PlannedEvent)->Unit,
     onAddEvent: (String, Long, Int, Int, String, String, Int, String)->Unit,
     generateDays: ()->List<Long>,
-    onNavigateToWeather: (PortStop)->Unit
+    onNavigateToWeather: (PortStop)->Unit,
+    onNavigateToPortMap: () -> Unit = {},
+    onNavigateToShipMaps: () -> Unit = {},
+    onNavigateToSettings: () -> Unit = {},
+    countdownExtra: String? = null
 ){
     val ports by portsFlow.collectAsState()
     val events by eventsFlow.collectAsState()
@@ -43,12 +55,15 @@ fun DashboardScreen(
     var selectedDate by remember { mutableStateOf<Long?>(null) }
 
     Scaffold(
-        topBar = { TopAppBar(title={ Text("🚢 Cruise Planner") }, actions={ IconButton(onClick=onNavigateToSetup){ Icon(Icons.Default.Settings,"setup") }}) },
+        topBar = { TopAppBar(title={ Text("🚢 CruiseLoom") }, actions={ IconButton(onClick=onNavigateToSettings){ Icon(Icons.Default.Settings,"settings") }}) },
         bottomBar = {
-            NavigationBar{
-                NavigationBarItem(selected=true, onClick={}, icon={ Icon(Icons.Default.Home,"home")}, label={ Text("Dashboard")})
-                NavigationBarItem(selected=false, onClick=onNavigateToPorts, icon={ Icon(Icons.Default.Place,"ports")}, label={ Text("Ports (${ports.size})")})
-                NavigationBarItem(selected=false, onClick=onNavigateToParty, icon={ Icon(Icons.Default.Person,"party")}, label={ Text("Party")})
+            Column(Modifier.navigationBarsPadding()) {
+                BannerAd(modifier = Modifier.fillMaxWidth())
+                NavigationBar(windowInsets = WindowInsets(0)){
+                    NavigationBarItem(selected=true, onClick={}, icon={ Icon(Icons.Default.Home,"home")}, label={ Text("Dashboard")})
+                    NavigationBarItem(selected=false, onClick=onNavigateToPorts, icon={ Icon(Icons.Default.Place,"ports")}, label={ Text("Ports (${ports.size})")})
+                    NavigationBarItem(selected=false, onClick=onNavigateToParty, icon={ Icon(Icons.Default.Person,"party")}, label={ Text("Party")})
+                }
             }
         },
         floatingActionButton = {
@@ -56,30 +71,89 @@ fun DashboardScreen(
         }
     ){ padding ->
         if(cruise==null){
-            Column(Modifier.padding(padding).padding(24.dp).fillMaxSize(), horizontalAlignment=Alignment.CenterHorizontally, verticalArrangement=Arrangement.Center){
-                Icon(Icons.Default.DirectionsBoat, contentDescription=null, modifier=Modifier.size(80.dp), tint=MaterialTheme.colorScheme.primary)
-                Spacer(Modifier.height(16.dp))
-                Text("Welcome Aboard!", style=MaterialTheme.typography.headlineMedium)
-                Text("Set up your cruise to start planning", style=MaterialTheme.typography.bodyMedium, color=MaterialTheme.colorScheme.onSurfaceVariant)
-                Spacer(Modifier.height(24.dp))
-                Button(onClick=onNavigateToSetup, modifier=Modifier.fillMaxWidth()){ Text("Create Cruise") }
+            Box(Modifier.padding(padding).fillMaxSize()){
+                EmptyState(
+                    emoji = "🏝️",
+                    title = "Welcome Aboard!",
+                    subtitle = "Set up your cruise to start planning",
+                    modifier = Modifier.align(Alignment.Center),
+                    action = { Button(onClick=onNavigateToSetup){ Text("Create Cruise") } }
+                )
             }
         } else {
             LazyColumn(Modifier.padding(padding).padding(16.dp)){
                 item{
-                    Card(Modifier.fillMaxWidth(), colors=CardDefaults.cardColors(containerColor=MaterialTheme.colorScheme.primaryContainer)){
-                        Column(Modifier.padding(16.dp)){
-                            Text(cruise.shipName, style=MaterialTheme.typography.headlineSmall)
-                            Text("${formatDate(cruise.startDate, "MMM d, yyyy")} - ${formatDate(cruise.endDate, "MMM d, yyyy")} • ${((cruise.endDate - cruise.startDate)/(24*60*60*1000)+1)} days", style=MaterialTheme.typography.bodyMedium)
-                            if(cruise.notes.isNotEmpty()) Text(cruise.notes, style=MaterialTheme.typography.bodySmall)
-                            Spacer(Modifier.height(8.dp))
+                    GradientHeroBanner(Modifier.fillMaxWidth()){
+                        Text(cruise.shipName, style=MaterialTheme.typography.headlineSmall, color=Color.White)
+                        Text("${formatDate(cruise.startDate, "MMM d, yyyy")} - ${formatDate(cruise.endDate, "MMM d, yyyy")} • ${((cruise.endDate - cruise.startDate)/(24*60*60*1000)+1)} days", style=MaterialTheme.typography.bodyMedium, color=Color.White.copy(alpha=0.9f))
+                            if(cruise.notes.isNotEmpty()) Text(cruise.notes, style=MaterialTheme.typography.bodySmall, color=Color.White.copy(alpha=0.85f))
+                            Spacer(Modifier.height(10.dp))
                             Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                                AssistChip(onClick=onNavigateToPorts, label={ Text("Manage Ports")}, leadingIcon={ Icon(Icons.Default.Place,null, Modifier.size(16.dp))})
-                                AssistChip(onClick=onNavigateToParty, label={ Text("Party Chat")}, leadingIcon={ Icon(Icons.Default.Chat,null, Modifier.size(16.dp))})
+                                AssistChip(onClick=onNavigateToPorts, label={ Text("Manage Ports")}, leadingIcon={ Icon(Icons.Default.Place,null, Modifier.size(16.dp))}, colors=AssistChipDefaults.assistChipColors(containerColor=Color.White.copy(alpha=0.16f), labelColor=Color.White, leadingIconContentColor=Color.White))
+                                AssistChip(onClick=onNavigateToParty, label={ Text("Party Chat")}, leadingIcon={ Icon(Icons.Default.Chat,null, Modifier.size(16.dp))}, colors=AssistChipDefaults.assistChipColors(containerColor=Color.White.copy(alpha=0.16f), labelColor=Color.White, leadingIconContentColor=Color.White))
                             }
-                        }
                     }
                     Spacer(Modifier.height(16.dp))
+                    // Countdown card if cruise is future
+                    val todayMid = com.charles.cruiseapp.util.startOfDay(System.currentTimeMillis())
+                    val startDay = com.charles.cruiseapp.util.startOfDay(cruise.startDate)
+                    val daysUntil = ((startDay - todayMid) / (24*60*60*1000L)).toInt()
+                    if (daysUntil > 0) {
+                        var tick by remember { mutableStateOf(0) }
+                        LaunchedEffect(cruise.startDate) {
+                            while (true) {
+                                kotlinx.coroutines.delay(60_000)
+                                tick++
+                            }
+                        }
+                        val effectiveDays = ((com.charles.cruiseapp.util.startOfDay(cruise.startDate) - com.charles.cruiseapp.util.startOfDay(System.currentTimeMillis())) / (24*60*60*1000L)).toInt()
+                        Card(Modifier.fillMaxWidth(), shape=MaterialTheme.shapes.large, colors=CardDefaults.cardColors(containerColor=MaterialTheme.colorScheme.tertiaryContainer), elevation=CardDefaults.cardElevation(4.dp)){
+                            Column(Modifier.padding(16.dp)){
+                                Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween, verticalAlignment=Alignment.CenterVertically){
+                                    Column(Modifier.weight(1f)){
+                                        Text(
+                                            when(effectiveDays){
+                                                1 -> "1 day to go!"
+                                                else -> "$effectiveDays days to go!"
+                                            }, style=MaterialTheme.typography.headlineSmall, color=MaterialTheme.colorScheme.onTertiaryContainer)
+                                        Text(cruise.shipName + " • " + formatDate(cruise.startDate, "EEE, MMM d, yyyy"), style=MaterialTheme.typography.bodyMedium, color=MaterialTheme.colorScheme.onTertiaryContainer)
+                                        if (countdownExtra != null) {
+                                            Spacer(Modifier.height(4.dp))
+                                            Text(countdownExtra, style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onTertiaryContainer)
+                                        }
+                                        Text("Daily 9 AM reminder enabled — you'll get a notification each morning.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha=0.8f))
+                                    }
+                                    Icon(Icons.Default.Event, contentDescription=null, modifier=Modifier.size(48.dp), tint=MaterialTheme.colorScheme.onTertiaryContainer)
+                                }
+                                Spacer(Modifier.height(8.dp))
+                                LinearProgressIndicator(
+                                    progress = { 1f - (effectiveDays.coerceIn(0,365) / 365f) },
+                                    modifier = Modifier.fillMaxWidth(),
+                                )
+                            }
+                        }
+                        Spacer(Modifier.height(16.dp))
+                    } else if (daysUntil == 0) {
+                        Card(Modifier.fillMaxWidth(), shape=MaterialTheme.shapes.large, colors=CardDefaults.cardColors(containerColor=MaterialTheme.colorScheme.secondaryContainer)){
+                            Row(Modifier.padding(16.dp), verticalAlignment=Alignment.CenterVertically){
+                                Icon(Icons.Default.Celebration, null, tint=MaterialTheme.colorScheme.primary, modifier=Modifier.size(32.dp))
+                                Spacer(Modifier.width(12.dp))
+                                Column{
+                                    Text("Bon voyage! 🚢", style=MaterialTheme.typography.titleMedium)
+                                    Text("Your cruise is today — have an amazing trip!", style=MaterialTheme.typography.bodySmall)
+                                }
+                            }
+                        }
+                        Spacer(Modifier.height(16.dp))
+                    }
+
+                    // Map / Deck quick actions
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.spacedBy(8.dp)){
+                        AssistChip(onClick=onNavigateToPortMap, label={ Text("Port Map")}, leadingIcon={ Icon(Icons.Default.Map, null, Modifier.size(16.dp))})
+                        AssistChip(onClick=onNavigateToShipMaps, label={ Text("Ship Decks")}, leadingIcon={ Icon(Icons.Default.DirectionsBoat, null, Modifier.size(16.dp))})
+                    }
+                    Spacer(Modifier.height(16.dp))
+
                     if(upcoming.isNotEmpty()){
                         Text("Upcoming Events", style=MaterialTheme.typography.titleMedium)
                         Spacer(Modifier.height(8.dp))
@@ -101,32 +175,39 @@ fun DashboardScreen(
                 items(days){ day ->
                     val dayEvents = events.filter{ it.dateMillis == day || it.dateMillis == com.charles.cruiseapp.util.startOfDay(day) }
                     val portForDay = ports.find{ day >= com.charles.cruiseapp.util.startOfDay(it.arrivalDate) && day <= com.charles.cruiseapp.util.startOfDay(it.departureDate) }
-                    Card(Modifier.fillMaxWidth().padding(vertical=6.dp).clickable{ onNavigateToDay(day) }, elevation=CardDefaults.cardElevation(2.dp)){
-                        Column(Modifier.padding(16.dp)){
-                            Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween, verticalAlignment=Alignment.CenterVertically){
-                                Column{
-                                    Text(formatDate(day, "EEEE, MMM d"), style=MaterialTheme.typography.titleMedium)
-                                    if(portForDay!=null) Text("📍 ${portForDay.name}", style=MaterialTheme.typography.bodyMedium, color=MaterialTheme.colorScheme.primary)
-                                    else Text("🌊 Sea Day", style=MaterialTheme.typography.bodySmall)
-                                }
-                                Badge(containerColor=MaterialTheme.colorScheme.primary){ Text("${dayEvents.size}") }
-                            }
-                            Spacer(Modifier.height(8.dp))
-                            if(dayEvents.isEmpty()) Text("No events yet — tap to add", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
-                            else {
-                                dayEvents.take(3).forEach{ ev ->
-                                    Row(verticalAlignment=Alignment.CenterVertically){
-                                        Box(Modifier.size(8.dp).background(MaterialTheme.colorScheme.primary, CircleShape))
-                                        Spacer(Modifier.width(8.dp))
-                                        Text("${formatTime(ev.startTimeMillis)} ${ev.title}", style=MaterialTheme.typography.bodySmall, maxLines=1)
-                                        if(ev.location.isNotEmpty()) Text(" • ${ev.location}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines=1)
+                    PopIn {
+                        Card(
+                            Modifier.fillMaxWidth().padding(vertical=6.dp).clickable{ onNavigateToDay(day) },
+                            shape=MaterialTheme.shapes.medium,
+                            colors=CardDefaults.cardColors(containerColor = if(portForDay!=null) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.surface),
+                            elevation=CardDefaults.cardElevation(2.dp)
+                        ){
+                            Column(Modifier.padding(16.dp)){
+                                Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween, verticalAlignment=Alignment.CenterVertically){
+                                    Column{
+                                        Text(formatDate(day, "EEEE, MMM d"), style=MaterialTheme.typography.titleMedium)
+                                        if(portForDay!=null) Text("📍 ${portForDay.name}", style=MaterialTheme.typography.bodyMedium, color=MaterialTheme.colorScheme.primary, fontWeight=FontWeight.Bold)
+                                        else Text("🌊 Sea Day", style=MaterialTheme.typography.bodySmall)
                                     }
+                                    Badge(containerColor=MaterialTheme.colorScheme.secondary){ Text("${dayEvents.size}") }
                                 }
-                                if(dayEvents.size>3) Text("+ ${dayEvents.size-3} more", style=MaterialTheme.typography.bodySmall)
-                            }
-                            if(portForDay!=null){
                                 Spacer(Modifier.height(8.dp))
-                                OutlinedButton(onClick={ onNavigateToWeather(portForDay) }, modifier=Modifier.fillMaxWidth()){ Icon(Icons.Default.WbSunny,null, Modifier.size(16.dp)); Spacer(Modifier.width(8.dp)); Text("Weather for ${portForDay.name}")}
+                                if(dayEvents.isEmpty()) Text("No events yet — tap to add", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                                else {
+                                    dayEvents.take(3).forEach{ ev ->
+                                        Row(verticalAlignment=Alignment.CenterVertically){
+                                            Box(Modifier.size(8.dp).background(MaterialTheme.colorScheme.secondary, CircleShape))
+                                            Spacer(Modifier.width(8.dp))
+                                            Text("${formatTime(ev.startTimeMillis)} ${ev.title}", style=MaterialTheme.typography.bodySmall, maxLines=1)
+                                            if(ev.location.isNotEmpty()) Text(" • ${ev.location}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines=1)
+                                        }
+                                    }
+                                    if(dayEvents.size>3) Text("+ ${dayEvents.size-3} more", style=MaterialTheme.typography.bodySmall)
+                                }
+                                if(portForDay!=null){
+                                    Spacer(Modifier.height(8.dp))
+                                    OutlinedButton(onClick={ onNavigateToWeather(portForDay) }, modifier=Modifier.fillMaxWidth()){ Icon(Icons.Default.WbSunny,null, Modifier.size(16.dp)); Spacer(Modifier.width(8.dp)); Text("Weather for ${portForDay.name}")}
+                                }
                             }
                         }
                     }

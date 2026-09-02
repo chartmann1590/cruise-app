@@ -1,0 +1,13 @@
+# AdMob IDs — template for local setup (committed, safe — contains only test IDs or placeholders)
+# 1. Copy this file to `admob.properties` in the same folder:  cp app/admob.properties.example app/admob.properties
+# 2. Replace the values with your real IDs from AdMob console (ca-app-pub-...).
+# 3. Never commit admob.properties — it is gitignored. Only admob.properties.example is tracked.
+#
+# How it works: app/build.gradle.kts reads admob.properties (if present) and injects the values
+# into BuildConfig (ADMOB_APP_ID, ADMOB_BANNER_ID, ADMOB_INTERSTITIAL_ID) and into
+# AndroidManifest's <meta-data com.google.android.gms.ads.APPLICATION_ID>.
+# If the file is missing (e.g. fresh clone, CI), Google's official test IDs are used so builds still work.
+
+ADMOB_APP_ID=ca-app-pub-3940256099942544~3347511713
+ADMOB_BANNER_ID=ca-app-pub-3940256099942544/6300978111
+ADMOB_INTERSTITIAL_ID=ca-app-pub-3940256099942544/1033173712

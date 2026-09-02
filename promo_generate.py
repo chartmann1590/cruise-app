@@ -5,19 +5,18 @@ PROMO_DIR = PROJECT_ROOT / "promo"
 TMP_DIR = PROMO_DIR / "tmp"
 OUTPUT = PUBLIC / "promo.mp4"
 POSTER = PUBLIC / "promo-poster.jpg"
+STORE_SHOTS = PROJECT_ROOT / "fastlane" / "metadata" / "android" / "en-US" / "images" / "phoneScreenshots"
 PROMO_DIR.mkdir(exist_ok=True)
 TMP_DIR.mkdir(parents=True, exist_ok=True)
 segments = [
-    {"image": PUBLIC / "screenshots" / "01_welcome.png", "text": "Welcome aboard Cruise Planner — your offline-first companion for life at sea.", "caption": "Welcome aboard — offline-first"},
-    {"image": PUBLIC / "screenshots" / "02_cruise_setup.png", "text": "Create your cruise. Name your ship, pick your start and end dates, and watch your itinerary come to life.", "caption": "Create your cruise — ship & dates"},
-    {"image": PUBLIC / "screenshots" / "04_calendar_picker.png", "text": "Our calendar makes it easy — pick a range or tap a single date, with quick minus one, plus one adjustments.", "caption": "Calendar with range & fine-tune"},
-    {"image": PUBLIC / "screenshots" / "06_dashboard.png", "text": "Your dashboard shows every sea day and port day at a glance — sea versus port, with your upcoming events.", "caption": "Dashboard — sea vs port, day by day"},
-    {"image": PUBLIC / "screenshots" / "07_port_list.png", "text": "Add real port stops. Search any city and we auto-fill latitude and longitude — no API key needed.", "caption": "Real ports — search, lat/lon auto-filled"},
-    {"image": PUBLIC / "screenshots" / "08_weather.png", "text": "Get live weather for any port. Seven days, current conditions, humidity and wind — cached for three hours, so it works offline on sea days.", "caption": "Live weather, no API key — cached 3h, works offline"},
-    {"image": PUBLIC / "screenshots" / "09_day_detail.png", "text": "Tap any day to add dinners, excursions, and reminders. Get notified on time, even after a reboot.", "caption": "Tap any day — dinners, excursions, reminders"},
-    {"image": PUBLIC / "screenshots" / "10_party.png", "text": "Stay close to your party with offline chat over Bluetooth mesh. No ship Wi-Fi needed — broadcast or private, with delivery and read receipts.", "caption": "Offline chat — Bluetooth mesh, broadcast or private"},
-    {"image": PUBLIC / "screenshots" / "11_my_qr.png", "text": "Share your QR code, not your name. Private, encrypted, and instant — just scan to add a shipmate.", "caption": "Share your QR — private, encrypted"},
-    {"image": PUBLIC / "screenshots" / "12_dashboard_final.png", "text": "From welcome aboard to welcome dinner — Cruise Planner. Built offline, for offline. Download today on GitHub.", "caption": "Built offline, for offline"},
+    {"image": STORE_SHOTS / "01_01_welcome.png", "text": "Welcome aboard CruiseLoom, your offline-first companion for a smoother vacation at sea.", "caption": "Welcome aboard CruiseLoom"},
+    {"image": STORE_SHOTS / "02_02_cruise_setup.png", "text": "Create your cruise, name your ship, and choose your sail dates in seconds.", "caption": "Set your ship and sail dates"},
+    {"image": STORE_SHOTS / "03_06_dashboard.png", "text": "See every sea day, port day, and upcoming plan together on one calm dashboard.", "caption": "Your whole voyage at a glance"},
+    {"image": STORE_SHOTS / "04_07_port_list.png", "text": "Add real port stops and keep arrival details organized without juggling notes.", "caption": "Organize every port stop"},
+    {"image": STORE_SHOTS / "05_08_weather.png", "text": "Check live port weather, then keep recent forecasts cached for spotty connections at sea.", "caption": "Port weather, cached for the voyage"},
+    {"image": STORE_SHOTS / "06_09_day_detail.png", "text": "Plan dinners, excursions, and reminders day by day, so the moments you care about stay on schedule.", "caption": "Dinners, excursions, and reminders"},
+    {"image": STORE_SHOTS / "07_10_party.png", "text": "Connect your travel party nearby using Bluetooth and Wi-Fi Direct, even without ship internet.", "caption": "Nearby party chat without ship internet"},
+    {"image": STORE_SHOTS / "08_11_my_qr.png", "text": "Share a local QR code to add a shipmate quickly. CruiseLoom keeps your voyage woven together, wherever you sail.", "caption": "Plan together with CruiseLoom"},
 ]
 VOICE = "en-US-AriaNeural"
 RATE = "+8%"
@@ -71,11 +70,11 @@ async def main():
             f.write(f"{idx+1}\n")
             f.write(f"{fmt(start)} --> {fmt(end)}\n")
             f.write(f"{seg['caption']}\n\n")
-            cur = end + 0.15
+            cur = end
     print(f"SRT written to {srt_path}")
     ass_path = PROMO_DIR / "subs.ass"
     with open(ass_path, "w", encoding="utf-8") as f:
-        f.write("[Script Info]\nTitle: Cruise Planner Promo\nScriptType: v4.00+\nWrapStyle: 0\nScaledBorderAndShadow: yes\nPlayResX: 1920\nPlayResY: 1080\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Default,Arial,52,&H00FFFFFF,&H000000FF,&H80000000,&HAA0B1E3B,1,0,0,0,100,100,0,0,1,4,2,2,30,30,80,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n")
+        f.write("[Script Info]\nTitle: CruiseLoom Promo\nScriptType: v4.00+\nWrapStyle: 0\nScaledBorderAndShadow: yes\nPlayResX: 1920\nPlayResY: 1080\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Default,Arial,52,&H00FFFFFF,&H000000FF,&H80000000,&HAA0B1E3B,1,0,0,0,100,100,0,0,1,4,2,2,30,30,80,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n")
         cur = 0.0
         for seg in segments:
             start = cur
@@ -88,12 +87,12 @@ async def main():
                 return f"{h}:{m:02d}:{s:02d}.{cs:02d}"
             cap = seg["caption"].replace(",", r"\,")
             f.write(f"Dialogue: 0,{ass_fmt(start)},{ass_fmt(end)},Default,,0,0,0,,{cap}\n")
-            cur = end + 0.15
+            cur = end
     print(f"ASS written to {ass_path}")
     clip_files = []
     for i, seg in enumerate(segments):
         img = seg["image"]
-        dur = seg["dur"] + 0.15
+        dur = seg["dur"]
         fade_in = 0.35
         fade_out = 0.35
         fade_out_start = max(0.5, dur - fade_out)

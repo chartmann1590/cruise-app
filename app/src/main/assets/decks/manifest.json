@@ -1,0 +1,2360 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-28T00:00:00Z",
+  "ships": [
+    {
+      "id": "carnival__celebration",
+      "displayName": "Carnival Celebration",
+      "line": "Carnival",
+      "class": "Excel",
+      "aliases": [
+        "celebration",
+        "carnival celebration"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/carnival__celebration",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31470,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39016,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39054,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39626,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36452,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29852,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30940,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31984,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37370,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29994,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "carnival__horizon",
+      "displayName": "Carnival Horizon",
+      "line": "Carnival",
+      "class": "Vista",
+      "aliases": [
+        "horizon"
+      ],
+      "deckCount": 0,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/carnival__horizon",
+      "thumb": null,
+      "decks": [],
+      "attribution": "Link to official cruise line deck plan — requires internet.",
+      "externalUrl": "https://www.carnival.com/cruise-ships/carnival-horizon"
+    },
+    {
+      "id": "carnival__jubilee",
+      "displayName": "Carnival Jubilee",
+      "line": "Carnival",
+      "class": "Excel",
+      "aliases": [
+        "jubilee",
+        "carnival jubilee"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/carnival__jubilee",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30072,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37530,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37548,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37940,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35012,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28034,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29440,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30524,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35960,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28622,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "carnival__vista",
+      "displayName": "Carnival Vista",
+      "line": "Carnival",
+      "class": "Vista",
+      "aliases": [
+        "vista",
+        "carnival vista"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/carnival__vista",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 3,
+          "name": "Deck 03 - Medical Center",
+          "file": "deck-03.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30294,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 4,
+          "name": "Deck 04 - Crew",
+          "file": "deck-04.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 26264,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29850,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37552,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37508,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37768,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35030,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 27944,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29328,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28282,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "carnival__mardi-gras",
+      "displayName": "Mardi Gras",
+      "line": "Carnival",
+      "class": "Excel",
+      "aliases": [
+        "mardi gras",
+        "carnival mardi gras"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/carnival__mardi-gras",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28966,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36598,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36322,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36756,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 33652,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 27000,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28372,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29412,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 34824,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 27234,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "celebrity__apex",
+      "displayName": "Celebrity Apex",
+      "line": "Celebrity",
+      "class": "Edge",
+      "aliases": [
+        "apex",
+        "celebrity apex"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/celebrity__apex",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30664,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37936,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37890,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38274,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35252,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28674,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31088,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29004,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36484,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28916,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "celebrity__edge",
+      "displayName": "Celebrity Edge",
+      "line": "Celebrity",
+      "class": "Edge",
+      "aliases": [
+        "edge",
+        "celebrity edge"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/celebrity__edge",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30324,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37810,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37726,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38618,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35082,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28526,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30964,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28830,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36330,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28650,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "msc__euribia",
+      "displayName": "MSC Euribia",
+      "line": "MSC",
+      "class": "Meraviglia Plus",
+      "aliases": [
+        "euribia"
+      ],
+      "deckCount": 0,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/msc__euribia",
+      "thumb": null,
+      "decks": [],
+      "attribution": "Link to official cruise line deck plan — requires internet.",
+      "externalUrl": "https://www.msccruises.com/ships/msc-euribia"
+    },
+    {
+      "id": "msc__seascape",
+      "displayName": "MSC Seascape",
+      "line": "MSC",
+      "class": "Seaside EVO",
+      "aliases": [
+        "seascape",
+        "msc seascape"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/msc__seascape",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30964,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38526,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38270,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38280,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35658,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28928,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36828,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29144,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 18,
+          "name": "Deck 18 - Aqua Park",
+          "file": "deck-18.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28316,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 19,
+          "name": "Deck 19 - Suite Deck",
+          "file": "deck-19.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28848,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "msc__seashore",
+      "displayName": "MSC Seashore",
+      "line": "MSC",
+      "class": "Seaside",
+      "aliases": [
+        "seashore",
+        "msc seashore"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/msc__seashore",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30300,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37772,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37672,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38080,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35010,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28674,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36074,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28634,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 18,
+          "name": "Deck 18 - Aqua Park",
+          "file": "deck-18.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 27664,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 19,
+          "name": "Deck 19 - Suite Deck",
+          "file": "deck-19.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28134,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "msc__world-europa",
+      "displayName": "MSC World Europa",
+      "line": "MSC",
+      "class": "World",
+      "aliases": [
+        "world europa",
+        "msc world europa"
+      ],
+      "deckCount": 11,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/msc__world-europa",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30784,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38340,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38274,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38808,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35890,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29184,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36884,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29106,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 18,
+          "name": "Deck 18 - Aqua Park",
+          "file": "deck-18.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28290,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 19,
+          "name": "Deck 19 - Suite Deck",
+          "file": "deck-19.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28594,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 20,
+          "name": "Deck 20 - Sky Deck",
+          "file": "deck-20.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28698,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "ncl__breakaway",
+      "displayName": "Norwegian Breakaway",
+      "line": "Norwegian",
+      "class": "Breakaway",
+      "aliases": [
+        "breakaway"
+      ],
+      "deckCount": 0,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/ncl__breakaway",
+      "thumb": null,
+      "decks": [],
+      "attribution": "Link to official cruise line deck plan — requires internet.",
+      "externalUrl": "https://www.ncl.com/cruise-ships/norwegian-breakaway"
+    },
+    {
+      "id": "ncl__encore",
+      "displayName": "Norwegian Encore",
+      "line": "Norwegian",
+      "class": "Breakaway Plus",
+      "aliases": [
+        "encore",
+        "norwegian encore",
+        "ncl encore"
+      ],
+      "deckCount": 11,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/ncl__encore",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32256,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39878,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39874,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 40050,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37120,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31638,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32642,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30634,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38070,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30496,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 17,
+          "name": "Deck 17 - Bridge",
+          "file": "deck-17.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30728,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "ncl__joy",
+      "displayName": "Norwegian Joy",
+      "line": "Norwegian",
+      "class": "Breakaway Plus",
+      "aliases": [
+        "joy",
+        "norwegian joy",
+        "ncl joy"
+      ],
+      "deckCount": 11,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/ncl__joy",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31346,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39200,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38502,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39238,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36254,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30728,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31804,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29840,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37446,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29644,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 17,
+          "name": "Deck 17 - Bridge",
+          "file": "deck-17.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29942,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "ncl__prima",
+      "displayName": "Norwegian Prima",
+      "line": "Norwegian",
+      "class": "Prima",
+      "aliases": [
+        "prima",
+        "norwegian prima",
+        "ncl prima"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/ncl__prima",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30848,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38272,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38088,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38362,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35648,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30254,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31236,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36848,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29082,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 17,
+          "name": "Deck 17 - Bridge",
+          "file": "deck-17.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29316,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "princess__discovery-princess",
+      "displayName": "Discovery Princess",
+      "line": "Princess",
+      "class": "Royal",
+      "aliases": [
+        "discovery princess",
+        "princess discovery"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/princess__discovery-princess",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31382,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38760,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38710,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39338,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36082,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29386,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30612,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37220,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29600,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 17,
+          "name": "Deck 17 - Bridge",
+          "file": "deck-17.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29948,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "princess__enchanted-princess",
+      "displayName": "Enchanted Princess",
+      "line": "Princess",
+      "class": "Royal",
+      "aliases": [
+        "enchanted princess"
+      ],
+      "deckCount": 10,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/princess__enchanted-princess",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31182,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38674,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38106,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39178,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36202,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29198,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29626,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 15,
+          "name": "Deck 15 - Pool Deck",
+          "file": "deck-15.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36986,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 16,
+          "name": "Deck 16 - Sun Deck",
+          "file": "deck-16.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29554,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 17,
+          "name": "Deck 17 - Bridge",
+          "file": "deck-17.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29698,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "princess__sky-princess",
+      "displayName": "Sky Princess",
+      "line": "Princess",
+      "class": "Royal",
+      "aliases": [
+        "sky princess"
+      ],
+      "deckCount": 0,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/princess__sky-princess",
+      "thumb": null,
+      "decks": [],
+      "attribution": "Link to official cruise line deck plan — requires internet.",
+      "externalUrl": "https://www.princess.com/ships-and-experience/ships/sky-princess/"
+    },
+    {
+      "id": "royal-caribbean__allure-of-the-seas",
+      "displayName": "Allure of the Seas",
+      "line": "Royal Caribbean",
+      "class": "Oasis",
+      "aliases": [
+        "allure ots"
+      ],
+      "deckCount": 0,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/royal-caribbean__allure-of-the-seas",
+      "thumb": null,
+      "decks": [],
+      "attribution": "Link to official cruise line deck plan — requires internet.",
+      "externalUrl": "https://www.royalcaribbean.com/cruise-ships/allure-of-the-seas"
+    },
+    {
+      "id": "royal-caribbean__harmony-of-the-seas",
+      "displayName": "Harmony of the Seas",
+      "line": "Royal Caribbean",
+      "class": "Oasis",
+      "aliases": [
+        "harmony ots",
+        "harmony of the seas"
+      ],
+      "deckCount": 12,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/royal-caribbean__harmony-of-the-seas",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 3,
+          "name": "Deck 03 - Medical Center",
+          "file": "deck-03.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32872,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 4,
+          "name": "Deck 04 - Crew",
+          "file": "deck-04.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28890,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32432,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 40160,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39930,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 40234,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37180,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30438,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31910,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32796,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 13,
+          "name": "Deck 13 - Deck",
+          "file": "deck-13.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39464,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30854,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "royal-caribbean__icon-of-the-seas",
+      "displayName": "Icon of the Seas",
+      "line": "Royal Caribbean",
+      "class": "Icon",
+      "aliases": [
+        "icon ots",
+        "icon of the seas"
+      ],
+      "deckCount": 12,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/royal-caribbean__icon-of-the-seas",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 3,
+          "name": "Deck 03 - Medical Center",
+          "file": "deck-03.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31576,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 4,
+          "name": "Deck 04 - Crew",
+          "file": "deck-04.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 27626,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30902,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38394,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38340,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38456,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 35590,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29096,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30384,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31490,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 13,
+          "name": "Deck 13 - Deck",
+          "file": "deck-13.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38028,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30012,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "royal-caribbean__oasis-of-the-seas",
+      "displayName": "Oasis of the Seas",
+      "line": "Royal Caribbean",
+      "class": "Oasis",
+      "aliases": [
+        "oasis ots",
+        "oasis of the seas"
+      ],
+      "deckCount": 12,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/royal-caribbean__oasis-of-the-seas",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 3,
+          "name": "Deck 03 - Medical Center",
+          "file": "deck-03.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32410,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 4,
+          "name": "Deck 04 - Crew",
+          "file": "deck-04.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28448,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31878,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 40280,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39324,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39472,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36550,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29882,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31278,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32240,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 13,
+          "name": "Deck 13 - Deck",
+          "file": "deck-13.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37904,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31002,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "royal-caribbean__symphony-of-the-seas",
+      "displayName": "Symphony of the Seas",
+      "line": "Royal Caribbean",
+      "class": "Oasis",
+      "aliases": [
+        "symphony ots",
+        "symphony",
+        "symphony of the seas",
+        "symphony of seas"
+      ],
+      "deckCount": 12,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/royal-caribbean__symphony-of-the-seas",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 3,
+          "name": "Deck 03 - Medical Center",
+          "file": "deck-03.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 33582,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 4,
+          "name": "Deck 04 - Crew",
+          "file": "deck-04.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 29680,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 33162,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 40644,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 40516,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 41276,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38050,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31130,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32506,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 33612,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 13,
+          "name": "Deck 13 - Deck",
+          "file": "deck-13.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 40172,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31516,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "royal-caribbean__utopia-of-the-seas",
+      "displayName": "Utopia of the Seas",
+      "line": "Royal Caribbean",
+      "class": "Oasis",
+      "aliases": [
+        "utopia ots",
+        "utopia of the seas"
+      ],
+      "deckCount": 12,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/royal-caribbean__utopia-of-the-seas",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 3,
+          "name": "Deck 03 - Medical Center",
+          "file": "deck-03.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32620,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 4,
+          "name": "Deck 04 - Crew",
+          "file": "deck-04.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28538,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32110,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39548,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39656,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39672,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 36664,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30136,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31462,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32508,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 13,
+          "name": "Deck 13 - Deck",
+          "file": "deck-13.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38078,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30480,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    },
+    {
+      "id": "royal-caribbean__wonder-of-the-seas",
+      "displayName": "Wonder of the Seas",
+      "line": "Royal Caribbean",
+      "class": "Oasis",
+      "aliases": [
+        "wonder ots",
+        "wonder of the seas"
+      ],
+      "deckCount": 12,
+      "imageBase": "https://cruise-app-2026.web.app/decks/ships/royal-caribbean__wonder-of-the-seas",
+      "thumb": "thumb.webp",
+      "decks": [
+        {
+          "number": 3,
+          "name": "Deck 03 - Medical Center",
+          "file": "deck-03.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32872,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 4,
+          "name": "Deck 04 - Crew",
+          "file": "deck-04.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 28942,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 5,
+          "name": "Deck 05 - Promenade",
+          "file": "deck-05.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 32410,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 6,
+          "name": "Deck 06 - Cabins 6200-6400",
+          "file": "deck-06.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39908,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 7,
+          "name": "Deck 07 - Cabins 7200-7400",
+          "file": "deck-07.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 39932,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 8,
+          "name": "Deck 08 - Cabins 8200-8500",
+          "file": "deck-08.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 40054,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 9,
+          "name": "Deck 09 - Lido Pool",
+          "file": "deck-09.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 37120,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 10,
+          "name": "Deck 10 - Spa",
+          "file": "deck-10.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30388,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 11,
+          "name": "Deck 11 - Sports Court",
+          "file": "deck-11.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 31834,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 12,
+          "name": "Deck 12 - Observation Lounge",
+          "file": "deck-12.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 33020,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 13,
+          "name": "Deck 13 - Deck",
+          "file": "deck-13.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 38802,
+          "license": "CC0-1.0"
+        },
+        {
+          "number": 14,
+          "name": "Deck 14 - Theater",
+          "file": "deck-14.webp",
+          "width": 1200,
+          "height": 1800,
+          "bytes": 30896,
+          "license": "CC0-1.0"
+        }
+      ],
+      "attribution": "Original CC0 schematic by CruiseLoom — not affiliated with cruise line. Drawn from public facts, own expression.",
+      "externalUrl": null
+    }
+  ]
+}

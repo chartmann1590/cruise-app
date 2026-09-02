@@ -17,6 +17,8 @@ class BootRescheduleReceiver : BroadcastReceiver() {
                     val db = CruiseDatabase.getDatabase(context)
                     val events = db.plannedEventDao().getFutureEvents(System.currentTimeMillis())
                     events.forEach { NotificationHelper.scheduleEventNotification(context, it) }
+                    // Reschedule countdown if cruise is still future
+                    NotificationHelper.rescheduleCountdownIfNeeded(context)
                 } finally { pending.finish() }
             }
         }

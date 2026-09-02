@@ -1,6 +1,7 @@
 package com.charles.cruiseapp.util
 
 import android.util.Log
+import com.charles.cruiseapp.BuildConfig
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.perf.FirebasePerformance
 import com.google.firebase.perf.metrics.Trace
@@ -16,7 +17,9 @@ object FirebaseCrashlyticsUtils {
 
     fun log(message: String) {
         try {
-            FirebaseCrashlytics.getInstance().log(message)
+            // Detailed breadcrumbs can contain user-entered context. Keep them local in
+            // production and send them only from developer/debug builds.
+            if (BuildConfig.DEBUG) FirebaseCrashlytics.getInstance().log(message)
             Log.d(TAG, message)
         } catch (e: Exception) {
             Log.w(TAG, "Crashlytics log failed", e)
@@ -45,19 +48,19 @@ object FirebaseCrashlyticsUtils {
     }
 
     fun setCustomKey(key: String, value: String) {
-        try { FirebaseCrashlytics.getInstance().setCustomKey(key, value) } catch (_: Exception) {}
+        try { if (BuildConfig.DEBUG) FirebaseCrashlytics.getInstance().setCustomKey(key, value) } catch (_: Exception) {}
     }
     fun setCustomKey(key: String, value: Int) {
-        try { FirebaseCrashlytics.getInstance().setCustomKey(key, value) } catch (_: Exception) {}
+        try { if (BuildConfig.DEBUG) FirebaseCrashlytics.getInstance().setCustomKey(key, value) } catch (_: Exception) {}
     }
     fun setCustomKey(key: String, value: Long) {
-        try { FirebaseCrashlytics.getInstance().setCustomKey(key, value) } catch (_: Exception) {}
+        try { if (BuildConfig.DEBUG) FirebaseCrashlytics.getInstance().setCustomKey(key, value) } catch (_: Exception) {}
     }
     fun setCustomKey(key: String, value: Boolean) {
-        try { FirebaseCrashlytics.getInstance().setCustomKey(key, value) } catch (_: Exception) {}
+        try { if (BuildConfig.DEBUG) FirebaseCrashlytics.getInstance().setCustomKey(key, value) } catch (_: Exception) {}
     }
     fun setUserId(userId: String) {
-        try { FirebaseCrashlytics.getInstance().setUserId(userId) } catch (_: Exception) {}
+        try { if (BuildConfig.DEBUG) FirebaseCrashlytics.getInstance().setUserId(userId) } catch (_: Exception) {}
     }
 
     /** Force a test crash (debug only) */

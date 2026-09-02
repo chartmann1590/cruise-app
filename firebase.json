@@ -15,6 +15,10 @@
         "headers": [{ "key": "Cache-Control", "value": "max-age=31536000" }]
       },
       {
+        "source": "**/*.@(json)",
+        "headers": [{ "key": "Cache-Control", "value": "max-age=3600" }, { "key": "Access-Control-Allow-Origin", "value": "*" }]
+      },
+      {
         "source": "**/*.@(js|css)",
         "headers": [{ "key": "Cache-Control", "value": "max-age=86400" }]
       }

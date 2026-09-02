@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity android:name=".DebugInjectorActivity" android:exported="true" android:theme="@android:style/Theme.Material.Light.NoActionBar" />
+        <activity android:name=".PartyTestActivity" android:exported="true" android:theme="@android:style/Theme.Material.Light.NoActionBar" />
+        <receiver android:name=".DebugMessageReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="com.charles.cruiseapp.DEBUG_SEND" />
+            </intent-filter>
+        </receiver>
+        <activity android:name=".DebugSendActivity" android:exported="true" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".DebugHotspotActivity" android:exported="true" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+    </application>
+</manifest>

@@ -76,3 +76,10 @@ data class WeatherCache(
     val weatherCode: Int? = null,
     val summary: String = ""
 )
+
+@Entity(tableName = "place_cache")
+data class PlaceCache(
+    @PrimaryKey val portStopId: Long,
+    val fetchedAt: Long,
+    val json: String // serialized List<com.charles.cruiseapp.data.remote.PlaceOfInterest>
+)

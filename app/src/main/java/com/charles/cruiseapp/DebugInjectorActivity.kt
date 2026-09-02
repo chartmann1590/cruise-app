@@ -31,9 +31,18 @@ class DebugInjectorActivity : ComponentActivity() {
                     // we will just clear via direct query would need, but for now rely on clearAll
                 } catch (_: Exception) {}
             }
-            val start = Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY,0); set(Calendar.MINUTE,0); set(Calendar.SECOND,0); set(Calendar.MILLISECOND,0) }.timeInMillis
-            val end = start + 6*24*60*60*1000L
-            val cruiseId = db.cruiseDao().insert(Cruise(shipName = ship, startDate = startOfDay(start), endDate = startOfDay(end)))
+            val offsetDays = intent.getIntExtra("offsetDays", 0)
+            val durationDays = intent.getIntExtra("durationDays", 7)
+            val base = Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY,0); set(Calendar.MINUTE,0); set(Calendar.SECOND,0); set(Calendar.MILLISECOND,0); add(Calendar.DAY_OF_YEAR, offsetDays) }.timeInMillis
+            val start = startOfDay(base)
+            val end = start + (durationDays-1)*24*60*60*1000L
+            val cruiseId = db.cruiseDao().insert(Cruise(shipName = ship, startDate = start, endDate = startOfDay(end)))
+            // Schedule countdown if future
+            if (start > startOfDay(System.currentTimeMillis())) {
+                try { com.charles.cruiseapp.notifications.NotificationHelper.scheduleDailyCountdown(applicationContext, cruiseId, ship, start) } catch (_:Exception){}
+            } else {
+                try { com.charles.cruiseapp.notifications.NotificationHelper.cancelDailyCountdown(applicationContext) } catch (_:Exception){}
+            }
             if (addPort) {
                 val arrival = startOfDay(start) + 1*24*60*60*1000L
                 db.portStopDao().insert(PortStop(cruiseId = cruiseId, name = portName, latitude = lat, longitude = lon, arrivalDate = arrival, departureDate = arrival, country = "Bahamas", orderIndex = 0))

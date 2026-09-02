@@ -1,0 +1,7 @@
+Welcome to CruiseLoom 1.0.0.
+
+• Plan cruises, port stops, and daily events
+• Check port weather and maps
+• Browse optional ship-deck schematics
+• Connect with your party nearby
+• Receive local event and sailing reminders

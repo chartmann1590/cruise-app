@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Cruise::class, PortStop::class, PlannedEvent::class, PartyMember::class, Message::class, WeatherCache::class],
-    version = 3,
+    entities = [Cruise::class, PortStop::class, PlannedEvent::class, PartyMember::class, Message::class, WeatherCache::class, PlaceCache::class],
+    version = 4,
     exportSchema = false
 )
 abstract class CruiseDatabase : RoomDatabase() {
@@ -17,6 +17,7 @@ abstract class CruiseDatabase : RoomDatabase() {
     abstract fun partyMemberDao(): PartyMemberDao
     abstract fun messageDao(): MessageDao
     abstract fun weatherCacheDao(): WeatherCacheDao
+    abstract fun placeCacheDao(): PlaceCacheDao
 
     companion object {
         @Volatile private var INSTANCE: CruiseDatabase? = null

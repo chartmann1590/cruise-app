@@ -71,7 +71,6 @@ class WeatherRepository {
 
     suspend fun searchLocation(query: String): Result<List<GeocodingResult>> {
         val trace = FirebasePerfUtils.startTrace("geocoding_search")
-        trace?.putAttribute("query", query.take(100))
         val httpMetric = FirebasePerfUtils.newHttpMetric("https://geocoding-api.open-meteo.com/v1/search", "GET")
         httpMetric?.start()
         val start = System.currentTimeMillis()
