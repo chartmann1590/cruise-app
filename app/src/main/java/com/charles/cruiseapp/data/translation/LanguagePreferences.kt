@@ -22,11 +22,10 @@ object LanguagePreferences {
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
             .edit()
             .putString(KEY_LANGUAGE, normalized)
-            .putBoolean(KEY_LANGUAGE_ONBOARDED, true)
             .apply()
     }
 
-    /** Called when onboarding completed (even if language is en) */
+    /** Called strictly when onboarding walkthrough is completed */
     fun setOnboarded(context: Context, onboarded: Boolean = true) {
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
             .edit().putBoolean(KEY_LANGUAGE_ONBOARDED, onboarded).apply()
@@ -34,12 +33,7 @@ object LanguagePreferences {
 
     fun isOnboarded(context: Context): Boolean {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        // If KEY_LANGUAGE exists and is not default, consider onboarded even if flag missing (migration)
-        val flagged = prefs.getBoolean(KEY_LANGUAGE_ONBOARDED, false)
-        if (flagged) return true
-        // backward compat: if user already had a non-English language set, treat as onboarded
-        val lang = prefs.getString(KEY_LANGUAGE, null)
-        return lang != null && lang != "en"
+        return prefs.getBoolean(KEY_LANGUAGE_ONBOARDED, false)
     }
 
     fun isLanguageSelected(context: Context): Boolean = isOnboarded(context)
@@ -57,7 +51,7 @@ object LanguagePreferences {
     fun observeOnboarded(context: Context): Flow<Boolean> = callbackFlow {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-            if (key == KEY_LANGUAGE_ONBOARDED || key == KEY_LANGUAGE) trySend(isOnboarded(context))
+            if (key == KEY_LANGUAGE_ONBOARDED) trySend(isOnboarded(context))
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
         trySend(isOnboarded(context))

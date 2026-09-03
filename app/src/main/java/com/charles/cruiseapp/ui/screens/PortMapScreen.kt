@@ -98,7 +98,7 @@ fun PortMapScreen(
                     Card(Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.large, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
                         Column(Modifier.padding(12.dp)) {
                             TText("🏝️ ${p.name}", style = MaterialTheme.typography.titleMedium)
-                            if (p.country.isNotEmpty()) Text(p.country, style = MaterialTheme.typography.bodySmall)
+                            if (p.country.isNotEmpty()) TText(p.country, style = MaterialTheme.typography.bodySmall)
                             TText("${formatDate(p.arrivalDate)} → ${formatDate(p.departureDate)}", style = MaterialTheme.typography.bodySmall)
                             TText("${p.latitude}, ${p.longitude}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             Spacer(Modifier.height(8.dp))

@@ -112,7 +112,7 @@ fun DashboardScreen(
                             Column(Modifier.padding(16.dp)){
                                 Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween, verticalAlignment=Alignment.CenterVertically){
                                     Column(Modifier.weight(1f)){
-                                        Text(
+                                        TText(
                                             when(effectiveDays){
                                                 1 -> "1 day to go!"
                                                 else -> "$effectiveDays days to go!"
@@ -120,7 +120,7 @@ fun DashboardScreen(
                                         TText(cruise.shipName + " • " + formatDate(cruise.startDate, "EEE, MMM d, yyyy"), style=MaterialTheme.typography.bodyMedium, color=MaterialTheme.colorScheme.onTertiaryContainer)
                                         if (countdownExtra != null) {
                                             Spacer(Modifier.height(4.dp))
-                                            Text(countdownExtra, style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onTertiaryContainer)
+                                            TText(countdownExtra, style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onTertiaryContainer)
                                         }
                                         TText("Daily 9 AM reminder enabled — you'll get a notification each morning.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha=0.8f))
                                     }
@@ -247,7 +247,7 @@ fun DashboardScreen(
                         items(days){ d ->
                             val sel = d==dateChoice
                             ListItem(
-                                headlineContent={ Text(formatDate(d))},
+                                headlineContent={ TText(formatDate(d)) },
                                 trailingContent={ if(sel) Icon(Icons.Default.Check,null)},
                                 modifier=Modifier.clickable{ dateChoice=d }
                             )

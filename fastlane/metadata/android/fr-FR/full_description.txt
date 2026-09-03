@@ -1,27 +1,33 @@
-CruiseLoom garde votre voyage connecté dans une app calme et hors-ligne.
+CruiseLoom garde chaque étape de votre croisière parfaitement organisée, 100% hors ligne.
 
-PLANIFIEZ TOUT LE VOYAGE
-• Choisissez navire et dates
-• Voyez jours en mer, escales et plans d'un coup d'œil
+🌐 TRADUCTION SUR L'APPAREIL 100% GRATUITE (33 LANGUES)
+• Propulsé par Google ML Kit — traduit toute l'application directement sur votre smartphone
+• Téléchargez le modèle de langue une fois et traduisez sans connexion au milieu de l'océan
+• Support multilingue : français, anglais, espagnol, allemand, italien, portugais, japonais, etc.
+
+🗓️ COMPTE À REBOURS & ITINÉRAIRE QUOTIDIEN
+• Entrez votre navire et vos dates ; votre programme quotidien est généré automatiquement
+• Jours en mer, jours d'escale et compte à rebours en un coup d'œil
 • Ajoutez dîners, spectacles, excursions et rappels locaux
-• Itinéraire disponible hors connexion
+• Rappel automatique chaque matin à 9h00
 
-PRÉPAREZ CHAQUE ESCALE
-• Recherchez et organisez de vraies escales
-• Météo du jour + 7 jours
-• Cache météo pour mer avec réseau instable
-• Carte OpenStreetMap de votre itinéraire
-• Plans de pont optionnels
+📍 PORTS ET MÉTÉO EN CACHE
+• Recherchez des escales réelles à travers le monde
+• Consultez les conditions actuelles et les prévisions marines à 7 jours
+• Données météo conservées hors ligne pour naviguer sans Wi-Fi
 
-RESTEZ ENSEMBLE
-• Ajoutez compagnons via QR local
-• Chat à proximité Bluetooth + Wi-Fi Direct
-• Messages groupe ou privés
-• Wi-Fi invité temporaire sans app
+🗺️ CARTES D'ESCALES ET PLANS DES PONTS
+• Suivez votre itinéraire sur une carte OpenStreetMap disponible hors ligne
+• Consultez les plans interactifs des ponts des grands paquebots
+• Zoomez et explorez chaque étage du bateau sans connexion
 
-FAIT POUR LA VIE À BORD
-Stockage local uniquement, sauvegarde désactivée. Services en ligne seulement pour météo, cartes, diagnostics et pubs (voir confidentialité).
+💬 CHAT HORS LIGNE SEAMESH™ & WI-FI INVITÉ
+• Discutez à proximité en Bluetooth et Wi-Fi Direct sans forfait internet
+• Point d'accès Wi-Fi Invité : vos proches se connectent et discutent depuis leur navigateur sans installer l'application
+• Connexion instantanée par QR code
 
-Contient des annonces. Permissions caméra/proximité/localisation/notifications optionnelles. Non affilié aux compagnies.
-Vidéo: https://www.youtube.com/watch?v=IcxRiCjYRSk
-Web: https://cruise-app-2026.web.app
+🔒 PRIVÉ ET SÉCURISÉ
+• Tous vos itinéraires et messages restent uniquement sur votre appareil
+• Aucun compte requis, aucune collecte de données personnelles
+
+CruiseLoom est une application indépendante, non affiliée aux compagnies de croisière.

@@ -93,7 +93,7 @@ fun ShipDeckScreen(
                 BannerAd(modifier = Modifier.fillMaxWidth())
                 if (ship != null && decks.isNotEmpty()) {
                     Column(Modifier.padding(12.dp)) {
-                        if (downloading) { LinearProgressIndicator(Modifier.fillMaxWidth()); Text(downloadMsg, style = MaterialTheme.typography.bodySmall) }
+                        if (downloading) { LinearProgressIndicator(Modifier.fillMaxWidth()); TText(downloadMsg, style = MaterialTheme.typography.bodySmall) }
                         TText("Deck ${decks.getOrNull(activeIndex)?.number ?: "--"} — ${decks.getOrNull(activeIndex)?.name ?: ""}", style = MaterialTheme.typography.titleSmall)
                         TText("Pinch to zoom • drag to pan • swipe to change deck • ${if (repo.isDeckDownloaded(ship!!.id, decks[activeIndex])) "Offline ✓" else "Tap Download for offline sea days"}", style = MaterialTheme.typography.bodySmall)
                         ScrollableTabRow(selectedTabIndex = activeIndex) {
@@ -122,7 +122,7 @@ fun ShipDeckScreen(
                         Icon(Icons.Default.OpenInNew, null, Modifier.size(48.dp))
                         Spacer(Modifier.height(12.dp))
                         TText("No offline deck images for ${ship!!.displayName}", style = MaterialTheme.typography.titleMedium)
-                        Text(ship!!.attribution, style = MaterialTheme.typography.bodySmall)
+                        TText(ship!!.attribution, style = MaterialTheme.typography.bodySmall)
                         Spacer(Modifier.height(12.dp))
                         Button(onClick = {
                             ship!!.externalUrl?.let { url -> try { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } catch(_:Exception){} }

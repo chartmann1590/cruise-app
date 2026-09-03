@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.charles.cruiseapp.ui.theme.CruiseGradients
+import com.charles.cruiseapp.ui.translation.TText
 
 /**
  * Diagonal ocean-to-sunset gradient banner used for hero/header sections.
@@ -79,7 +80,7 @@ fun CruiseCard(
 }
 
 /**
- * Friendly emoji-led empty/loading placeholder — replaces plain text blocks.
+ * Friendly emoji-led empty/loading placeholder — translates title and subtitle on-device.
  */
 @Composable
 fun EmptyState(
@@ -96,9 +97,9 @@ fun EmptyState(
     ) {
         Text(emoji, style = MaterialTheme.typography.displayMedium)
         Spacer(Modifier.height(4.dp))
-        Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+        TText(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
         if (subtitle != null) {
-            Text(
+            TText(
                 subtitle,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,

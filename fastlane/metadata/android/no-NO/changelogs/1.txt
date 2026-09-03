@@ -1,0 +1,1 @@
+1.0.0: Første utgave med frakoblet cruiseplanlegger, oversettelse på 33 språk via Google ML Kit, SeaMesh-chatt og dekksplaner.

@@ -124,7 +124,7 @@ fun CruiseSetupScreen(onSave: (String, Long, Long)->Unit, onBack:()->Unit){
             dismissButton = { TextButton(onClick = { showRangePicker = false }) { TText("Cancel") } }
         ) {
             DateRangePicker(state = state, title = { TText("Select cruise dates", modifier = Modifier.padding(16.dp)) }, headline = {
-                Text(
+                TText(
                     if (state.selectedStartDateMillis != null && state.selectedEndDateMillis != null)
                         "${state.selectedStartDateMillis?.let { formatDate(it,"MMM d") }} → ${state.selectedEndDateMillis?.let { formatDate(it,"MMM d, yyyy") }}"
                     else "Choose start and end",

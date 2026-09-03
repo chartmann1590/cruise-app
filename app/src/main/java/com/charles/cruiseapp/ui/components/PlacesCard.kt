@@ -69,7 +69,7 @@ fun PlacesCard(
                         }
                         else -> {
                             if (error != null) {
-                                Text(error, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.75f))
+                                TText(error, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.75f))
                                 Spacer(Modifier.height(8.dp))
                             }
                             places.forEach { place ->
@@ -113,7 +113,7 @@ private fun PlaceRow(place: PlaceOfInterest, onOpen: () -> Unit, onAdd: () -> Un
                 if (place.address != null) {
                     TText("📍 ${place.address}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, maxLines = 1)
                 }
-                Text(place.extract, style = MaterialTheme.typography.bodySmall, maxLines = 4, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                TText(place.extract, style = MaterialTheme.typography.bodySmall, maxLines = 4, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 TText("Tap for details", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
             }
             Spacer(Modifier.width(4.dp))

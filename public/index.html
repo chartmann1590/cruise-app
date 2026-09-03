@@ -27,7 +27,7 @@
       <a href="/privacy.html">Privacy</a>
     </div>
     <div class="nav-cta">
-      <a class="btn btn-secondary" href="#download" style="padding:10px 16px;font-size:14px">Download</a>
+      <a class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.charles.cruiseapp" target="_blank" rel="noopener" style="padding:10px 16px;font-size:14px">Google Play</a>
       <button class="hamburger" aria-label="menu" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display==='flex' ? 'none':'flex'">☰</button>
     </div>
   </div>
@@ -36,17 +36,17 @@
 <div class="hero">
   <div class="container hero-grid">
     <div>
-      <span class="badge">Works without Wi-Fi</span>
+      <span class="badge">100% Offline • Free On-Device Translation</span>
       <h1>Your cruise, <em>perfectly planned</em></h1>
-      <p class="lead">Everything for your voyage in one place — your itinerary, port stops, weather and staying in touch with your group. <b>NEW:</b> Guest Wi-Fi Chat — guests join your hotspot and chat in their browser, no app, no internet, live.</p>
+      <p class="lead">Everything for your voyage in one place — your itinerary, port stops, cached weather, deck blueprints, and offline group chat. <b>NEW:</b> On-device translation into 33 languages &amp; Guest Wi-Fi Chat in any browser.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">Download for Android</a>
-        <a class="btn btn-ghost" href="#promo">Watch video</a>
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.charles.cruiseapp" target="_blank" rel="noopener">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">Download APK</a>
       </div>
       <div class="hero-bullets">
-        <span><i>✓</i> Works offline</span>
-        <span><i>✓</i> Real weather</span>
-        <span><i>✓</i> Group + Guest Wi-Fi chat</span>
+        <span><i>✓</i> Works offline at sea</span>
+        <span><i>✓</i> 33 languages (Google ML Kit)</span>
+        <span><i>✓</i> Group &amp; Guest Wi-Fi chat</span>
       </div>
     </div>
     <div class="hero-visual">
@@ -109,10 +109,20 @@
       <p>Simple tools for the parts of a cruise that matter most.</p>
     </div>
     <div class="grid3">
+      <div class="card" style="border-color:rgba(14,165,163,.28);background:linear-gradient(180deg,rgba(14,165,163,.06),#fff)">
+        <div class="ic">🌐</div>
+        <h3>100% Free Translation <span style="font-size:11px;background:#0EA5A3;color:#fff;padding:2px 6px;border-radius:999px;vertical-align:middle">33 Languages</span></h3>
+        <p>Powered by Google ML Kit on-device machine learning. Download your native language model once and the entire app translates dynamically offline in the middle of the ocean.</p>
+      </div>
       <div class="card">
         <div class="ic">🗓️</div>
         <h3>Plan your days</h3>
         <p>Create your trip, set your dates, and build an itinerary for every sea day and port day. Add dinners, excursions and reminders in a few taps.</p>
+      </div>
+      <div class="card">
+        <div class="ic">🛳️</div>
+        <h3>Ship Deck Blueprints</h3>
+        <p>Explore interactive deck schematics for major cruise ships. Pinch, zoom, and navigate the decks on board with zero internet connection.</p>
       </div>
       <div class="card">
         <div class="ic">📍</div>
@@ -124,20 +134,10 @@
         <h3>Weather when you need it</h3>
         <p>Check the forecast for any port — then view it later without signal. It stays available for a few hours after you check.</p>
       </div>
-      <div class="card">
-        <div class="ic">⏰</div>
-        <h3>Reminders</h3>
-        <p>Set a reminder for anything on your itinerary and get notified at the right time, even after you restart your phone.</p>
-      </div>
       <div class="card" style="border-color:rgba(14,165,163,.28);background:linear-gradient(180deg,rgba(14,165,163,.06),#fff)">
         <div class="ic">💬</div>
         <h3>Chat with your group <span style="font-size:11px;background:#0EA5A3;color:#fff;padding:2px 6px;border-radius:999px;vertical-align:middle">NEW Guest Wi-Fi</span></h3>
         <p>Bluetooth Nearby for app users + <b>Guest Wi-Fi Chat</b> for everyone else. Host taps <b>Start Guest Chat</b> → phone creates a local-only hotspot (no internet) + web server on <code>:8085</code>. Guests scan a <code>WIFI:</code> QR to join, then open <code>http://&lt;host-ip&gt;:8085/</code> in any browser. Captive-portal probe (<code>generate_204</code>) auto-opens the chat like hotel Wi-Fi. One shared thread, live WebSocket, no refresh.</p>
-      </div>
-      <div class="card">
-        <div class="ic">📆</div>
-        <h3>Easy to use</h3>
-        <p>A clean calendar and simple screens help you get set up quickly, so you can get back to enjoying the trip.</p>
       </div>
     </div>
   </div>
@@ -239,11 +239,11 @@
     <div class="cta">
       <div>
         <h3>Ready to get started?</h3>
-        <p>Get CruiseLoom for your Android phone. It works on Android 8 and newer. Host Guest Wi-Fi, share two QR codes, and your whole group chats — even without the app.</p>
+        <p>Get CruiseLoom for your Android phone. Fully offline-capable with free on-device translation in 33 languages, interactive deck blueprints, and guest Wi-Fi group chat.</p>
       </div>
       <div class="cta-actions">
-        <a class="btn" style="background:#fff;color:var(--navy)" href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">Download for Android</a>
-        <a class="btn" style="background:transparent;border-color:rgba(255,255,255,.25);color:#fff" href="/privacy.html">Privacy</a>
+        <a class="btn" style="background:#fff;color:var(--navy);font-weight:700" href="https://play.google.com/store/apps/details?id=com.charles.cruiseapp" target="_blank" rel="noopener">Get it on Google Play</a>
+        <a class="btn" style="background:transparent;border-color:rgba(255,255,255,.25);color:#fff" href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">Download APK</a>
       </div>
     </div>
   </div>
@@ -254,11 +254,12 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <div class="brand"><span class="brand-mark">🚢</span><span>CruiseLoom</span></div>
-        <p>A simple companion for cruise days. Plan your trip, check the weather and stay in touch — all without needing Wi-Fi.</p>
+        <p>Your offline-first companion for cruise days. Plan your voyage, check marine weather, navigate ship decks, and stay in touch — all without needing Wi-Fi.</p>
       </div>
       <div class="foot-col">
         <h4>Product</h4>
         <a href="#features">Features</a>
+        <a href="#guest-wifi">Guest Wi-Fi</a>
         <a href="#screenshots">Screenshots</a>
         <a href="#promo">Video</a>
       </div>
@@ -269,13 +270,14 @@
       </div>
       <div class="foot-col">
         <h4>Get it</h4>
-        <a href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">Download APK</a>
-        <span class="small">Android 8+ • Free</span>
+        <a href="https://play.google.com/store/apps/details?id=com.charles.cruiseapp" target="_blank" rel="noopener">Google Play Store</a>
+        <a href="https://github.com/chartmann1590/cruise-app/releases" target="_blank" rel="noopener">Direct APK Release</a>
+        <span class="small">Android 8+ • 100% Free</span>
       </div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 CruiseLoom • All rights reserved</span>
-      <span><a href="/privacy.html" style="text-decoration:underline">Privacy</a> • <a href="https://github.com/chartmann1590/cruise-app" style="text-decoration:underline">GitHub</a></span>
+      <span><a href="/privacy.html" style="text-decoration:underline">Privacy</a> • <a href="https://github.com/chartmann1590/cruise-app" style="text-decoration:underline">GitHub</a> • <a href="https://play.google.com/store/apps/details?id=com.charles.cruiseapp" style="text-decoration:underline">Google Play</a></span>
     </div>
   </div>
 </footer>

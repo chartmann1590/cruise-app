@@ -1,0 +1,26 @@
+CruiseLoom pitää risteilysi kaikki tiedot järjestyksessä täysin ilman nettiyhteyttä.
+
+🌐 100% ILMAINEN KÄÄNNÖS LAITTEELLA (33 KIELTÄ)
+• Google ML Kit -teknologia: kääntää koko sovelluksen suoraan puhelimessasi
+• Lataa kielipaketti kerran ja käytä offline-tilassa ulkomerellä
+• Tuki suomelle, englannille, saksalle, espanjalle, ranskalle ja 28 muulle kielelle
+
+🗓️ LÄHTÖLASKENTA & PÄIVÄOHJELMA
+• Valitse laiva ja matkapäivät; päiväohjelma luodaan automaattisesti
+• Meripäivät, satamapäivät ja lähtölaskenta yhdellä silmäyksellä
+
+📍 SATAMAT & SÄÄENNUSTE
+• Etsi satamia ympäri maailmaa ja katso 7 päivän merisääennuste ilman nettiä
+
+🗺️ KARTAT & KANSIKARTAT
+• Tarkastele reittiä OpenStreetMap-kartalla offline-tilassa
+• Tutki risteilyalusten interaktiivisia kansikarttoja
+
+💬 SEAMESH™ OFFLINE-CHAT & VIERAS-WIFI
+• Keskustele Bluetoothin ja Wi-Fi Directin kautta ilman laivan maksullista nettiä
+• Vieras-hotspot: ystävät voivat keskustella selaimessa ilman sovelluksen lataamista
+
+🔒 YKSITYISYYS
+• Kaikki tiedot tallennetaan vain omaan puhelimeesi
+
+CruiseLoom on itsenäinen sovellus.

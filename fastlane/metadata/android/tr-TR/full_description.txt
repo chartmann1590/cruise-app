@@ -1,0 +1,30 @@
+CruiseLoom, gemi seyahatinizin tüm ayrıntılarını internet olmadan organize eden seyahat arkadaşınızdır.
+
+🌐 %100 ÜCRETSİZ CİHAZ İÇİ ÇEVİRİ (33 DİL)
+• Google ML Kit destekli: tüm uygulamayı doğrudan telefonunuzda çevirir
+• Dil paketini bir kez indirin ve açık denizde internetsiz çeviri yapın
+• Türkçe, İngilizce, İspanyolca, Almanca, Fransızca ve 28 diğer dil desteği
+
+🗓️ GERİ SAYIM VE GÜNLÜK PLANLAYICI
+• Geminizi ve tarihleri belirleyin; günlük seyahat planınız otomatik oluşsun
+• Deniz günleri, liman günleri ve geri sayım sayacı
+• Akşam yemekleri, gösteriler, turlar ve hatırlatıcılar ekleyin
+• Her sabah saat 09:00'da günlük bildirim
+
+📍 LİMANLAR VE KAYITLI HAVA DURUMU
+• Dünya çapındaki gerçek limanları arayın ve ekleyin
+• 7 günlük deniz hava durumu tahminlerini çevrimdışı görüntüleyin
+
+🗺️ LİMAN HARİTALARI VE GÜVERTE PLANLARI
+• OpenStreetMap ile rotanızı çevrimdışı haritada görün
+• Popüler kruvaziyer gemilerinin interaktif güverte planlarını inceleyin
+
+💬 SEAMESH™ ÇEVRİMDİŞİ SOHBET VE MİSAFİR WI-FI
+• Bluetooth ve Wi-Fi Direct üzerinden internetsiz grup sohbeti
+• Misafir Wi-Fi: arkadaşlarınız uygulama indirmeden tarayıcıdan sohbete katılsın
+• QR kod ile anında eşleşme
+
+🔒 GİZLİLİK VE GÜVENLİK
+• Tüm planlarınız ve mesajlarınız yalnızca telefonunuzda saklanır
+
+CruiseLoom bağımsız bir uygulamadır.

@@ -16,36 +16,43 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
+import com.charles.cruiseapp.data.translation.DownloadState
 import com.charles.cruiseapp.data.translation.TranslationManager
 import kotlinx.coroutines.launch
 
 /**
  * Remember a translated version of [original] using the current TranslationManager.
- * Returns original immediately, then updates once ML Kit translation completes.
- * Caching in TranslationManager makes subsequent calls instant.
+ * Returns cached translated version instantly (or original if not yet translated),
+ * and reactively updates once ML Kit translation completes or model finishes downloading.
  */
 @Composable
 fun rememberTranslatedText(original: String): String {
     if (original.isBlank()) return original
-    // Do not translate empty or very short punctuation-only strings overhead
     val manager = runCatching { LocalTranslationManager.current }.getOrNull() ?: return original
     val targetLang by manager.targetLanguage.collectAsState()
-    var translated by remember(original, targetLang) { mutableStateOf(original) }
+    val downloadState by manager.downloadState.collectAsState()
+
     // If English, no translation needed (fast path)
     if (targetLang == "en") return original
 
-    LaunchedEffect(original, targetLang) {
-        // Quick cache check via synchronous path first
-        // Note: we still call suspend translate which checks cache anyway
-        translated = manager.translate(original)
+    // Instant cache lookup for initial state to prevent any 1-frame text flicker
+    val initial = manager.translateCached(original)
+    var translated by remember(original, targetLang) { mutableStateOf(initial) }
+
+    LaunchedEffect(original, targetLang, downloadState) {
+        if (targetLang != "en") {
+            val res = manager.translate(original)
+            if (res != translated) {
+                translated = res
+            }
+        }
     }
     return translated
 }
 
 /**
  * Drop-in replacement for Material3 Text that auto-translates [text] from English to the
- * user's selected language via ML Kit. Use for ALL static UI strings.
- * For dynamic/user data (cruise names, port names, chat messages) use regular Text().
+ * user's selected language via ML Kit.
  */
 @Composable
 fun TText(
@@ -89,7 +96,7 @@ fun TText(
     )
 }
 
-/** AnnotatedString variant (rarely needed, but handy) */
+/** AnnotatedString variant */
 @Composable
 fun TTextAnnotated(
     text: String,
@@ -113,13 +120,7 @@ fun TTextAnnotated(
 }
 
 /**
- * For non-Text usages (e.g., contentDescription, Toast, notification, string concatenation).
- * Launch translation and get result via callback/suspend. Prefer this in ViewModels.
+ * For contentDescription, accessibility, toasts, etc.
  */
 @Composable
 fun TranslatedContentDescription(original: String): String = rememberTranslatedText(original)
-
-/**
- * Helper for places where you need translated string outside of composition (e.g., in ViewModel).
- * Use TranslationManager.translate() suspend directly there.
- */

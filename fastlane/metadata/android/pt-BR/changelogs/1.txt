@@ -1,7 +1,1 @@
-Bem-vindo ao CruiseLoom 1.0.0!
-
-• Planeje cruzeiros, portos e eventos
-• Clima e mapas dos portos
-• Plantas de convés opcionais
-• Chat do grupo por perto
-• Lembretes locais
+1.0.0: Lançamento inicial com planejador offline, tradução em 33 idiomas via Google ML Kit, chat SeaMesh e plantas de navios.

@@ -1,0 +1,27 @@
+CruiseLoom giúp bạn quản lý toàn bộ kỳ nghỉ du thuyền một cách mượt mà hoàn toàn không cần kết nối mạng.
+
+🌐 DỊCH THUẬT MIỄN PHÍ TRÊN THIẾT BỊ (33 NGÔN NGỮ)
+• Sử dụng Google ML Kit: dịch toàn bộ ứng dụng trực tiếp trên điện thoại của bạn
+• Tải gói ngôn ngữ một lần và dịch ngoại tuyến ở giữa đại dương
+• Hỗ trợ Tiếng Việt, Tiếng Anh, Tiếng Pháp, Tiếng Tây Ban Nha, Tiếng Trung và 28 ngôn ngữ khác
+
+🗓️ ĐẾM NGƯỢC & LỊCH TRÌNH HÀNG NGÀY
+• Chọn tàu và ngày đi; lịch trình từng ngày được tự động tạo lập
+• Xem nhanh các ngày trên biển, ngày cập cảng và đồng hồ đếm ngược
+• Thêm bữa tối, xem show, tour tham quan và chuông báo nhắc nhở
+
+📍 ĐIỂM CẬP CẢNG & DỰ BÁO THỜI TIẾT
+• Tìm kiếm các cảng biển trên toàn thế giới và xem dự báo thời tiết 7 ngày ngoại tuyến
+
+🗺️ BẢN ĐỒ HẢI TRÌNH & SƠ ĐỒ BOONG TÀU
+• Theo dõi tuyến hành trình trên bản đồ OpenStreetMap ngoại tuyến
+• Khám phá sơ đồ các tầng boong tàu của các du thuyền lớn
+
+💬 SEAMESH™ CHAT OFFLINE & WI-FI KHÁCH
+• Nhắn tin qua Bluetooth và Wi-Fi Direct mà không cần mua Wi-Fi trên tàu
+• Điểm phát sóng cho khách: bạn bè có thể tham gia chat trực tiếp trên trình duyệt mà không cần cài ứng dụng
+
+🔒 BẢO MẬT & RIÊNG TƯ
+• Tất cả dữ liệu và tin nhắn chỉ lưu trên thiết bị của bạn
+
+CruiseLoom là ứng dụng độc lập.

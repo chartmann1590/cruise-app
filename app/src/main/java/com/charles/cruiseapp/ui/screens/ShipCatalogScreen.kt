@@ -150,7 +150,7 @@ fun ShipCatalogScreen(
                             Column(Modifier.weight(1f)) {
                                 Text(ship.displayName, style = MaterialTheme.typography.titleMedium)
                                 TText("${ship.line} • ${ship.shipClass} • ${if (total==0) "External link" else "$total decks"}", style = MaterialTheme.typography.bodySmall)
-                                Text(ship.attribution.take(90), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2)
+                                TText(ship.attribution.take(90), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2)
                             }
                             Badge(containerColor = if (isDownloaded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer) {
                                 TText(if (isDownloaded) "Offline" else if (downloaded>0) "$downloaded/$total" else if (total==0) "Link" else "Online")
@@ -190,7 +190,7 @@ fun ShipCatalogScreen(
                                 }
                             }
                             if (downloadingId == ship.id && progressText.isNotEmpty()) {
-                                Spacer(Modifier.height(6.dp)); Text(progressText, style = MaterialTheme.typography.bodySmall)
+                                Spacer(Modifier.height(6.dp)); TText(progressText, style = MaterialTheme.typography.bodySmall)
                                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
                             }
                             TText("Size ~${(ship.decks.sumOf { it.bytes } / 1024)} KB • Tap View to browse & pinch-zoom. Downloaded to filesDir/decks/ — works at sea.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)

@@ -169,13 +169,11 @@ fun AppNav(){
         } else countdownExtra = null
     }
 
-    // Language onboarding — if user has never selected a language, force onboarding first
+    // Language & App Onboarding — if user has not completed onboarding, start at Onboarding
     val appCtx2 = navController.context.applicationContext
-    var isOnboarded by remember { mutableStateOf(LanguagePreferences.isOnboarded(appCtx2)) }
-    LaunchedEffect(Unit) {
-        LanguagePreferences.observeOnboarded(appCtx2).collect { isOnboarded = it }
+    val startDest = remember {
+        if (LanguagePreferences.isOnboarded(appCtx2)) Screen.Dashboard.route else Screen.OnboardingLanguage.route
     }
-    val startDest = if (isOnboarded) Screen.Dashboard.route else Screen.OnboardingLanguage.route
 
     NavHost(navController, startDestination = startDest){
         composable(Screen.OnboardingLanguage.route){
@@ -191,6 +189,9 @@ fun AppNav(){
                         popUpTo(Screen.OnboardingLanguage.route){ inclusive = true }
                         launchSingleTop = true
                     }
+                },
+                onCreateCruise = { ship, start, end ->
+                    dashboardVm.createCruise(ship, start, end)
                 }
             )
         }

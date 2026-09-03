@@ -1,0 +1,30 @@
+CruiseLoom håller alla detaljer för din kryssning samlade i en smart offline-app.
+
+🌐 100% GRATIS ÖVERSÄTTNING PÅ ENHETEN (33 SPRÅK)
+• Drivs av Google ML Kit: översätter hela appen direkt i telefonen
+• Ladda ner språkmodeller en gång och översätt offline mitt ute på havet
+• Stöd för svenska, engelska, tyska, spanska, franska och 28 andra språk
+
+🗓️ NEDRÄKNING & DAGLIG PLANERARE
+• Välj fartyg och resedatum; din resplan skapas automatiskt
+• Sjödagar, hamndagar och nedräkningsklocka
+• Lägg till middagar, shower, utflykter och påminnelser
+• Daglig morgonpåminnelse kl 09:00
+
+📍 HAMNAR & CACHAT VÄDER
+• Sök och organisera hamnstopp över hela världen
+• Se aktuellt väder och 7-dagars marinprognos offline
+
+🗺️ HAMNKARTOR & DÄCKSKISSAR
+• Se resrutten på OpenStreetMap utan internetanslutning
+• Utforska interaktiva däckkartor för kryssningsfartyg
+
+💬 SEAMESH™ OFFLINE-CHATT & GÄST-WIFI
+• Chatta via Bluetooth och Wi-Fi Direct utan fartygets Wi-Fi
+• Gäst-hotspot: vänner ansluter och chattar i webbläsaren utan app
+• Snabb parkoppling med QR-kod
+
+🔒 PRIVAT & SÄKERT
+• Alla planer och meddelanden sparas enbart på din telefon
+
+CruiseLoom är en oberoende app.

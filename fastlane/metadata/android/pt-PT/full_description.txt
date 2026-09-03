@@ -1,0 +1,30 @@
+CruiseLoom mantém todos os detalhes da sua viagem organizados num assistente offline.
+
+🌐 TRADUÇÃO GRATUITA NO DISPOSITIVO (33 IDIOMAS)
+• Com Google ML Kit: traduz toda a aplicação diretamente no seu smartphone
+• Transfira o modelo de idioma e traduza offline em alto-mar sem internet
+• Suporte para português, inglês, espanhol, francês, alemão e mais 28 línguas
+
+🗓️ CONTAGEM DECRESCENTE E PLANO DIÁRIO
+• Defina o navio e datas; o itinerário diário é gerado automaticamente
+• Dias de navegação, portos de escala e contagem decrescente
+• Adicione jantares, espetáculos, excursões e lembretes locais
+• Notificação matinal diária às 9h00
+
+📍 PORTOS E METEOROLOGIA OFFLINE
+• Pesquise escalas em todo o mundo
+• Previsão meteorológica a 7 dias guardada para consulta sem rede
+
+🗺️ MAPAS E PLANTAS DE DECKS
+• Rota em mapas OpenStreetMap acessíveis offline
+• Esquemas interativos de decks dos principais navios de cruzeiro
+
+💬 SEAMESH™ CHAT OFFLINE E WI-FI PARA CONVIDADOS
+• Converse via Bluetooth e Wi-Fi Direct sem ligação à internet
+• Hotspot para convidados: partilhe o chat através do navegador sem necessidade de instalar a app
+• Emparelhamento por código QR
+
+🔒 PRIVACIDADE E SEGURANÇA
+• Dados guardados localmente no seu dispositivo, sem registo obrigatório
+
+CruiseLoom é uma aplicação independente sem afiliação a companhias de cruzeiros.

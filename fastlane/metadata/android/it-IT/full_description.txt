@@ -1,27 +1,32 @@
-CruiseLoom tiene il tuo viaggio compatto — calmo e offline.
+CruiseLoom organizza ogni momento della tua crociera in un assistente di viaggio offline.
 
-PIANIFICA TUTTO IL VIAGGIO
-• Scegli nave e date
-• Vedi giorni di mare, scali e piani a colpo d'occhio
-• Aggiungi cene, spettacoli, escursioni e promemoria
-• Itinerario disponibile offline
+🌐 TRADUZIONE SU DISPOSITIVO 100% GRATUITA (33 LINGUE)
+• Con tecnologia Google ML Kit: traduce l'intera app direttamente sul tuo telefono
+• Scarica i modelli linguistici e traduci offline in mezzo al mare senza internet
+• Supporto per italiano, inglese, spagnolo, francese, tedesco, portoghese e altre 27 lingue
 
-PREPARATI PER OGNI PORTO
-• Cerca e organizza scali reali
-• Meteo attuale + 7 giorni
-• Cache meteo per mare con connessione instabile
-• Mappa OpenStreetMap
-• Piantine ponte opzionali
+🗓️ CONTO ALLA ROVESCIA E PROGRAMMA GIORNALIERO
+• Inserisci nave e date: il tuo itinerario giornaliero viene generato automaticamente
+• Giorni di navigazione, tappe nei porti e conto alla rovescia a colpo d'occhio
+• Aggiungi cene, spettacoli, escursioni e promemoria locali
+• Notifica mattutina alle 9:00
 
-RESTA CONNESSO
-• Aggiungi compagni via QR locale
-• Chat vicina Bluetooth + Wi-Fi Direct
-• Messaggi di gruppo o privati
-• Chat Wi-Fi ospite senza app
+📍 PORTI E METEO SALVATO OFFLINE
+• Cerca e aggiungi gli scali del tuo viaggio in tutto il mondo
+• Meteo attuale e previsioni a 7 giorni memorizzati nella cache per l'uso senza Wi-Fi
 
-PER LA VITA A BORDO
-Solo archiviazione locale, backup disattivato. Servizi online solo per meteo, mappe, diagnostica e annunci (vedi privacy).
+🗺️ MAPPE DEI PORTI E PIANI DEI PONTI
+• Visualizza la rotta su mappe OpenStreetMap utilizzabili offline
+• Schemi interattivi dei ponti delle principali navi da crociera
+• Naviga e fai zoom sui ponti senza connessione
 
-Contiene annunci. Permessi fotocamera/vicinanza/posizione/notifiche opzionali. Non affiliato alle compagnie.
-Video: https://www.youtube.com/watch?v=IcxRiCjYRSk
-Web: https://cruise-app-2026.web.app
+💬 SEAMESH™ CHAT OFFLINE E WI-FI PER OSPITI
+• Chatta con i compagni di viaggio via Bluetooth e Wi-Fi Direct senza connessione a bordo
+• Hotspot Wi-Fi Ospiti: gli amici si collegano e chattano dal browser senza installare l'app
+• Associazione rapida tramite codice QR
+
+🔒 PRIVATO E SICURO
+• Tutti i tuoi piani e messaggi rimangono solo sul tuo dispositivo
+• Nessun account richiesto
+
+CruiseLoom è un'applicazione indipendente non affiliata a compagnie di crociera.

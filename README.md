@@ -1,18 +1,19 @@
 # 🚢 CruiseLoom — Offline-First Cruise Companion
 
+[![Google Play](https://img.shields.io/badge/Google_Play-Draft_Ready-4285F4?logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.charles.cruiseapp)
 [![Android](https://img.shields.io/badge/Platform-Android%208%2B-3DDC84?logo=android&logoColor=white)](#)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-7F52FF?logo=kotlin&logoColor=white)](#)
 [![Jetpack Compose](https://img.shields.io/badge/Compose-1.5.8-4285F4?logo=jetpackcompose&logoColor=white)](#)
+[![ML Kit Translation](https://img.shields.io/badge/Google_ML_Kit-33_Languages-00C853?logo=google&logoColor=white)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Firebase](https://img.shields.io/badge/Firebase-Hosting%20%7C%20Crashlytics%20%7C%20Perf-FFCA28?logo=firebase&logoColor=black)](#)
 [![Website](https://img.shields.io/badge/Website-cruise--app--2026.web.app-0B1E3B)](https://cruise-app-2026.web.app)
 [![Privacy](https://img.shields.io/badge/Privacy-Policy-0EA5A3)](https://cruise-app-2026.web.app/privacy)
 
-**Plan your entire cruise without Wi-Fi.**
+**Plan your entire cruise without Wi-Fi — with 100% free on-device translation in 33 languages.**
 
-CruiseLoom is an offline-first Android app for cruise passengers. Create your voyage, add real port stops, plan each sea day, get live weather (no API key), receive local reminders, and chat with your party over **Bluetooth / BLE / Wi-Fi Direct** — even when the ship has no internet.
+CruiseLoom is an offline-first Android app for cruise passengers. Create your voyage, add real port stops, plan each sea day, get live weather (no API key), translate the entire app offline via Google ML Kit, explore interactive ship decks, receive local reminders, and chat with your party over **Bluetooth / BLE / Wi-Fi Direct** and **Guest Wi-Fi Hotspot** — even in the middle of the ocean.
 
-> **🌐 Website:** [https://cruise-app-2026.web.app](https://cruise-app-2026.web.app) · **🎬 Promo:** [youtu.be/IcxRiCjYRSk](https://youtu.be/IcxRiCjYRSk) · **📄 Privacy Policy:** [https://cruise-app-2026.web.app/privacy](https://cruise-app-2026.web.app/privacy) · **📦 Package:** `com.charles.cruiseapp`
+> **🌐 Website:** [https://cruise-app-2026.web.app](https://cruise-app-2026.web.app) · **▶️ Google Play:** [com.charles.cruiseapp](https://play.google.com/store/apps/details?id=com.charles.cruiseapp) · **🎬 Promo:** [youtu.be/IcxRiCjYRSk](https://youtu.be/IcxRiCjYRSk) · **📄 Privacy Policy:** [https://cruise-app-2026.web.app/privacy](https://cruise-app-2026.web.app/privacy) · **📦 Package:** `com.charles.cruiseapp`
 
 No mock data. No cloud sync for your plans. Your cruises, ports, events and chats stay on your device.
 

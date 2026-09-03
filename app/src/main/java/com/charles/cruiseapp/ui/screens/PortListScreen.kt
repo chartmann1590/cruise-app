@@ -64,7 +64,7 @@ fun PortListScreen(cruise: Cruise?, portsFlow: StateFlow<List<PortStop>>, onAddP
                             Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween){
                                 Column(Modifier.weight(1f)){
                                     TText("🏝️ ${port.name}", style=MaterialTheme.typography.titleMedium)
-                                    if(port.country.isNotEmpty()) Text(port.country, style=MaterialTheme.typography.bodySmall)
+                                    if(port.country.isNotEmpty()) TText(port.country, style=MaterialTheme.typography.bodySmall)
                                     TText("${formatDate(port.arrivalDate)} → ${formatDate(port.departureDate)}", style=MaterialTheme.typography.bodySmall)
                                     TText("${port.latitude}, ${port.longitude}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                                 }
@@ -110,7 +110,7 @@ fun PortListScreen(cruise: Cruise?, portsFlow: StateFlow<List<PortStop>>, onAddP
                             }
                         }, { err -> searching=false; error=err })
                     }, enabled=name.isNotBlank()){ if(searching) CircularProgressIndicator(Modifier.size(16.dp)) else Icon(Icons.Default.Search,null); Spacer(Modifier.width(8.dp)); TText("Search location")}
-                    if(error!=null) Text(error!!, color=MaterialTheme.colorScheme.error, style=MaterialTheme.typography.bodySmall)
+                    if(error!=null) TText(error!!, color=MaterialTheme.colorScheme.error, style=MaterialTheme.typography.bodySmall)
                     if(searchResults.isNotEmpty()){
                         TText("Results:", style=MaterialTheme.typography.labelMedium)
                         searchResults.take(3).forEach{ r ->

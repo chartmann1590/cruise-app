@@ -575,11 +575,11 @@ private fun ExpandableSection(
                 }
                 Spacer(Modifier.width(12.dp))
                 Column(Modifier.weight(1f)){
-                    Text(title, style=MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, maxLines=1)
-                    Text(subtitle, style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines=1)
+                    TText(title, style=MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold, maxLines=1)
+                    TText(subtitle, style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines=1)
                 }
                 if (badge != null) {
-                    Badge(containerColor = MaterialTheme.colorScheme.primary, modifier=Modifier.padding(end=8.dp)) { Text(badge) }
+                    Badge(containerColor = MaterialTheme.colorScheme.primary, modifier=Modifier.padding(end=8.dp)) { TText(badge) }
                 }
                 Icon(
                     if(expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
@@ -794,7 +794,7 @@ private fun MessageBubble(msg: Message, timeFmt: SimpleDateFormat){
                 "DELIVERED" -> Color(0xFF2E7D32)
                 else -> MaterialTheme.colorScheme.onSurfaceVariant
             }
-            Text(statusText, style=MaterialTheme.typography.labelSmall, color=statusColor, fontSize=10.sp, modifier=Modifier.padding(end=4.dp, top=2.dp))
+            TText(statusText, style=MaterialTheme.typography.labelSmall, color=statusColor, fontSize=10.sp, modifier=Modifier.padding(end=4.dp, top=2.dp))
         } else {
             if(msg.status == "READ"){
                 TText("Read", style=MaterialTheme.typography.labelSmall, color=Color(0xFF2E7D32), fontSize=10.sp, modifier=Modifier.padding(start=4.dp, top=2.dp))

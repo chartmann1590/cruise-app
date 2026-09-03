@@ -1,0 +1,28 @@
+CruiseLoom holder styr på hele cruiset ditt i en komplett offline-app.
+
+🌐 100% GRATIS OVERSETTELSE PÅ ENHETEN (33 SPRÅK)
+• Drevet av Google ML Kit: oversetter hele appen direkte på telefonen
+• Last ned språkmodeller én gang og oversett offline midt på havet
+• Støtte for norsk, engelsk, tysk, spansk, fransk og 28 andre språk
+
+🗓️ NEDTELLING OG DAGLIG REISERUTE
+• Velg skip og datoer; dagsplanen din genereres automatisk
+• Sjødager, havnedager og nedtellingsur
+• Legg til middager, show, utflukter og påminnelser
+
+📍 HAVNER OG LAGRET VÆR
+• Søk opp havner i hele verden og se 7-dagers værvarsel offline
+
+🗺️ HAVNEKART OG DEKKSPLANER
+• Vis seilingsruten på OpenStreetMap uten nett
+• Utforsk interaktive dekksplaner for cruiseskip
+
+💬 SEAMESH™ OFFLINE-CHATT OG GJESTE-WIFI
+• Chat via Bluetooth og Wi-Fi Direct uten skipets internett
+• Gjeste-hotspot: venner kobler seg til og chatter i nettleseren uten app
+• Par sammen med QR-kode på sekunder
+
+🔒 PERSONVERN
+• Alle data lagres lokalt på din enhet
+
+CruiseLoom er en uavhengig app.

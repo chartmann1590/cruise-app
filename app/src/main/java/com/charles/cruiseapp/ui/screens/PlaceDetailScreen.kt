@@ -151,7 +151,7 @@ fun PlaceDetailScreen(
                             fontWeight = FontWeight.Bold,
                             letterSpacing = 1.sp,
                         )
-                        Text(
+                        TText(
                             fullExtract ?: p.extract,
                             style = MaterialTheme.typography.bodyMedium,
                             lineHeight = 22.sp,
@@ -202,6 +202,6 @@ private fun InfoChip(icon: ImageVector, text: String, accent: Boolean = false, o
     ) {
         Icon(icon, contentDescription = null, tint = content, modifier = Modifier.size(16.dp))
         Spacer(Modifier.width(6.dp))
-        Text(text, style = MaterialTheme.typography.labelMedium, color = content, maxLines = 1, textAlign = TextAlign.Start)
+        TText(text, style = MaterialTheme.typography.labelMedium, color = content, maxLines = 1, textAlign = TextAlign.Start)
     }
 }

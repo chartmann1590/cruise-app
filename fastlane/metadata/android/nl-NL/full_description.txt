@@ -1,27 +1,33 @@
-CruiseLoom houdt je reis gebundeld — rustig en offline-first.
+CruiseLoom brengt alle onderdelen van uw cruise samen in één handige offline app.
 
-HELE REIS PLANNEN
-• Kies schip en data
-• Zeedagen, havendagen en plannen in één oogopslag
-• Diners, shows, excursies en herinneringen toevoegen
-• Reisschema offline beschikbaar
+🌐 100% GRATIS VERTALING OP HET TOESTEL (33 TALEN)
+• Aangedreven door Google ML Kit: vertaalt de hele app rechtstreeks op uw telefoon
+• Download taalmodellen eenmalig en vertaal offline midden op de oceaan
+• Ondersteunt Nederlands, Engels, Duits, Frans, Spaans en 28 andere talen
 
-VOORBEREID OP ELKE HAVEN
-• Zoek en orden echte havens
-• Actueel weer + 7 dagen
-• Weercache voor instabiele zeeverbinding
-• Route op OpenStreetMap
-• Optionele dekplannen
+🗓️ CRUISE COUNTDOWN & DAGPLANNER
+• Voer uw schip en reisdata in: uw dagelijkse reisschema wordt automatisch aangemaakt
+• Zeedagen, havendagen en aftelklok in één oogopslag
+• Voeg diners, shows, excursies en herinneringen toe
+• Dagelijkse herinnering om 9:00 uur 's ochtends
 
-SAMEN BLIJVEN
-• Reisgenoten via lokale QR toevoegen
-• Dichtbij chatten via Bluetooth + Wi-Fi Direct
-• Groeps- of privéberichten
-• Tijdelijke gasten-Wi-Fi chat zonder app
+📍 HAVENS & OFFLINE WEERSVERWACHTING
+• Zoek en organiseer wereldwijde cruisehavens
+• Bekijk de actuele omstandigheden en een 7-daagse maritieme weersvoorspelling
+• Automatisch opgeslagen voor gebruik zonder wifi op zee
 
-VOOR HET LEVEN AAN BOORD
-Alleen lokale opslag, geen cloud-backup. Online alleen voor weer, kaarten, diagnostiek en advertenties (zie privacy).
+🗺️ HAVENKAARTEN & DEKPLANNEN
+• Bekijk uw vaarroute op OpenStreetMap offline kaarten
+• Interactieve dekplattegronden van populaire cruiseschepen
+• Zoom en navigeer over de dekken zonder internetverbinding
 
-Bevat advertenties. Optionele camera/nearby/locatie/meldingen. Niet gelieerd aan rederijen.
-Video: https://www.youtube.com/watch?v=IcxRiCjYRSk
-Web: https://cruise-app-2026.web.app
+💬 SEAMESH™ OFFLINE CHAT & GASTEN-WIFI
+• Chat met reisgenoten via Bluetooth en Wi-Fi Direct zonder scheepswifi
+• Gasten-hotspot: vrienden verbinden met uw hotspot en chatten in de browser zonder app
+• Snel koppelen via QR-code
+
+🔒 PRIVÉ & VEILIG
+• Al uw reisplannen en berichten blijven op uw toestel opgeslagen
+• Geen account vereist
+
+CruiseLoom is een onafhankelijke app en is niet gelieerd aan cruisemaatschappijen.

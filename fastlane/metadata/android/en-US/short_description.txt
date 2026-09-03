@@ -1,1 +1,1 @@
-Plan cruise days, ports, weather and nearby party chat—even offline.
+Offline cruise planner, weather, ship decks, offline translation & group chat.

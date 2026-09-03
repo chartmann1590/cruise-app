@@ -1,0 +1,28 @@
+CruiseLoom mengelola setiap detail perjalanan kapal pesiar Anda secara lengkap tanpa koneksi internet.
+
+🌐 TERJEMAHAN 100% GRATIS DI PERANGKAT (33 BAHASA)
+• Didukung Google ML Kit: menerjemahkan seluruh aplikasi langsung di ponsel Anda
+• Unduh paket bahasa sekali dan terjemahkan secara offline di tengah laut
+• Mendukung Bahasa Indonesia, Inggris, Spanyol, Prancis, Jerman, dan 28 bahasa lainnya
+
+🗓️ HITUNG MUNDUR & RENCANA HARIAN
+• Masukkan nama kapal dan tanggal; jadwal harian Anda dibuat otomatis
+• Hari berlayar, hari berlabuh di pelabuhan, dan jam hitung mundur
+• Tambahkan makan malam, pertunjukan, tur darat, dan pengingat
+
+📍 PELABUHAN & PERKIRAAN CUACA OFFLINE
+• Cari pelabuhan di seluruh dunia dan lihat ramalan cuaca maritim 7 hari
+
+🗺️ PETA RUTE & DENAH DEK KAPAL
+• Lihat rute pelayaran di peta OpenStreetMap offline
+• Jelajahi denah lantai dan dek interaktif berbagai kapal pesiar
+
+💬 SEAMESH™ CHAT OFFLINE & WI-FI TAMU
+• Mengobrol via Bluetooth & Wi-Fi Direct tanpa membeli paket internet kapal
+• Hotspot Tamu: teman dapat terhubung dan chat lewat browser tanpa menginstal aplikasi
+• Pasangkan perangkat dengan cepat melalui kode QR
+
+🔒 PRIVASI PENUH
+• Semua data dan pesan hanya tersimpan di perangkat Anda
+
+CruiseLoom adalah aplikasi independen.

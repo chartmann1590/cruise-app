@@ -1,7 +1,1 @@
-Welkom bij CruiseLoom 1.0.0!
-
-• Plan cruises, havens en evenementen
-• Havenweer en kaarten
-• Optionele dekplannen
-• Groepschat dichtbij
-• Lokale herinneringen
+1.0.0: Eerste release met offline reisplanner, Google ML Kit vertaling in 33 talen, SeaMesh chat en dekplattegronden.

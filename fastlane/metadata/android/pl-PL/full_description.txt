@@ -1,0 +1,29 @@
+CruiseLoom to niezastąpiony towarzysz rejsu wycieczkowego, działający w 100% offline.
+
+🌐 DARMOWE TŁUMACZENIE NA URZĄDZENIU (33 JĘZYKI)
+• Oparte na Google ML Kit: tłumaczy całą aplikację bezpośrednio na telefonie
+• Pobierz model językowy raz i tłumacz offline na środku oceanu
+• Obsługa języka polskiego, angielskiego, hiszpańskiego, niemieckiego i 29 innych
+
+🗓️ ODLICZANIE I PLANER DNI
+• Wybierz statek i daty; Twój harmonogram wygeneruje się automatycznie
+• Dni na morzu, dni w portach i zegar odliczania
+• Dodawaj kolacje, spektakle, wycieczki i powiadomienia
+• Codzienne przypomnienie o 9:00 rano
+
+📍 PORTY I ZAPISANA POGODA
+• Wyszukuj porty na całym świecie i sprawdzaj 7-dniową prognozę pogody offline
+
+🗺️ MAPY I PLANY POKŁADÓW
+• Trasa rejsu na mapie OpenStreetMap dostępnej offline
+• Interaktywne plany pokładów popularnych statków wycieczkowych
+
+💬 SEAMESH™ CZAT OFFLINE I WI-FI DLA GOŚCI
+• Czatuj przez Bluetooth i Wi-Fi Direct bez pakietu internetowego
+• Hotspot dla gości: znajomi dołączają przez przeglądarkę bez instalowania aplikacji
+• Parowanie kodem QR w kilka sekund
+
+🔒 PRYWATNOŚĆ
+• Wszystkie dane pozostają wyłącznie na Twoim urządzeniu
+
+CruiseLoom jest niezależną aplikacją.

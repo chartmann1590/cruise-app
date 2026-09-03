@@ -1,0 +1,1 @@
+1.0.0: Lançamento inicial com planeador de cruzeiros offline, tradução local em 33 línguas, chat SeaMesh e mapas de decks.

@@ -1,7 +1,1 @@
-Bienvenue dans CruiseLoom 1.0.0 !
-
-• Planifiez croisières, ports et événements
-• Météo et cartes des ports
-• Plans de pont optionnels
-• Chat de groupe à proximité
-• Rappels locaux
+1.0.0: Version initiale avec itinéraire hors ligne, traduction Google ML Kit en 33 langues, chat SeaMesh et plans de ponts.

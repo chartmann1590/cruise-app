@@ -2,14 +2,20 @@ package com.charles.cruiseapp.data.translation
 
 import android.content.Context
 import android.util.Log
+import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.common.model.RemoteModelManager
 import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.TranslateRemoteModel
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.Translator
 import com.google.mlkit.nl.translate.TranslatorOptions
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -20,6 +26,8 @@ import kotlin.coroutines.resume
 enum class DownloadState { IDLE, DOWNLOADING, DOWNLOADED, FAILED, NOT_REQUIRED }
 
 class TranslationManager(private val appContext: Context) {
+
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     private val _targetLanguage = MutableStateFlow(LanguagePreferences.getLanguage(appContext))
     val targetLanguage: StateFlow<String> = _targetLanguage.asStateFlow()
@@ -34,7 +42,7 @@ class TranslationManager(private val appContext: Context) {
 
     // LRU cache: key = (targetLang to originalText)
     private val cache: LinkedHashMap<Pair<String, String>, String> = object : LinkedHashMap<Pair<String, String>, String>(512, 0.75f, true) {
-        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Pair<String, String>, String>?): Boolean = size > 1200
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Pair<String, String>, String>?): Boolean = size > 1500
     }
     private val cacheMutex = Mutex()
 
@@ -43,8 +51,15 @@ class TranslationManager(private val appContext: Context) {
     private val translatorMutex = Mutex()
 
     init {
-        // Keep flow in sync with prefs changes from other processes/screens
-        // Poll initial is sufficient; updates go via setLanguage()
+        val current = _targetLanguage.value
+        if (current != "en") {
+            scope.launch {
+                val downloaded = isModelDownloaded(current)
+                if (downloaded) {
+                    _downloadState.value = DownloadState.DOWNLOADED
+                }
+            }
+        }
     }
 
     fun getCurrentLanguage(): String = _targetLanguage.value
@@ -52,23 +67,75 @@ class TranslationManager(private val appContext: Context) {
     fun getCurrentSupportedLanguage(): SupportedLanguage = SupportedLanguages.fromCode(_targetLanguage.value)
 
     /**
+     * Check if the ML Kit translation model for [language] is downloaded on disk.
+     */
+    suspend fun isModelDownloaded(language: String): Boolean {
+        if (language == "en") return true
+        val mlKitCode = try {
+            SupportedLanguages.fromCode(language).mlKitCode
+        } catch (_: Exception) { language }
+
+        return withContext(Dispatchers.IO) {
+            suspendCancellableCoroutine { cont ->
+                val model = TranslateRemoteModel.Builder(mlKitCode).build()
+                RemoteModelManager.getInstance().isModelDownloaded(model)
+                    .addOnSuccessListener { downloaded ->
+                        if (cont.isActive) cont.resume(downloaded)
+                    }
+                    .addOnFailureListener { e ->
+                        Log.d("TranslationManager", "isModelDownloaded check failed for $language: ${e.message}")
+                        if (cont.isActive) cont.resume(false)
+                    }
+            }
+        }
+    }
+
+    /**
+     * Return all language codes whose ML Kit translation models are currently downloaded.
+     */
+    suspend fun getDownloadedLanguages(): Set<String> {
+        return withContext(Dispatchers.IO) {
+            suspendCancellableCoroutine { cont ->
+                RemoteModelManager.getInstance().getDownloadedModels(TranslateRemoteModel::class.java)
+                    .addOnSuccessListener { models ->
+                        val codes = mutableSetOf<String>()
+                        codes.add("en")
+                        models.forEach { model ->
+                            val langCode = model.language
+                            SupportedLanguages.ALL.find { it.mlKitCode == langCode }?.let {
+                                codes.add(it.code)
+                            }
+                        }
+                        if (cont.isActive) cont.resume(codes)
+                    }
+                    .addOnFailureListener {
+                        if (cont.isActive) cont.resume(setOf("en"))
+                    }
+            }
+        }
+    }
+
+    /**
      * Change language. Persists to prefs, swaps translator, triggers model download if needed.
-     * Caller should observe downloadState for progress. Returns immediately; download runs async.
      */
     suspend fun setLanguage(code: String) {
         val normalized = code.lowercase().ifBlank { "en" }
-        if (normalized == _targetLanguage.value) return
+        if (normalized == _targetLanguage.value) {
+            if (normalized != "en" && _downloadState.value == DownloadState.IDLE) {
+                if (isModelDownloaded(normalized)) {
+                    _downloadState.value = DownloadState.DOWNLOADED
+                }
+            }
+            return
+        }
 
         // Persist
         LanguagePreferences.setLanguage(appContext, normalized)
         _targetLanguage.value = normalized
 
-        // Reset cache for old language? Keep but keys are lang-specific so no need to clear.
-        // But we can clear if cache grows too large - keep for now.
-
         // Close old translator
         translatorMutex.withLock {
-            currentTranslator?.close()
+            try { currentTranslator?.close() } catch (_: Exception) {}
             currentTranslator = null
             currentTranslatorLang = null
         }
@@ -78,25 +145,46 @@ class TranslationManager(private val appContext: Context) {
             return
         }
 
-        _downloadState.value = DownloadState.IDLE
-        // Optionally auto-start download in background; caller can await ensureModelDownloaded()
+        // Check if already downloaded
+        val alreadyDownloaded = isModelDownloaded(normalized)
+        _downloadState.value = if (alreadyDownloaded) DownloadState.DOWNLOADED else DownloadState.IDLE
     }
 
+    /**
+     * Download the ML Kit model for [language] if needed.
+     * Uses flexible download conditions so it works on Wi-Fi or cellular.
+     */
     suspend fun ensureModelDownloaded(language: String = _targetLanguage.value): Boolean {
         if (language == "en") {
             _downloadState.value = DownloadState.NOT_REQUIRED
             return true
         }
-        _downloadState.value = DownloadState.DOWNLOADING
+
+        val already = isModelDownloaded(language)
+        if (already) {
+            if (language == _targetLanguage.value) {
+                _downloadState.value = DownloadState.DOWNLOADED
+            }
+            return true
+        }
+
+        if (language == _targetLanguage.value) {
+            _downloadState.value = DownloadState.DOWNLOADING
+        }
+
         val translator = getOrCreateTranslator(language) ?: run {
-            _downloadState.value = DownloadState.FAILED
+            if (language == _targetLanguage.value) _downloadState.value = DownloadState.FAILED
             return false
         }
+
         val success = try {
             withContext(Dispatchers.IO) {
                 suspendCancellableCoroutine<Boolean> { cont ->
-                    translator.downloadModelIfNeeded()
-                        .addOnSuccessListener { if (cont.isActive) cont.resume(true) }
+                    val conditions = DownloadConditions.Builder().build()
+                    translator.downloadModelIfNeeded(conditions)
+                        .addOnSuccessListener {
+                            if (cont.isActive) cont.resume(true)
+                        }
                         .addOnFailureListener { e ->
                             Log.w("TranslationManager", "downloadModelIfNeeded failed for $language", e)
                             if (cont.isActive) cont.resume(false)
@@ -107,27 +195,28 @@ class TranslationManager(private val appContext: Context) {
             Log.w("TranslationManager", "ensureModelDownloaded exception", e)
             false
         }
-        _downloadState.value = if (success) DownloadState.DOWNLOADED else DownloadState.FAILED
+
+        if (language == _targetLanguage.value) {
+            _downloadState.value = if (success) DownloadState.DOWNLOADED else DownloadState.FAILED
+        }
         return success
     }
 
     fun getDownloadStateFor(language: String): DownloadState {
         if (language == "en") return DownloadState.NOT_REQUIRED
         if (language == _targetLanguage.value) return _downloadState.value
-        // For non-current language we don't track; assume IDLE
         return DownloadState.IDLE
     }
 
     /**
      * Translate text from English to current target language.
      * Returns original on failure, missing model, or if target is English.
-     * Uses LRU cache to avoid re-translating.
+     * Uses LRU cache to make repeat translations instant.
      */
     suspend fun translate(text: String): String {
         if (text.isBlank()) return text
         val lang = _targetLanguage.value
-        if (lang == "en") return text
-        if (lang.isBlank()) return text
+        if (lang == "en" || lang.isBlank()) return text
 
         val key = lang to text
         cacheMutex.withLock {
@@ -136,8 +225,6 @@ class TranslationManager(private val appContext: Context) {
 
         val translator = getOrCreateTranslator(lang) ?: return text
 
-        // If model not yet downloaded, try to translate anyway (ML Kit will fail fast -> return original)
-        // We trigger background download so next call succeeds.
         val result = try {
             _isTranslating.value = true
             withContext(Dispatchers.IO) {
@@ -147,11 +234,8 @@ class TranslationManager(private val appContext: Context) {
                             if (cont.isActive) cont.resume(translated)
                         }
                         .addOnFailureListener { e ->
-                            // Model not downloaded or other error -> return original and trigger download
-                            Log.d("TranslationManager", "translate failed for '$text' -> $lang: ${e.message}")
+                            Log.d("TranslationManager", "translate fallback for '$text' -> $lang: ${e.message}")
                             if (cont.isActive) cont.resume(text)
-                            // Fire-and-forget download for next time
-                            // Note: don't block; caller gets original this time
                         }
                 }
             }
@@ -162,25 +246,15 @@ class TranslationManager(private val appContext: Context) {
             _isTranslating.value = false
         }
 
-        // Only cache if actually translated (or if result != text? still cache misses to avoid retry storm?
-        // Cache translated results but also cache misses briefly? We cache only successes to allow retry after download.
         if (result != text) {
             cacheMutex.withLock {
                 cache[key] = result
-            }
-        } else {
-            // If we failed because model missing, kick off download in background for future
-            if (_downloadState.value == DownloadState.IDLE || _downloadState.value == DownloadState.FAILED) {
-                // launch download without blocking translate
-                // Use separate coroutine scope - for simplicity trigger async via thread
-                // Caller that cares should call ensureModelDownloaded() explicitly (onboarding/settings)
-                // Here we just log; actual download is driven by UI via ensureModelDownloaded()
             }
         }
         return result
     }
 
-    // Non-suspend fast path for notifications etc. Returns original if not cached
+    // Non-suspend fast path for notifications, compose initial state, etc. Returns original if not cached
     fun translateCached(text: String): String {
         if (text.isBlank()) return text
         val lang = _targetLanguage.value
@@ -194,8 +268,6 @@ class TranslationManager(private val appContext: Context) {
         if (texts.isEmpty()) return emptyList()
         val lang = _targetLanguage.value
         if (lang == "en") return texts
-        // Translate concurrently but limit to avoid flooding ML Kit (which is serial internally anyway)
-        // Do sequential with cache check for simplicity and to respect rate
         return texts.map { translate(it) }
     }
 
@@ -220,7 +292,6 @@ class TranslationManager(private val appContext: Context) {
             Log.w("TranslationManager", "Unsupported language $language, fallback to en")
             return@withLock null
         }
-        // Validate TranslateLanguage can handle it
         val mlKitCode = try {
             SupportedLanguages.fromCode(language).mlKitCode
         } catch (_: Exception) { language }
@@ -240,9 +311,5 @@ class TranslationManager(private val appContext: Context) {
         }
     }
 
-    /**
-     * Quick check if language needs download. For UI to show state.
-     * We treat IDLE as not yet checked; caller should call ensureModelDownloaded.
-     */
     fun isEnglish(): Boolean = _targetLanguage.value == "en"
 }

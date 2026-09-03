@@ -64,7 +64,7 @@ fun WeatherDetailScreen(
             Card(Modifier.fillMaxWidth(), shape=MaterialTheme.shapes.large){
                 Column(Modifier.padding(16.dp)){
                     TText("🏝️ ${port.name}", style=MaterialTheme.typography.headlineSmall)
-                    if(port.country.isNotEmpty()) Text(port.country)
+                    if(port.country.isNotEmpty()) TText(port.country)
                     val unitLabel = if (isMetric) "°C • km/h" else "°F • mph"
                     TText("Arrival ${com.charles.cruiseapp.util.formatDate(port.arrivalDate)} • $unitLabel", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                 }

@@ -1,0 +1,26 @@
+CruiseLoom samler alle detaljer om dit krydstogt i en komplet offline-app.
+
+🌐 100% GRATIS OVERSÆTTELSE PÅ ENHEDEN (33 SPROG)
+• Drevet af Google ML Kit: oversætter hele appen direkte på telefonen
+• Download sprogpakker én gang og oversæt offline midt på havet
+• Støtte til dansk, engelsk, tysk, spansk, fransk og 28 andre sprog
+
+🗓️ NEDTÆLLING OG DAGLIG REJSEPLAN
+• Vælg skib og datoer; din dagsplan oprettes automatisk
+• Havdage, havnedage og nedtællingsur
+
+📍 HAVNE OG GEMT VEJR
+• Find havne i hele verden og se 7-dages vejrudsigt offline
+
+🗺️ HAVNEKORT OG DÆKSPLANER
+• Se ruten på OpenStreetMap uden internetforbindelse
+• Udforsk interaktive dæksplaner for krydstogtskibe
+
+💬 SEAMESH™ OFFLINE-CHAT OG GÆSTE-WIFI
+• Chat via Bluetooth og Wi-Fi Direct uden skibets Wi-Fi
+• Gæste-hotspot: venner chatter i browseren uden at hente appen
+
+🔒 PRIVATLIV
+• Alle planer og beskeder gemmes udelukkende på din enhed
+
+CruiseLoom er en uafhængig app.

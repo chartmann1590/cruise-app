@@ -29,10 +29,14 @@ class CountdownReceiver : BroadcastReceiver() {
                 val startDay = startOfDay(startDate)
                 val daysUntil = ((startDay - today) / (24 * 60 * 60 * 1000L)).toInt()
 
+                val tm = (context.applicationContext as? CruiseApplication)?.translationManager
+
                 // If cruise started or passed, cancel future and show bon voyage once
                 if (daysUntil <= 0) {
                     if (daysUntil == 0) {
-                        showNotification(context, "🚢 Bon voyage!", "$shipName sets sail today — have an amazing cruise! \uD83C\uDF0A", cruiseId)
+                        val bTitle = tm?.translate("🚢 Bon voyage!") ?: "🚢 Bon voyage!"
+                        val bText = tm?.translate("$shipName sets sail today — have an amazing cruise! \uD83C\uDF0A") ?: "$shipName sets sail today — have an amazing cruise! \uD83C\uDF0A"
+                        showNotification(context, bTitle, bText, cruiseId)
                     }
                     NotificationHelper.cancelDailyCountdown(context)
                     pending.finish()
@@ -72,16 +76,19 @@ class CountdownReceiver : BroadcastReceiver() {
                     }
                 } catch (_: Exception) {}
 
-                val title = when (daysUntil) {
+                val rawTitle = when (daysUntil) {
                     1 -> "\uD83D\uDEA2 1 day until $shipName!"
                     else -> "\uD83D\uDEA2 $daysUntil days until $shipName"
                 }
                 val dateStr = formatDate(startDate, "EEE, MMM d, yyyy")
-                var text = "Sets sail $dateStr"
-                if (weatherSnippet != null) text += " • $weatherSnippet"
-                else text += " • Get ready to board! \uD83C\uDF0A"
+                var rawText = "Sets sail $dateStr"
+                if (weatherSnippet != null) rawText += " • $weatherSnippet"
+                else rawText += " • Get ready to board! \uD83C\uDF0A"
 
-                showNotification(context, title, text, cruiseId)
+                val finalTitle = tm?.translate(rawTitle) ?: rawTitle
+                val finalText = tm?.translate(rawText) ?: rawText
+
+                showNotification(context, finalTitle, finalText, cruiseId)
 
                 // Reschedule for next day 9 AM
                 NotificationHelper.scheduleDailyCountdown(context, cruiseId, shipName, startDate)
