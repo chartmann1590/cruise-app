@@ -1,0 +1,7 @@
+¡Bienvenido a CruiseLoom 1.0.0!
+
+• Planifica cruceros, puertos y eventos diarios
+• Consulta clima y mapas de puerto
+• Explora planos de cubiertas opcionales
+• Conecta con tu grupo cerca
+• Recibe recordatorios locales

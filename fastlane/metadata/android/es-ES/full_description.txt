@@ -1,0 +1,27 @@
+CruiseLoom mantiene todo tu viaje conectado en una app tranquila y offline para cruceros.
+
+PLANIFICA TODO EL VIAJE
+• Elige tu barco y fechas de navegación
+• Ve días de mar, días de puerto y planes de un vistazo
+• Añade cenas, espectáculos, excursiones y recordatorios locales
+• Mantén tu itinerario disponible sin conexión
+
+PREPÁRATE PARA CADA PUERTO
+• Busca y organiza paradas reales
+• Consulta el tiempo actual y 7 días de pronóstico
+• Guarda el clima reciente para conexiones inestables en el mar
+• Ve tu ruta en un mapa OpenStreetMap
+• Descarga planos de cubierta opcionales
+
+MANTÉN A TU GRUPO UNIDO
+• Añade compañeros con código QR local
+• Chatea cerca por Bluetooth y Wi-Fi Direct
+• Mensajes a todos o privados
+• Chat invitado por Wi-Fi temporal sin app
+
+HECHO PARA LA VIDA A BORDO
+CruiseLoom guarda planes y chats localmente. Copia de seguridad desactivada. Solo clima, mapas, descargas, diagnósticos y anuncios usan servicios online (ver privacidad).
+
+CruiseLoom contiene anuncios. Algunas funciones requieren cámara, dispositivos cercanos, ubicación o notificaciones opcionales. Sin afiliación con navieras.
+Video: https://www.youtube.com/watch?v=IcxRiCjYRSk
+Web: https://cruise-app-2026.web.app

@@ -1,0 +1,7 @@
+Bienvenue dans CruiseLoom 1.0.0 !
+
+• Planifiez croisières, ports et événements
+• Météo et cartes des ports
+• Plans de pont optionnels
+• Chat de groupe à proximité
+• Rappels locaux

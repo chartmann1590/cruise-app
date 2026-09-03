@@ -1,0 +1,27 @@
+CruiseLoom tiene il tuo viaggio compatto — calmo e offline.
+
+PIANIFICA TUTTO IL VIAGGIO
+• Scegli nave e date
+• Vedi giorni di mare, scali e piani a colpo d'occhio
+• Aggiungi cene, spettacoli, escursioni e promemoria
+• Itinerario disponibile offline
+
+PREPARATI PER OGNI PORTO
+• Cerca e organizza scali reali
+• Meteo attuale + 7 giorni
+• Cache meteo per mare con connessione instabile
+• Mappa OpenStreetMap
+• Piantine ponte opzionali
+
+RESTA CONNESSO
+• Aggiungi compagni via QR locale
+• Chat vicina Bluetooth + Wi-Fi Direct
+• Messaggi di gruppo o privati
+• Chat Wi-Fi ospite senza app
+
+PER LA VITA A BORDO
+Solo archiviazione locale, backup disattivato. Servizi online solo per meteo, mappe, diagnostica e annunci (vedi privacy).
+
+Contiene annunci. Permessi fotocamera/vicinanza/posizione/notifiche opzionali. Non affiliato alle compagnie.
+Video: https://www.youtube.com/watch?v=IcxRiCjYRSk
+Web: https://cruise-app-2026.web.app

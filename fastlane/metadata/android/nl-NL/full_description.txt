@@ -1,0 +1,27 @@
+CruiseLoom houdt je reis gebundeld — rustig en offline-first.
+
+HELE REIS PLANNEN
+• Kies schip en data
+• Zeedagen, havendagen en plannen in één oogopslag
+• Diners, shows, excursies en herinneringen toevoegen
+• Reisschema offline beschikbaar
+
+VOORBEREID OP ELKE HAVEN
+• Zoek en orden echte havens
+• Actueel weer + 7 dagen
+• Weercache voor instabiele zeeverbinding
+• Route op OpenStreetMap
+• Optionele dekplannen
+
+SAMEN BLIJVEN
+• Reisgenoten via lokale QR toevoegen
+• Dichtbij chatten via Bluetooth + Wi-Fi Direct
+• Groeps- of privéberichten
+• Tijdelijke gasten-Wi-Fi chat zonder app
+
+VOOR HET LEVEN AAN BOORD
+Alleen lokale opslag, geen cloud-backup. Online alleen voor weer, kaarten, diagnostiek en advertenties (zie privacy).
+
+Bevat advertenties. Optionele camera/nearby/locatie/meldingen. Niet gelieerd aan rederijen.
+Video: https://www.youtube.com/watch?v=IcxRiCjYRSk
+Web: https://cruise-app-2026.web.app

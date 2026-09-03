@@ -1,0 +1,7 @@
+Willkommen bei CruiseLoom 1.0.0!
+
+• Kreuzfahrten, Häfen und Events planen
+• Hafenwetter und Karten
+• Optionale Deckpläne
+• Gruppen-Chat in der Nähe
+• Lokale Erinnerungen
