@@ -2,7 +2,7 @@
 
 This makes GitHub Actions able to publish `app/build/outputs/bundle/release/app-release.aab` to Play Console without manual upload. The secret is `PLAY_SERVICE_ACCOUNT_JSON` (never committed).
 
-> **Status 2026-09-03:** All Play assets + placeholder secret are created. `gh secret list` shows 7 secrets including `PLAY_SERVICE_ACCOUNT_JSON` (placeholder). Replace it with the real JSON you download in step B — run `.\scripts\set-play-service-account.ps1 -JsonPath .\play-service-account.json` to overwrite. CI will then publish for real; until then the `play-deploy` workflow auths with the placeholder and will 401 (expected).
+> **Status 2026-09-03 18:22 UTC: Created via CLI — `play-publisher@cruise-app-2026.iam.gserviceaccount.com` (ID 118267812441479582095) + JSON key + `androidpublisher.googleapis.com` enabled + `PLAY_SERVICE_ACCOUNT_JSON` set in GitHub (7 secrets total, `gh secret list` shows `PLAY_SERVICE_ACCOUNT_JSON 2026-09-03T18:22:15Z`). ONE manual click remains in Play Console to grant it access (API scopes via CLI are blocked by Google — must be done once in UI, 30 sec, see step C).
 
 ## What you will create
 
