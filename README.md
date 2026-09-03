@@ -12,7 +12,7 @@
 
 CruiseLoom is an offline-first Android app for cruise passengers. Create your voyage, add real port stops, plan each sea day, get live weather (no API key), receive local reminders, and chat with your party over **Bluetooth / BLE / Wi-Fi Direct** — even when the ship has no internet.
 
-> **🌐 Website:** [https://cruise-app-2026.web.app](https://cruise-app-2026.web.app) · **📄 Privacy Policy:** [https://cruise-app-2026.web.app/privacy](https://cruise-app-2026.web.app/privacy) · **📦 Package:** `com.charles.cruiseapp`
+> **🌐 Website:** [https://cruise-app-2026.web.app](https://cruise-app-2026.web.app) · **🎬 Promo:** [youtu.be/IcxRiCjYRSk](https://youtu.be/IcxRiCjYRSk) · **📄 Privacy Policy:** [https://cruise-app-2026.web.app/privacy](https://cruise-app-2026.web.app/privacy) · **📦 Package:** `com.charles.cruiseapp`
 
 No mock data. No cloud sync for your plans. Your cruises, ports, events and chats stay on your device.
 

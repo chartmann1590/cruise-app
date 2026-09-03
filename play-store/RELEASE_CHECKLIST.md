@@ -19,7 +19,8 @@
 - Play icon: `fastlane/metadata/android/en-US/images/icon.png` (512×512, RGB PNG)
 - Feature graphic: `fastlane/metadata/android/en-US/images/featureGraphic.png` (1024×500, RGB PNG)
 - Phone screenshots: `fastlane/metadata/android/en-US/images/phoneScreenshots/` (8 images, 1262×2244, RGB PNG)
-- Promo master: `public/promo.mp4` (1920×1080 H.264/AAC, voiceover, burned-in captions)
+- Promo master: `public/promo.mp4` (1920×1080 H.264/AAC, voiceover, burned-in captions) — also on YouTube: https://youtu.be/IcxRiCjYRSk
+- Promo YouTube: `https://youtu.be/IcxRiCjYRSk` (unlisted, monetization OFF) — paste this URL into Play Console → Store listing → Preview video
 - Captions sidecar: `promo/subs.srt`
 - Store copy: `fastlane/metadata/android/en-US/`
 - Data safety draft: `play-store/DATA_SAFETY.md`
@@ -31,7 +32,7 @@
 3. Complete Data safety using `DATA_SAFETY.md` and declare **Contains ads**.
 4. Complete App access (all core features are accessible without an account), content rating, target audience, and advertising-ID declarations.
 5. In AdMob Privacy & messaging, publish the GDPR and applicable US-state messages used by the integrated UMP SDK, and enable consent mode as appropriate.
-6. Upload `public/promo.mp4` to a public or unlisted, monetization-disabled YouTube video, then paste its standard YouTube URL into the store listing. Google Play does not accept a direct MP4 upload for preview video.
+6. Promo is already on YouTube at https://youtu.be/IcxRiCjYRSk (unlisted, monetization OFF) — paste `https://www.youtube.com/watch?v=IcxRiCjYRSk` into Play Console → Store listing → Preview video. Google Play does not accept a direct MP4 upload. Keep `public/promo.mp4` as local fallback + Firebase Hosting `/promo.mp4`.
 7. Upload the AAB to Internal testing first, review the pre-launch report, then promote after testing.
 
 Never upload a bundle built with Google test ad IDs. The release build intentionally fails if production ad configuration is missing.

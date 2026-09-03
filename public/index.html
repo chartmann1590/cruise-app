@@ -82,19 +82,21 @@
     <div class="section-head" style="margin-bottom:18px">
       <span class="badge">Quick tour</span>
       <h2>See it in action</h2>
-      <p>A quick look at how it works — real screens from the app.</p>
+      <p>A quick look at how it works — real screens from the app. Now on YouTube.</p>
     </div>
     <div style="max-width:960px;margin:0 auto;background:#0B1E3B;border-radius:24px;padding:14px;box-shadow:0 20px 60px rgba(11,30,59,.18);border:1px solid rgba(255,255,255,.08)">
       <div style="position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;background:#000">
-        <video controls poster="/promo-poster.jpg" preload="metadata" playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-          <source src="/promo.mp4" type="video/mp4">
-          Your browser does not support video. <a href="/promo.mp4">Download video</a>
-        </video>
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/IcxRiCjYRSk?rel=0&modestbranding=1" title="CruiseLoom promo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-top:12px;color:rgba(255,255,255,.75);font-size:13px">
-        <span>About a minute • Captions included</span>
-        <a href="/promo.mp4" download style="color:#fff;text-decoration:underline">Download video</a>
+        <span>~51 sec • Human voiceover • Captions included — <a href="https://youtu.be/IcxRiCjYRSk" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">youtu.be/IcxRiCjYRSk</a></span>
+        <span style="display:flex;gap:10px;flex-wrap:wrap"><a href="https://youtu.be/IcxRiCjYRSk" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">Watch on YouTube ↗</a><a href="/promo.mp4" download style="color:rgba(255,255,255,.7);text-decoration:underline">Download MP4</a></span>
       </div>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;color:rgba(255,255,255,.6);font-size:12px">
+        <span>Also hosted: <a href="/promo.mp4" style="color:#fff;text-decoration:underline">promo.mp4</a></span><span>•</span><span><a href="https://github.com/chartmann1590/cruise-app" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">github.com/chartmann1590/cruise-app</a></span><span>•</span><span>Ends with website + GitHub card</span>
+      </div>
+      <!-- Fallback local video for offline/crawlers (hidden behind YouTube iframe, kept for Play Console + direct hosting) -->
+      <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"><video controls poster="/promo-poster.jpg" preload="none"><source src="/promo.mp4" type="video/mp4"></video></div>
     </div>
   </div>
 </section>
