@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.screens
 
+import com.charles.cruiseapp.ui.translation.TText
 import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -148,8 +149,8 @@ fun PartyScreen(
             TopAppBar(
                 title={
                     Column{
-                        Text("Party Chat", fontWeight = FontWeight.Bold)
-                        Text("${members.size} members • ${connected.size} connected${if(hotspotState is HotspotState.Running) " • $hotspotGuestCount guests" else ""}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                        TText("Party Chat", fontWeight = FontWeight.Bold)
+                        TText("${members.size} members • ${connected.size} connected${if(hotspotState is HotspotState.Running) " • $hotspotGuestCount guests" else ""}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 },
                 navigationIcon={ IconButton(onClick=onBack){ Icon(Icons.Default.ArrowBack,null) }},
@@ -176,11 +177,11 @@ fun PartyScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                Text("To:", style = MaterialTheme.typography.labelMedium)
+                                TText("To:", style = MaterialTheme.typography.labelMedium)
                                 FilterChip(
                                     selected = selectedRecipient == null,
                                     onClick = { selectedRecipient = null },
-                                    label = { Text("Everyone") },
+                                    label = { TText("Everyone") },
                                     leadingIcon = { Icon(Icons.Default.Group, null, Modifier.size(16.dp)) }
                                 )
                                 members.filter { !it.isSelf }.take(3).forEach { m ->
@@ -192,7 +193,7 @@ fun PartyScreen(
                                     )
                                 }
                                 if (members.filter { !it.isSelf }.size > 3) {
-                                    Text("+${members.filter { !it.isSelf }.size - 3}", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                                    TText("+${members.filter { !it.isSelf }.size - 3}", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                                 }
                             }
                             HorizontalDivider()
@@ -200,7 +201,7 @@ fun PartyScreen(
                         Row(Modifier.fillMaxWidth().padding(8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)){
                             OutlinedTextField(
                                 value=chatText, onValueChange={chatText=it},
-                                placeholder={ Text(if (selectedRecipient == null) "Message everyone..." else "To ${selectedRecipient?.displayName}...")},
+                                placeholder={ TText(if (selectedRecipient == null) "Message everyone..." else "To ${selectedRecipient?.displayName}...")},
                                 modifier=Modifier.weight(1f),
                                 shape= RoundedCornerShape(24.dp),
                                 maxLines = 4
@@ -227,19 +228,19 @@ fun PartyScreen(
                         selected = false,
                         onClick = { if (onNavigateToHome != null) onNavigateToHome() else onBack() },
                         icon = { Icon(Icons.Default.Home, contentDescription = "Dashboard") },
-                        label = { Text("Dashboard") }
+                        label = { TText("Dashboard") }
                     )
                     NavigationBarItem(
                         selected = false,
                         onClick = { onNavigateToPorts?.invoke() },
                         icon = { Icon(Icons.Default.Place, contentDescription = "Ports") },
-                        label = { Text("Ports") }
+                        label = { TText("Ports") }
                     )
                     NavigationBarItem(
                         selected = true,
                         onClick = { },
                         icon = { Icon(Icons.Default.Group, contentDescription = "Party") },
-                        label = { Text("Party") }
+                        label = { TText("Party") }
                     )
                 }
             }
@@ -258,10 +259,10 @@ fun PartyScreen(
                 Card(Modifier.fillMaxWidth(), colors= CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha=0.6f)), shape= RoundedCornerShape(12.dp)){
                     Row(Modifier.padding(12.dp).fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
                         Column(Modifier.weight(1f)){
-                            Text("Connections & members", style=MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
-                            Text("${if(connected.isNotEmpty()) "Bluetooth: ${connected.size} connected" else status.take(36)} • ${members.size} in party${if(hotspotState is HotspotState.Running) " • hotspot on" else ""}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines=1)
+                            TText("Connections & members", style=MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
+                            TText("${if(connected.isNotEmpty()) "Bluetooth: ${connected.size} connected" else status.take(36)} • ${members.size} in party${if(hotspotState is HotspotState.Running) " • hotspot on" else ""}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines=1)
                         }
-                        if (hotspotState is HotspotState.Running) Badge(containerColor = Color(0xFF2E7D32)){ Text("${hotspotGuestCount} guests") }
+                        if (hotspotState is HotspotState.Running) Badge(containerColor = Color(0xFF2E7D32)){ TText("${hotspotGuestCount} guests") }
                     }
                 }
             }
@@ -280,29 +281,29 @@ fun PartyScreen(
                     // Display name field
                     OutlinedTextField(
                         value=displayName, onValueChange={displayName=it},
-                        label={ Text("Your display name")},
-                        placeholder={ Text("Enter your real name")},
+                        label={ TText("Your display name")},
+                        placeholder={ TText("Enter your real name")},
                         modifier=Modifier.fillMaxWidth(),
                         singleLine = true,
                         leadingIcon = { Icon(Icons.Default.Person, null)},
                         shape = RoundedCornerShape(12.dp)
                     )
                     if(!perms.allPermissionsGranted){
-                        Button(onClick={ perms.launchMultiplePermissionRequest()}, modifier=Modifier.fillMaxWidth(), colors= ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)){ Icon(Icons.Default.Bluetooth, null); Spacer(Modifier.width(8.dp)); Text("Grant Bluetooth Permissions")}
-                        Text("Needed: BLUETOOTH_SCAN / ADVERTISE / CONNECT", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.error)
+                        Button(onClick={ perms.launchMultiplePermissionRequest()}, modifier=Modifier.fillMaxWidth(), colors= ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)){ Icon(Icons.Default.Bluetooth, null); Spacer(Modifier.width(8.dp)); TText("Grant Bluetooth Permissions")}
+                        TText("Needed: BLUETOOTH_SCAN / ADVERTISE / CONNECT", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.error)
                     } else {
                         Row(horizontalArrangement=Arrangement.spacedBy(8.dp), modifier=Modifier.fillMaxWidth()){
                             Button(onClick={ if(displayName.isNotBlank()) partyVm.nearby.startAdvertising(displayName) }, modifier=Modifier.weight(1f), enabled=displayName.isNotBlank()){
-                                Icon(Icons.Default.Campaign,null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("Advertise")
+                                Icon(Icons.Default.Campaign,null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("Advertise")
                             }
                             Button(onClick={ partyVm.nearby.startDiscovery() }, modifier=Modifier.weight(1f)){
-                                Icon(Icons.Default.Radar,null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("Discover")
+                                Icon(Icons.Default.Radar,null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("Discover")
                             }
                             FilledTonalIconButton(onClick={ partyVm.nearby.stopAll() }){ Icon(Icons.Default.Stop, null, Modifier.size(16.dp)) }
                         }
                     }
                     if(discovered.isNotEmpty()){
-                        Text("Nearby cruisers — tap Connect", style=MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                        TText("Nearby cruisers — tap Connect", style=MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
                         discovered.take(6).forEach{ ep ->
                             Card(Modifier.fillMaxWidth(), colors= CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation= CardDefaults.cardElevation(1.dp)){
                                 Row(Modifier.padding(10.dp).fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween, verticalAlignment=Alignment.CenterVertically){
@@ -314,17 +315,17 @@ fun PartyScreen(
                                         Column(Modifier.weight(1f)){
                                             Text(ep.name, style=MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium, maxLines=1)
                                             Text(ep.id.take(10), style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines=1)
-                                            ep.code?.let { Text("ID: ${it.take(8)}…", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.primary) }
+                                            ep.code?.let { TText("ID: ${it.take(8)}…", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.primary) }
                                         }
                                     }
-                                    FilledTonalButton(onClick={ partyVm.nearby.requestConnection(ep.id) }){ Text("Connect") }
+                                    FilledTonalButton(onClick={ partyVm.nearby.requestConnection(ep.id) }){ TText("Connect") }
                                 }
                             }
                         }
-                        if (discovered.size > 6) Text("+ ${discovered.size - 6} more", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                        if (discovered.size > 6) TText("+ ${discovered.size - 6} more", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     if(connected.isNotEmpty()){
-                        Text("Connected peers", style=MaterialTheme.typography.labelMedium)
+                        TText("Connected peers", style=MaterialTheme.typography.labelMedium)
                         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp), modifier=Modifier.fillMaxWidth()){
                             connected.forEach{ c ->
                                 AssistChip(onClick={}, label={ Text(c.name)}, leadingIcon={ Icon(Icons.Default.CheckCircle,null, Modifier.size(16.dp), tint=Color(0xFF2E7D32))}, colors= AssistChipDefaults.assistChipColors(containerColor = MaterialTheme.colorScheme.surface))
@@ -381,29 +382,29 @@ fun PartyScreen(
                 ) {
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier=Modifier.fillMaxWidth()){
                         FilledTonalButton(onClick={ showMyQr = true }, modifier=Modifier.weight(1f), contentPadding = PaddingValues(vertical=8.dp)){
-                            Icon(Icons.Default.QrCode, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("My QR")
+                            Icon(Icons.Default.QrCode, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("My QR")
                         }
                         FilledTonalButton(onClick={
                             if (cameraPerms.allPermissionsGranted) qrLauncher.launch(com.journeyapps.barcodescanner.ScanOptions().setPrompt("Scan party QR").setBeepEnabled(true).setOrientationLocked(false))
                             else cameraPerms.launchMultiplePermissionRequest()
                         }, modifier=Modifier.weight(1f), contentPadding = PaddingValues(vertical=8.dp)){
-                            Icon(Icons.Default.QrCodeScanner, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("Scan")
+                            Icon(Icons.Default.QrCodeScanner, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("Scan")
                         }
                     }
                     if (!cameraPerms.allPermissionsGranted) {
-                        Text("Camera permission needed to scan QR", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.error)
+                        TText("Camera permission needed to scan QR", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.error)
                     }
-                    Text("Add by scanning QR — no typing, guarantees correct identity for direct messages.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                    TText("Add by scanning QR — no typing, guarantees correct identity for direct messages.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement=Arrangement.spacedBy(8.dp), modifier=Modifier.fillMaxWidth()){
                         var newMember by remember { mutableStateOf("") }
-                        OutlinedTextField(value=newMember, onValueChange={newMember=it}, label={ Text("Add manually")}, modifier=Modifier.weight(1f), placeholder={ Text("Enter real name")}, singleLine = true, shape= RoundedCornerShape(12.dp))
+                        OutlinedTextField(value=newMember, onValueChange={newMember=it}, label={ TText("Add manually")}, modifier=Modifier.weight(1f), placeholder={ TText("Enter real name")}, singleLine = true, shape= RoundedCornerShape(12.dp))
                         Button(onClick={ if(newMember.isNotBlank()){ partyVm.addMember(newMember); newMember="" }}, shape= RoundedCornerShape(12.dp)){
                             Icon(Icons.Default.PersonAdd, null, Modifier.size(18.dp))
                         }
                     }
                     if(members.isEmpty()){
                         Box(Modifier.fillMaxWidth().padding(vertical=8.dp), contentAlignment = Alignment.Center){
-                            Text("No members yet. Show your QR to shipmates to get scanned.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                            TText("No members yet. Show your QR to shipmates to get scanned.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     } else {
                         FlowRow(
@@ -433,10 +434,10 @@ fun PartyScreen(
                         }
                         if (selectedRecipient != null) {
                             Card(colors= CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha=0.6f)), shape=RoundedCornerShape(8.dp)) {
-                                Text("Private: messages to ${selectedRecipient?.displayName} only. Tap Everyone to broadcast.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onPrimaryContainer, modifier=Modifier.padding(8.dp))
+                                TText("Private: messages to ${selectedRecipient?.displayName} only. Tap Everyone to broadcast.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onPrimaryContainer, modifier=Modifier.padding(8.dp))
                             }
                         } else {
-                            Text("Broadcasting to everyone nearby — or select a member chip to message privately.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                            TText("Broadcasting to everyone nearby — or select a member chip to message privately.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -453,11 +454,11 @@ fun PartyScreen(
                     onExpandedChange = { debugExpanded = it }
                 ) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)){
-                        OutlinedButton(onClick = { partyVm.sendLocalMessage("Hello everyone! Test broadcast") }, modifier = Modifier.weight(1f)) { Text("Broadcast Test", maxLines=1) }
-                        Button(onClick = { val t = members.firstOrNull { !it.isSelf }; if (t != null) partyVm.sendToMember("Hi private test!", t) else partyVm.sendLocalMessage("Private test - add member first") }, modifier = Modifier.weight(1f)) { Text("Private Test", maxLines=1) }
+                        OutlinedButton(onClick = { partyVm.sendLocalMessage("Hello everyone! Test broadcast") }, modifier = Modifier.weight(1f)) { TText("Broadcast Test", maxLines=1) }
+                        Button(onClick = { val t = members.firstOrNull { !it.isSelf }; if (t != null) partyVm.sendToMember("Hi private test!", t) else partyVm.sendLocalMessage("Private test - add member first") }, modifier = Modifier.weight(1f)) { TText("Private Test", maxLines=1) }
                     }
                     OutlinedButton(onClick={ partyVm.clearMessages() }, modifier=Modifier.fillMaxWidth()){
-                        Icon(Icons.Default.DeleteSweep, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("Clear all messages")
+                        Icon(Icons.Default.DeleteSweep, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("Clear all messages")
                     }
                 }
             }
@@ -469,15 +470,15 @@ fun PartyScreen(
                         Row(verticalAlignment = Alignment.CenterVertically){
                             Icon(Icons.Default.ChatBubble, null, tint=MaterialTheme.colorScheme.primary)
                             Spacer(Modifier.width(8.dp))
-                            Text("Chat", fontWeight = FontWeight.Bold)
+                            TText("Chat", fontWeight = FontWeight.Bold)
                             Spacer(Modifier.width(8.dp))
-                            Badge(containerColor = MaterialTheme.colorScheme.primary){ Text("${localMessages.size}") }
+                            Badge(containerColor = MaterialTheme.colorScheme.primary){ TText("${localMessages.size}") }
                             if (selectedRecipient != null) {
                                 Spacer(Modifier.width(6.dp))
-                                AssistChip(onClick={ selectedRecipient = null }, label={ Text("${selectedRecipient?.displayName}") }, leadingIcon={ Icon(Icons.Default.Person, null, Modifier.size(14.dp))})
+                                AssistChip(onClick={ selectedRecipient = null }, label={ TText("${selectedRecipient?.displayName}") }, leadingIcon={ Icon(Icons.Default.Person, null, Modifier.size(14.dp))})
                             }
                         }
-                        Text("Retry until delivered", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                        TText("Retry until delivered", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }
@@ -490,8 +491,8 @@ fun PartyScreen(
                                 Box(Modifier.size(48.dp).clip(CircleShape).background(MaterialTheme.colorScheme.primaryContainer), contentAlignment = Alignment.Center){
                                     Icon(Icons.Default.Chat, null, Modifier.size(24.dp), tint=MaterialTheme.colorScheme.onPrimaryContainer)
                                 }
-                                Text("No messages yet", fontWeight = FontWeight.Bold)
-                                Text("Send a message — it'll deliver as soon as someone's in range.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, modifier=Modifier.padding(horizontal=16.dp))
+                                TText("No messages yet", fontWeight = FontWeight.Bold)
+                                TText("Send a message — it'll deliver as soon as someone's in range.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, modifier=Modifier.padding(horizontal=16.dp))
                             }
                         }
                     }
@@ -518,24 +519,24 @@ fun PartyScreen(
         val bmp = remember(data) { generateQrBitmap(data, 700) }
         AlertDialog(
             onDismissRequest = { showMyQr = false },
-            title = { Text("My Party QR") },
+            title = { TText("My Party QR") },
             text = {
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()){
-                    Text("Let others scan this to add you instantly. Works offline.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                    TText("Let others scan this to add you instantly. Works offline.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                     Spacer(Modifier.height(12.dp))
                     if (bmp != null) {
                         Image(bitmap = bmp.asImageBitmap(), contentDescription = "QR", modifier = Modifier.size(220.dp).clip(RoundedCornerShape(12.dp)).background(Color.White).padding(8.dp))
                     } else {
-                        Text("Could not generate QR", color=MaterialTheme.colorScheme.error)
+                        TText("Could not generate QR", color=MaterialTheme.colorScheme.error)
                     }
                     Spacer(Modifier.height(12.dp))
-                    Text(displayName.ifBlank { partyVm.getSelfName().ifBlank { "Cruiser" } }, fontWeight = FontWeight.Bold)
-                    Text("ID: ${partyVm.getSelfCode().take(8)}…", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                    TText(displayName.ifBlank { partyVm.getSelfName().ifBlank { "Cruiser" } }, fontWeight = FontWeight.Bold)
+                    TText("ID: ${partyVm.getSelfCode().take(8)}…", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                     Spacer(Modifier.height(8.dp))
                     Text(data, style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2)
                 }
             },
-            confirmButton = { TextButton(onClick = { showMyQr = false }) { Text("Close") } }
+            confirmButton = { TextButton(onClick = { showMyQr = false }) { TText("Close") } }
         )
     }
 }
@@ -612,29 +613,29 @@ private fun GuestWifiChatContent(
     val context = LocalContext.current
     when (hotspotState) {
         is HotspotState.Idle -> {
-            Text("Let anyone nearby join the chat from their browser — no app install needed. Your phone creates a temporary Wi-Fi network (no internet) and hosts the chat page.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            TText("Let anyone nearby join the chat from their browser — no app install needed. Your phone creates a temporary Wi-Fi network (no internet) and hosts the chat page.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (!hotspotPermsGranted) {
                 Button(
                     onClick = onRequestPerms,
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
-                ) { Icon(Icons.Default.Wifi, null); Spacer(Modifier.width(8.dp)); Text("Grant Wi-Fi Permission") }
-                Text("Needed to create the guest Wi-Fi network (Nearby Wi-Fi / Location).", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                ) { Icon(Icons.Default.Wifi, null); Spacer(Modifier.width(8.dp)); TText("Grant Wi-Fi Permission") }
+                TText("Needed to create the guest Wi-Fi network (Nearby Wi-Fi / Location).", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
             } else {
                 Button(onClick = onStart, modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Default.WifiTethering, null, Modifier.size(18.dp)); Spacer(Modifier.width(8.dp)); Text("Start Guest Chat")
+                    Icon(Icons.Default.WifiTethering, null, Modifier.size(18.dp)); Spacer(Modifier.width(8.dp)); TText("Start Guest Chat")
                 }
-                Text("Guests will see 2 QR codes after you start: one to join Wi-Fi, one to open the chat page.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                TText("Guests will see 2 QR codes after you start: one to join Wi-Fi, one to open the chat page.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
         is HotspotState.Starting -> {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
                 CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
                 Spacer(Modifier.width(12.dp))
-                Text("Starting hotspot…", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                TText("Starting hotspot…", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
             }
             LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-            Button(onClick = {}, enabled = false, modifier = Modifier.fillMaxWidth()) { Text("Starting…") }
+            Button(onClick = {}, enabled = false, modifier = Modifier.fillMaxWidth()) { TText("Starting…") }
         }
         is HotspotState.Running -> {
             val running = hotspotState as HotspotState.Running
@@ -648,19 +649,19 @@ private fun GuestWifiChatContent(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Default.Group, null, tint = MaterialTheme.colorScheme.primary)
                         Spacer(Modifier.width(8.dp))
-                        Text("$guestCount guest${if (guestCount==1) "" else "s"} connected", fontWeight = FontWeight.Bold)
+                        TText("$guestCount guest${if (guestCount==1) "" else "s"} connected", fontWeight = FontWeight.Bold)
                     }
                     Text(urlText, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onPrimaryContainer, maxLines=1, modifier=Modifier.weight(1f).padding(start=8.dp))
                 }
             }
-            Text("Two steps for guests (order matters!):", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+            TText("Two steps for guests (order matters!):", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant), shape = RoundedCornerShape(12.dp)) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Step 1 — Join Wi-Fi", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                    TText("Step 1 — Join Wi-Fi", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text("Network:", style = MaterialTheme.typography.labelMedium)
+                                TText("Network:", style = MaterialTheme.typography.labelMedium)
                                 Spacer(Modifier.width(6.dp))
                                 Text(running.ssid, fontWeight = FontWeight.Bold, modifier=Modifier.weight(1f, fill=false))
                                 IconButton(onClick = { copyToClipboard(context, "Wi-Fi name", running.ssid) }, modifier = Modifier.size(28.dp)) {
@@ -668,14 +669,14 @@ private fun GuestWifiChatContent(
                                 }
                             }
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text("Password:", style = MaterialTheme.typography.labelMedium)
+                                TText("Password:", style = MaterialTheme.typography.labelMedium)
                                 Spacer(Modifier.width(6.dp))
-                                Text(running.password.ifBlank { "(none)" }, fontWeight = FontWeight.Bold, maxLines = 1, modifier=Modifier.weight(1f, fill=false))
+                                TText(running.password.ifBlank { "(none)" }, fontWeight = FontWeight.Bold, maxLines = 1, modifier=Modifier.weight(1f, fill=false))
                                 IconButton(onClick = { copyToClipboard(context, "Wi-Fi password", running.password) }, modifier = Modifier.size(28.dp)) {
                                     Icon(Icons.Default.ContentCopy, "Copy", Modifier.size(16.dp))
                                 }
                             }
-                            Text("Scan with camera to join automatically, or enter manually in Wi-Fi settings.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            TText("Scan with camera to join automatically, or enter manually in Wi-Fi settings.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         if (wifiQr != null) {
                             Image(bitmap = wifiQr.asImageBitmap(), contentDescription = "Wi-Fi QR", modifier = Modifier.size(92.dp).clip(RoundedCornerShape(12.dp)).background(Color.White).padding(6.dp))
@@ -685,14 +686,14 @@ private fun GuestWifiChatContent(
             }
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant), shape = RoundedCornerShape(12.dp)) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Step 2 — Open the chat page", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                    TText("Step 2 — Open the chat page", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Text(urlText, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.primary)
                             TextButton(onClick = { copyToClipboard(context, "Chat URL", urlText) }, contentPadding = PaddingValues(4.dp)) {
-                                Icon(Icons.Default.ContentCopy, null, Modifier.size(14.dp)); Spacer(Modifier.width(4.dp)); Text("Copy URL")
+                                Icon(Icons.Default.ContentCopy, null, Modifier.size(14.dp)); Spacer(Modifier.width(4.dp)); TText("Copy URL")
                             }
-                            Text("Guests open this in their browser after joining Wi-Fi.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            TText("Guests open this in their browser after joining Wi-Fi.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         if (urlQr != null) {
                             Image(bitmap = urlQr.asImageBitmap(), contentDescription = "URL QR", modifier = Modifier.size(92.dp).clip(RoundedCornerShape(12.dp)).background(Color.White).padding(6.dp))
@@ -704,8 +705,8 @@ private fun GuestWifiChatContent(
                 onClick = onStop,
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
-            ) { Icon(Icons.Default.Stop, null); Spacer(Modifier.width(8.dp)); Text("Stop Guest Chat") }
-            Text("Guests will be disconnected when you stop. The hotspot and web chat keep running even if you leave this screen.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            ) { Icon(Icons.Default.Stop, null); Spacer(Modifier.width(8.dp)); TText("Stop Guest Chat") }
+            TText("Guests will be disconnected when you stop. The hotspot and web chat keep running even if you leave this screen.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         is HotspotState.Error -> {
             val reason = (hotspotState as HotspotState.Error).reason
@@ -714,18 +715,18 @@ private fun GuestWifiChatContent(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Default.Error, null, tint = MaterialTheme.colorScheme.error)
                         Spacer(Modifier.width(8.dp))
-                        Text("Could not start guest chat", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onErrorContainer)
+                        TText("Could not start guest chat", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onErrorContainer)
                     }
                     Text(reason, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onErrorContainer)
                 }
             }
             if (!hotspotPermsGranted) {
                 Button(onClick = onRequestPerms, modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)) {
-                    Icon(Icons.Default.Wifi, null); Spacer(Modifier.width(8.dp)); Text("Grant Wi-Fi Permission")
+                    Icon(Icons.Default.Wifi, null); Spacer(Modifier.width(8.dp)); TText("Grant Wi-Fi Permission")
                 }
             } else {
                 Button(onClick = onStart, modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Default.Refresh, null); Spacer(Modifier.width(8.dp)); Text("Try Again")
+                    Icon(Icons.Default.Refresh, null); Spacer(Modifier.width(8.dp)); TText("Try Again")
                 }
             }
         }
@@ -755,11 +756,11 @@ private fun MessageBubble(msg: Message, timeFmt: SimpleDateFormat){
             Row(verticalAlignment = Alignment.CenterVertically){
                 Text(msg.senderName, style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.primary, modifier=Modifier.padding(start=8.dp, bottom=2.dp))
                 if (msg.targetName != null) {
-                    Text(" → ${msg.targetName}", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.onSurfaceVariant, modifier=Modifier.padding(start=4.dp, bottom=2.dp))
+                    TText(" → ${msg.targetName}", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.onSurfaceVariant, modifier=Modifier.padding(start=4.dp, bottom=2.dp))
                 }
             }
         } else if (msg.targetName != null) {
-            Text("To ${msg.targetName}", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.primary, modifier=Modifier.padding(end=8.dp, bottom=2.dp))
+            TText("To ${msg.targetName}", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.primary, modifier=Modifier.padding(end=8.dp, bottom=2.dp))
         }
         Box(
             modifier=Modifier
@@ -796,9 +797,9 @@ private fun MessageBubble(msg: Message, timeFmt: SimpleDateFormat){
             Text(statusText, style=MaterialTheme.typography.labelSmall, color=statusColor, fontSize=10.sp, modifier=Modifier.padding(end=4.dp, top=2.dp))
         } else {
             if(msg.status == "READ"){
-                Text("Read", style=MaterialTheme.typography.labelSmall, color=Color(0xFF2E7D32), fontSize=10.sp, modifier=Modifier.padding(start=4.dp, top=2.dp))
+                TText("Read", style=MaterialTheme.typography.labelSmall, color=Color(0xFF2E7D32), fontSize=10.sp, modifier=Modifier.padding(start=4.dp, top=2.dp))
             } else if (msg.status == "DELIVERED") {
-                Text("Delivered", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.onSurfaceVariant, fontSize=10.sp, modifier=Modifier.padding(start=4.dp, top=2.dp))
+                TText("Delivered", style=MaterialTheme.typography.labelSmall, color=MaterialTheme.colorScheme.onSurfaceVariant, fontSize=10.sp, modifier=Modifier.padding(start=4.dp, top=2.dp))
             }
         }
     }

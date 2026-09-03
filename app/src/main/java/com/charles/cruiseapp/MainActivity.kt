@@ -18,6 +18,8 @@ import com.charles.cruiseapp.ads.AdConfig
 import com.charles.cruiseapp.ui.navigation.Screen
 import com.charles.cruiseapp.ui.screens.*
 import com.charles.cruiseapp.ui.theme.CruiseTheme
+import com.charles.cruiseapp.data.translation.LanguagePreferences
+import com.charles.cruiseapp.ui.translation.LocalTranslationManager
 import kotlinx.coroutines.launch
 import com.charles.cruiseapp.util.FirebaseCrashlyticsUtils
 import com.charles.cruiseapp.util.FirebasePerfUtils
@@ -39,9 +41,14 @@ class MainActivity : ComponentActivity() {
         } catch (e: Exception) { Log.w("MainActivity", "perf trace failed", e) }
 
         setContent {
+            val app = application as CruiseApplication
             CruiseTheme {
-                Surface(Modifier.fillMaxSize(), color=MaterialTheme.colorScheme.background){
-                    AppNav()
+                androidx.compose.runtime.CompositionLocalProvider(
+                    LocalTranslationManager provides app.translationManager
+                ) {
+                    Surface(Modifier.fillMaxSize(), color=MaterialTheme.colorScheme.background){
+                        AppNav()
+                    }
                 }
             }
         }
@@ -162,7 +169,31 @@ fun AppNav(){
         } else countdownExtra = null
     }
 
-    NavHost(navController, startDestination = Screen.Dashboard.route){
+    // Language onboarding — if user has never selected a language, force onboarding first
+    val appCtx2 = navController.context.applicationContext
+    var isOnboarded by remember { mutableStateOf(LanguagePreferences.isOnboarded(appCtx2)) }
+    LaunchedEffect(Unit) {
+        LanguagePreferences.observeOnboarded(appCtx2).collect { isOnboarded = it }
+    }
+    val startDest = if (isOnboarded) Screen.Dashboard.route else Screen.OnboardingLanguage.route
+
+    NavHost(navController, startDestination = startDest){
+        composable(Screen.OnboardingLanguage.route){
+            OnboardingLanguageScreen(
+                onComplete = {
+                    navController.navigate(Screen.Dashboard.route){
+                        popUpTo(Screen.OnboardingLanguage.route){ inclusive = true }
+                        launchSingleTop = true
+                    }
+                },
+                onSkipToEnglish = {
+                    navController.navigate(Screen.Dashboard.route){
+                        popUpTo(Screen.OnboardingLanguage.route){ inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
         composable(Screen.Dashboard.route){
             DashboardScreen(
                 cruise=cruise,

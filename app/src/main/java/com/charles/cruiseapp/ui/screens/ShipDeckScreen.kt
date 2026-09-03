@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.screens
 
+import com.charles.cruiseapp.ui.translation.TText
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
@@ -64,7 +65,7 @@ fun ShipDeckScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Column { Text(ship?.displayName ?: shipId); ship?.let { Text("${it.line} • ${it.decks.size} decks", style = MaterialTheme.typography.bodySmall) } } },
+                title = { Column { TText(ship?.displayName ?: shipId); ship?.let { TText("${it.line} • ${it.decks.size} decks", style = MaterialTheme.typography.bodySmall) } } },
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Default.ArrowBack, null) } },
                 actions = {
                     if (ship != null && decks.isNotEmpty()) {
@@ -93,14 +94,14 @@ fun ShipDeckScreen(
                 if (ship != null && decks.isNotEmpty()) {
                     Column(Modifier.padding(12.dp)) {
                         if (downloading) { LinearProgressIndicator(Modifier.fillMaxWidth()); Text(downloadMsg, style = MaterialTheme.typography.bodySmall) }
-                        Text("Deck ${decks.getOrNull(activeIndex)?.number ?: "--"} — ${decks.getOrNull(activeIndex)?.name ?: ""}", style = MaterialTheme.typography.titleSmall)
-                        Text("Pinch to zoom • drag to pan • swipe to change deck • ${if (repo.isDeckDownloaded(ship!!.id, decks[activeIndex])) "Offline ✓" else "Tap Download for offline sea days"}", style = MaterialTheme.typography.bodySmall)
+                        TText("Deck ${decks.getOrNull(activeIndex)?.number ?: "--"} — ${decks.getOrNull(activeIndex)?.name ?: ""}", style = MaterialTheme.typography.titleSmall)
+                        TText("Pinch to zoom • drag to pan • swipe to change deck • ${if (repo.isDeckDownloaded(ship!!.id, decks[activeIndex])) "Offline ✓" else "Tap Download for offline sea days"}", style = MaterialTheme.typography.bodySmall)
                         ScrollableTabRow(selectedTabIndex = activeIndex) {
                             decks.forEachIndexed { idx, d ->
                                 val dl = repo.isDeckDownloaded(ship!!.id, d)
                                 Tab(selected = idx == activeIndex, onClick = { scope.launch { pagerState.animateScrollToPage(idx) } }, text = {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Text("${d.number}")
+                                        TText("${d.number}")
                                         if (dl) { Spacer(Modifier.width(4.dp)); Icon(Icons.Default.CheckCircle, null, Modifier.size(12.dp), tint = MaterialTheme.colorScheme.primary) }
                                     }
                                 })
@@ -114,18 +115,18 @@ fun ShipDeckScreen(
         Column(Modifier.padding(pad).fillMaxSize()) {
             when {
                 loading -> { Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() } }
-                error != null -> { Column(Modifier.padding(24.dp)) { Text("Error: $error", color = MaterialTheme.colorScheme.error); Button(onClick = { scope.launch { loading = true; val r = repo.loadCatalog(true); ship = r.getOrNull()?.ships?.find { it.id == shipId }; error = r.exceptionOrNull()?.message; loading = false } }) { Text("Retry") } } }
-                ship == null -> { Text("Ship not found") }
+                error != null -> { Column(Modifier.padding(24.dp)) { TText("Error: $error", color = MaterialTheme.colorScheme.error); Button(onClick = { scope.launch { loading = true; val r = repo.loadCatalog(true); ship = r.getOrNull()?.ships?.find { it.id == shipId }; error = r.exceptionOrNull()?.message; loading = false } }) { TText("Retry") } } }
+                ship == null -> { TText("Ship not found") }
                 decks.isEmpty() -> {
                     Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                         Icon(Icons.Default.OpenInNew, null, Modifier.size(48.dp))
                         Spacer(Modifier.height(12.dp))
-                        Text("No offline deck images for ${ship!!.displayName}", style = MaterialTheme.typography.titleMedium)
+                        TText("No offline deck images for ${ship!!.displayName}", style = MaterialTheme.typography.titleMedium)
                         Text(ship!!.attribution, style = MaterialTheme.typography.bodySmall)
                         Spacer(Modifier.height(12.dp))
                         Button(onClick = {
                             ship!!.externalUrl?.let { url -> try { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } catch(_:Exception){} }
-                        }) { Text("Open official deck plan") }
+                        }) { TText("Open official deck plan") }
                     }
                 }
                 else -> {
@@ -141,7 +142,7 @@ fun ShipDeckScreen(
                 }
             }
             if (ship != null) {
-                Text("CC0-1.0 • Original schematic, not affiliated with ${ship!!.line} • © CruiseLoom", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(12.dp))
+                TText("CC0-1.0 • Original schematic, not affiliated with ${ship!!.line} • © CruiseLoom", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(12.dp))
             }
         }
     }

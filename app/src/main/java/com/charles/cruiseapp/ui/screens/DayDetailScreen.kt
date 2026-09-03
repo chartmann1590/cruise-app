@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.screens
 
+import com.charles.cruiseapp.ui.translation.TText
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,14 +32,14 @@ fun DayDetailScreen(dateMillis: Long, eventsFlow: Flow<List<PlannedEvent>>, onAd
     var rem by remember{ mutableStateOf("15")}
 
     Scaffold(
-        topBar={ TopAppBar(title={ Text(formatDate(dateMillis,"EEEE, MMM d"))}, navigationIcon={ IconButton(onClick=onBack){ Icon(Icons.Default.ArrowBack,null)}}) },
+        topBar={ TopAppBar(title={ TText(formatDate(dateMillis,"EEEE, MMM d"))}, navigationIcon={ IconButton(onClick=onBack){ Icon(Icons.Default.ArrowBack,null)}}) },
         floatingActionButton={ FloatingActionButton(onClick={ showAdd=true }){ Icon(Icons.Default.Add,null)}},
         bottomBar = { BannerAd(modifier = Modifier.fillMaxWidth().navigationBarsPadding()) }
     ){ pad ->
         LazyColumn(Modifier.padding(pad).padding(16.dp)){
             item{
-                Text("Plan for ${formatDate(dateMillis,"EEEE")}", style=MaterialTheme.typography.titleMedium)
-                Text("${events.size} events • Notifications will remind you", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                TText("Plan for ${formatDate(dateMillis,"EEEE")}", style=MaterialTheme.typography.titleMedium)
+                TText("${events.size} events • Notifications will remind you", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(12.dp))
             }
             if(events.isEmpty()){
@@ -48,7 +49,7 @@ fun DayDetailScreen(dateMillis: Long, eventsFlow: Flow<List<PlannedEvent>>, onAd
                             emoji = "🌴",
                             title = "No plans yet",
                             subtitle = "Add breakfast, excursion, show, dinner...",
-                            action = { Button(onClick={ showAdd=true }){ Text("Add Event")} }
+                            action = { Button(onClick={ showAdd=true }){ TText("Add Event")} }
                         )
                     }
                 }
@@ -59,8 +60,8 @@ fun DayDetailScreen(dateMillis: Long, eventsFlow: Flow<List<PlannedEvent>>, onAd
                         Row(Modifier.padding(16.dp).fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween){
                             Column(Modifier.weight(1f)){
                                 Text(ev.title, style=MaterialTheme.typography.titleMedium)
-                                if(ev.location.isNotEmpty()) Text("📍 ${ev.location}", style=MaterialTheme.typography.bodySmall)
-                                Text("${formatTime(ev.startTimeMillis)} • ${ev.category} • remind ${ev.reminderMinutesBefore}m before", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                                if(ev.location.isNotEmpty()) TText("📍 ${ev.location}", style=MaterialTheme.typography.bodySmall)
+                                TText("${formatTime(ev.startTimeMillis)} • ${ev.category} • remind ${ev.reminderMinutesBefore}m before", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                                 if(ev.description.isNotEmpty()) Text(ev.description, style=MaterialTheme.typography.bodySmall)
                             }
                             IconButton(onClick={ onDeleteEvent(ev)} ){ Icon(Icons.Default.Delete,null, tint=MaterialTheme.colorScheme.error)}
@@ -75,17 +76,17 @@ fun DayDetailScreen(dateMillis: Long, eventsFlow: Flow<List<PlannedEvent>>, onAd
     if(showAdd){
         AlertDialog(
             onDismissRequest={ showAdd=false},
-            title={ Text("Add Event for ${formatDate(dateMillis)}")},
+            title={ TText("Add Event for ${formatDate(dateMillis)}")},
             text={
                 Column(verticalArrangement=Arrangement.spacedBy(8.dp)){
-                    OutlinedTextField(value=title, onValueChange={title=it}, label={ Text("Title *")}, modifier=Modifier.fillMaxWidth())
-                    OutlinedTextField(value=loc, onValueChange={loc=it}, label={ Text("Location")}, modifier=Modifier.fillMaxWidth())
+                    OutlinedTextField(value=title, onValueChange={title=it}, label={ TText("Title *")}, modifier=Modifier.fillMaxWidth())
+                    OutlinedTextField(value=loc, onValueChange={loc=it}, label={ TText("Location")}, modifier=Modifier.fillMaxWidth())
                     Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                        OutlinedTextField(value=hour, onValueChange={hour=it}, label={ Text("Hour 0-23")}, modifier=Modifier.weight(1f))
-                        OutlinedTextField(value=min, onValueChange={min=it}, label={ Text("Min")}, modifier=Modifier.weight(1f))
-                        OutlinedTextField(value=rem, onValueChange={rem=it}, label={ Text("Remind")}, modifier=Modifier.weight(1f))
+                        OutlinedTextField(value=hour, onValueChange={hour=it}, label={ TText("Hour 0-23")}, modifier=Modifier.weight(1f))
+                        OutlinedTextField(value=min, onValueChange={min=it}, label={ TText("Min")}, modifier=Modifier.weight(1f))
+                        OutlinedTextField(value=rem, onValueChange={rem=it}, label={ TText("Remind")}, modifier=Modifier.weight(1f))
                     }
-                    OutlinedTextField(value=cat, onValueChange={cat=it}, label={ Text("Category")}, modifier=Modifier.fillMaxWidth(), placeholder={ Text("Dining, Excursion, Show...")})
+                    OutlinedTextField(value=cat, onValueChange={cat=it}, label={ TText("Category")}, modifier=Modifier.fillMaxWidth(), placeholder={ TText("Dining, Excursion, Show...")})
                 }
             },
             confirmButton={
@@ -95,9 +96,9 @@ fun DayDetailScreen(dateMillis: Long, eventsFlow: Flow<List<PlannedEvent>>, onAd
                         onAddEvent(title,h,m,loc,cat,r,"")
                         title=""; loc=""; showAdd=false
                     }
-                }){ Text("Save")}
+                }){ TText("Save")}
             },
-            dismissButton={ TextButton(onClick={ showAdd=false}){ Text("Cancel")}}
+            dismissButton={ TextButton(onClick={ showAdd=false}){ TText("Cancel")}}
         )
     }
 }

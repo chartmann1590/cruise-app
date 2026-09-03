@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.screens
 
+import com.charles.cruiseapp.ui.translation.TText
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -35,48 +36,48 @@ fun CruiseSetupScreen(onSave: (String, Long, Long)->Unit, onBack:()->Unit){
     val durationDays = ((end - start)/(24*60*60*1000) + 1).coerceAtLeast(1)
 
     Scaffold(
-        topBar={ TopAppBar(title={ Text("Cruise Setup")}, navigationIcon={ IconButton(onClick=onBack){ Icon(Icons.Default.ArrowBack,null) }}) },
+        topBar={ TopAppBar(title={ TText("Cruise Setup")}, navigationIcon={ IconButton(onClick=onBack){ Icon(Icons.Default.ArrowBack,null) }}) },
         bottomBar = { BannerAd(modifier = Modifier.fillMaxWidth().navigationBarsPadding()) }
     ){
         Column(Modifier.padding(it).fillMaxSize()){
             Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement=Arrangement.spacedBy(16.dp)){
-                OutlinedTextField(value=ship, onValueChange={ship=it}, label={ Text("Cruise Ship Name")}, modifier=Modifier.fillMaxWidth(), placeholder={ Text("e.g., Symphony of the Seas")}, singleLine = true)
+                OutlinedTextField(value=ship, onValueChange={ship=it}, label={ TText("Cruise Ship Name")}, modifier=Modifier.fillMaxWidth(), placeholder={ TText("e.g., Symphony of the Seas")}, singleLine = true)
 
                 Card(Modifier.fillMaxWidth(), shape=MaterialTheme.shapes.large, colors= CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)){
                     Column(Modifier.padding(16.dp), verticalArrangement=Arrangement.spacedBy(12.dp)){
                         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
-                            Text("Dates", style=MaterialTheme.typography.titleMedium)
+                            TText("Dates", style=MaterialTheme.typography.titleMedium)
                             FilledTonalButton(onClick = { showRangePicker = true }){
                                 Icon(Icons.Default.CalendarMonth, null, Modifier.size(18.dp))
                                 Spacer(Modifier.width(6.dp))
-                                Text("Calendar")
+                                TText("Calendar")
                             }
                         }
-                        Text("Tap calendar to pick start & end, or adjust below", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                        TText("Tap calendar to pick start & end, or adjust below", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                         Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){
                             OutlinedCard(modifier = Modifier.weight(1f).clickable { showStartPicker = true }){
                                 Column(Modifier.padding(12.dp)){
-                                    Text("Start", style=MaterialTheme.typography.labelMedium, color=MaterialTheme.colorScheme.primary)
-                                    Text(formatDate(start,"EEE, MMM d, yyyy"), style=MaterialTheme.typography.bodyLarge)
+                                    TText("Start", style=MaterialTheme.typography.labelMedium, color=MaterialTheme.colorScheme.primary)
+                                    TText(formatDate(start,"EEE, MMM d, yyyy"), style=MaterialTheme.typography.bodyLarge)
                                     Spacer(Modifier.height(4.dp))
-                                    Text("Tap to pick", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                                    TText("Tap to pick", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                                     Spacer(Modifier.height(8.dp))
                                     Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                                        FilledTonalButton(onClick={ start=addDays(start,-1)} ) { Text("-1d")}
-                                        FilledTonalButton(onClick={ start=addDays(start,1)} ) { Text("+1d")}
+                                        FilledTonalButton(onClick={ start=addDays(start,-1)} ) { TText("-1d")}
+                                        FilledTonalButton(onClick={ start=addDays(start,1)} ) { TText("+1d")}
                                     }
                                 }
                             }
                             OutlinedCard(modifier = Modifier.weight(1f).clickable { showEndPicker = true }){
                                 Column(Modifier.padding(12.dp)){
-                                    Text("End", style=MaterialTheme.typography.labelMedium, color=MaterialTheme.colorScheme.primary)
-                                    Text(formatDate(end,"EEE, MMM d, yyyy"), style=MaterialTheme.typography.bodyLarge)
+                                    TText("End", style=MaterialTheme.typography.labelMedium, color=MaterialTheme.colorScheme.primary)
+                                    TText(formatDate(end,"EEE, MMM d, yyyy"), style=MaterialTheme.typography.bodyLarge)
                                     Spacer(Modifier.height(4.dp))
-                                    Text("Tap to pick", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                                    TText("Tap to pick", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                                     Spacer(Modifier.height(8.dp))
                                     Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                                        FilledTonalButton(onClick={ end=addDays(end,-1)} ) { Text("-1d")}
-                                        FilledTonalButton(onClick={ end=addDays(end,1)} ) { Text("+1d")}
+                                        FilledTonalButton(onClick={ end=addDays(end,-1)} ) { TText("-1d")}
+                                        FilledTonalButton(onClick={ end=addDays(end,1)} ) { TText("+1d")}
                                     }
                                 }
                             }
@@ -84,13 +85,13 @@ fun CruiseSetupScreen(onSave: (String, Long, Long)->Unit, onBack:()->Unit){
                         Card(shape=MaterialTheme.shapes.medium, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)){
                             Row(Modifier.padding(12.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically){
                                 Column{
-                                    Text("$durationDays days", style=MaterialTheme.typography.titleMedium, color=MaterialTheme.colorScheme.onSecondaryContainer)
-                                    Text("${formatDate(start,"MMM d")} → ${formatDate(end,"MMM d, yyyy")}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSecondaryContainer)
+                                    TText("$durationDays days", style=MaterialTheme.typography.titleMedium, color=MaterialTheme.colorScheme.onSecondaryContainer)
+                                    TText("${formatDate(start,"MMM d")} → ${formatDate(end,"MMM d, yyyy")}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSecondaryContainer)
                                 }
                                 Icon(Icons.Default.DateRange, null, tint=MaterialTheme.colorScheme.onSecondaryContainer, modifier=Modifier.size(32.dp))
                             }
                         }
-                        Text("Tip: day-by-day planner auto-generates after saving.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                        TText("Tip: day-by-day planner auto-generates after saving.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }
@@ -99,7 +100,7 @@ fun CruiseSetupScreen(onSave: (String, Long, Long)->Unit, onBack:()->Unit){
                     if(end < start) end = start
                     onSave(ship, startOfDay(start), startOfDay(end))
                 }, modifier=Modifier.fillMaxWidth(), enabled=ship.isNotBlank()){
-                    Icon(Icons.Default.DateRange,null); Spacer(Modifier.width(8.dp)); Text("Save Cruise — $durationDays days")
+                    Icon(Icons.Default.DateRange,null); Spacer(Modifier.width(8.dp)); TText("Save Cruise — $durationDays days")
                 }
             }
         }
@@ -118,11 +119,11 @@ fun CruiseSetupScreen(onSave: (String, Long, Long)->Unit, onBack:()->Unit){
                     if (e != null) end = startOfDay(e)
                     if (s != null && e != null && e < s) end = s
                     showRangePicker = false
-                }) { Text("Confirm") }
+                }) { TText("Confirm") }
             },
-            dismissButton = { TextButton(onClick = { showRangePicker = false }) { Text("Cancel") } }
+            dismissButton = { TextButton(onClick = { showRangePicker = false }) { TText("Cancel") } }
         ) {
-            DateRangePicker(state = state, title = { Text("Select cruise dates", modifier = Modifier.padding(16.dp)) }, headline = {
+            DateRangePicker(state = state, title = { TText("Select cruise dates", modifier = Modifier.padding(16.dp)) }, headline = {
                 Text(
                     if (state.selectedStartDateMillis != null && state.selectedEndDateMillis != null)
                         "${state.selectedStartDateMillis?.let { formatDate(it,"MMM d") }} → ${state.selectedEndDateMillis?.let { formatDate(it,"MMM d, yyyy") }}"
@@ -137,16 +138,16 @@ fun CruiseSetupScreen(onSave: (String, Long, Long)->Unit, onBack:()->Unit){
         val state = rememberDatePickerState(initialSelectedDateMillis = start)
         DatePickerDialog(
             onDismissRequest = { showStartPicker = false },
-            confirmButton = { TextButton(onClick = { state.selectedDateMillis?.let { start = startOfDay(it) }; if (end < start) end = start; showStartPicker = false }) { Text("OK") } },
-            dismissButton = { TextButton(onClick = { showStartPicker = false }) { Text("Cancel") } }
+            confirmButton = { TextButton(onClick = { state.selectedDateMillis?.let { start = startOfDay(it) }; if (end < start) end = start; showStartPicker = false }) { TText("OK") } },
+            dismissButton = { TextButton(onClick = { showStartPicker = false }) { TText("Cancel") } }
         ) { DatePicker(state = state) }
     }
     if (showEndPicker) {
         val state = rememberDatePickerState(initialSelectedDateMillis = end)
         DatePickerDialog(
             onDismissRequest = { showEndPicker = false },
-            confirmButton = { TextButton(onClick = { state.selectedDateMillis?.let { end = startOfDay(it) }; if (end < start) end = start; showEndPicker = false }) { Text("OK") } },
-            dismissButton = { TextButton(onClick = { showEndPicker = false }) { Text("Cancel") } }
+            confirmButton = { TextButton(onClick = { state.selectedDateMillis?.let { end = startOfDay(it) }; if (end < start) end = start; showEndPicker = false }) { TText("OK") } },
+            dismissButton = { TextButton(onClick = { showEndPicker = false }) { TText("Cancel") } }
         ) { DatePicker(state = state) }
     }
 }

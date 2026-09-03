@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.screens
 
+import com.charles.cruiseapp.ui.translation.TText
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -55,14 +56,14 @@ fun DashboardScreen(
     var selectedDate by remember { mutableStateOf<Long?>(null) }
 
     Scaffold(
-        topBar = { TopAppBar(title={ Text("🚢 CruiseLoom") }, actions={ IconButton(onClick=onNavigateToSettings){ Icon(Icons.Default.Settings,"settings") }}) },
+        topBar = { TopAppBar(title={ TText("🚢 CruiseLoom") }, actions={ IconButton(onClick=onNavigateToSettings){ Icon(Icons.Default.Settings,"settings") }}) },
         bottomBar = {
             Column(Modifier.navigationBarsPadding()) {
                 BannerAd(modifier = Modifier.fillMaxWidth())
                 NavigationBar(windowInsets = WindowInsets(0)){
-                    NavigationBarItem(selected=true, onClick={}, icon={ Icon(Icons.Default.Home,"home")}, label={ Text("Dashboard")})
-                    NavigationBarItem(selected=false, onClick=onNavigateToPorts, icon={ Icon(Icons.Default.Place,"ports")}, label={ Text("Ports (${ports.size})")})
-                    NavigationBarItem(selected=false, onClick=onNavigateToParty, icon={ Icon(Icons.Default.Person,"party")}, label={ Text("Party")})
+                    NavigationBarItem(selected=true, onClick={}, icon={ Icon(Icons.Default.Home,"home")}, label={ TText("Dashboard")})
+                    NavigationBarItem(selected=false, onClick=onNavigateToPorts, icon={ Icon(Icons.Default.Place,"ports")}, label={ TText("Ports (${ports.size})")})
+                    NavigationBarItem(selected=false, onClick=onNavigateToParty, icon={ Icon(Icons.Default.Person,"party")}, label={ TText("Party")})
                 }
             }
         },
@@ -77,7 +78,7 @@ fun DashboardScreen(
                     title = "Welcome Aboard!",
                     subtitle = "Set up your cruise to start planning",
                     modifier = Modifier.align(Alignment.Center),
-                    action = { Button(onClick=onNavigateToSetup){ Text("Create Cruise") } }
+                    action = { Button(onClick=onNavigateToSetup){ TText("Create Cruise") } }
                 )
             }
         } else {
@@ -85,12 +86,12 @@ fun DashboardScreen(
                 item{
                     GradientHeroBanner(Modifier.fillMaxWidth()){
                         Text(cruise.shipName, style=MaterialTheme.typography.headlineSmall, color=Color.White)
-                        Text("${formatDate(cruise.startDate, "MMM d, yyyy")} - ${formatDate(cruise.endDate, "MMM d, yyyy")} • ${((cruise.endDate - cruise.startDate)/(24*60*60*1000)+1)} days", style=MaterialTheme.typography.bodyMedium, color=Color.White.copy(alpha=0.9f))
+                        TText("${formatDate(cruise.startDate, "MMM d, yyyy")} - ${formatDate(cruise.endDate, "MMM d, yyyy")} • ${((cruise.endDate - cruise.startDate)/(24*60*60*1000)+1)} days", style=MaterialTheme.typography.bodyMedium, color=Color.White.copy(alpha=0.9f))
                             if(cruise.notes.isNotEmpty()) Text(cruise.notes, style=MaterialTheme.typography.bodySmall, color=Color.White.copy(alpha=0.85f))
                             Spacer(Modifier.height(10.dp))
                             Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                                AssistChip(onClick=onNavigateToPorts, label={ Text("Manage Ports")}, leadingIcon={ Icon(Icons.Default.Place,null, Modifier.size(16.dp))}, colors=AssistChipDefaults.assistChipColors(containerColor=Color.White.copy(alpha=0.16f), labelColor=Color.White, leadingIconContentColor=Color.White))
-                                AssistChip(onClick=onNavigateToParty, label={ Text("Party Chat")}, leadingIcon={ Icon(Icons.Default.Chat,null, Modifier.size(16.dp))}, colors=AssistChipDefaults.assistChipColors(containerColor=Color.White.copy(alpha=0.16f), labelColor=Color.White, leadingIconContentColor=Color.White))
+                                AssistChip(onClick=onNavigateToPorts, label={ TText("Manage Ports")}, leadingIcon={ Icon(Icons.Default.Place,null, Modifier.size(16.dp))}, colors=AssistChipDefaults.assistChipColors(containerColor=Color.White.copy(alpha=0.16f), labelColor=Color.White, leadingIconContentColor=Color.White))
+                                AssistChip(onClick=onNavigateToParty, label={ TText("Party Chat")}, leadingIcon={ Icon(Icons.Default.Chat,null, Modifier.size(16.dp))}, colors=AssistChipDefaults.assistChipColors(containerColor=Color.White.copy(alpha=0.16f), labelColor=Color.White, leadingIconContentColor=Color.White))
                             }
                     }
                     Spacer(Modifier.height(16.dp))
@@ -116,12 +117,12 @@ fun DashboardScreen(
                                                 1 -> "1 day to go!"
                                                 else -> "$effectiveDays days to go!"
                                             }, style=MaterialTheme.typography.headlineSmall, color=MaterialTheme.colorScheme.onTertiaryContainer)
-                                        Text(cruise.shipName + " • " + formatDate(cruise.startDate, "EEE, MMM d, yyyy"), style=MaterialTheme.typography.bodyMedium, color=MaterialTheme.colorScheme.onTertiaryContainer)
+                                        TText(cruise.shipName + " • " + formatDate(cruise.startDate, "EEE, MMM d, yyyy"), style=MaterialTheme.typography.bodyMedium, color=MaterialTheme.colorScheme.onTertiaryContainer)
                                         if (countdownExtra != null) {
                                             Spacer(Modifier.height(4.dp))
                                             Text(countdownExtra, style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onTertiaryContainer)
                                         }
-                                        Text("Daily 9 AM reminder enabled — you'll get a notification each morning.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha=0.8f))
+                                        TText("Daily 9 AM reminder enabled — you'll get a notification each morning.", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha=0.8f))
                                     }
                                     Icon(Icons.Default.Event, contentDescription=null, modifier=Modifier.size(48.dp), tint=MaterialTheme.colorScheme.onTertiaryContainer)
                                 }
@@ -139,8 +140,8 @@ fun DashboardScreen(
                                 Icon(Icons.Default.Celebration, null, tint=MaterialTheme.colorScheme.primary, modifier=Modifier.size(32.dp))
                                 Spacer(Modifier.width(12.dp))
                                 Column{
-                                    Text("Bon voyage! 🚢", style=MaterialTheme.typography.titleMedium)
-                                    Text("Your cruise is today — have an amazing trip!", style=MaterialTheme.typography.bodySmall)
+                                    TText("Bon voyage! 🚢", style=MaterialTheme.typography.titleMedium)
+                                    TText("Your cruise is today — have an amazing trip!", style=MaterialTheme.typography.bodySmall)
                                 }
                             }
                         }
@@ -149,26 +150,26 @@ fun DashboardScreen(
 
                     // Map / Deck quick actions
                     Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                        AssistChip(onClick=onNavigateToPortMap, label={ Text("Port Map")}, leadingIcon={ Icon(Icons.Default.Map, null, Modifier.size(16.dp))})
-                        AssistChip(onClick=onNavigateToShipMaps, label={ Text("Ship Decks")}, leadingIcon={ Icon(Icons.Default.DirectionsBoat, null, Modifier.size(16.dp))})
+                        AssistChip(onClick=onNavigateToPortMap, label={ TText("Port Map")}, leadingIcon={ Icon(Icons.Default.Map, null, Modifier.size(16.dp))})
+                        AssistChip(onClick=onNavigateToShipMaps, label={ TText("Ship Decks")}, leadingIcon={ Icon(Icons.Default.DirectionsBoat, null, Modifier.size(16.dp))})
                     }
                     Spacer(Modifier.height(16.dp))
 
                     if(upcoming.isNotEmpty()){
-                        Text("Upcoming Events", style=MaterialTheme.typography.titleMedium)
+                        TText("Upcoming Events", style=MaterialTheme.typography.titleMedium)
                         Spacer(Modifier.height(8.dp))
                         upcoming.take(3).forEach{ ev ->
                             Card(Modifier.fillMaxWidth().padding(vertical=4.dp), colors=CardDefaults.cardColors(containerColor=MaterialTheme.colorScheme.secondaryContainer)){
                                 Row(Modifier.padding(12.dp).fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween){
-                                    Column{ Text(ev.title, style=MaterialTheme.typography.bodyLarge); Text(ev.location, style=MaterialTheme.typography.bodySmall); Text("${formatDate(ev.dateMillis)} ${formatTime(ev.startTimeMillis)}", style=MaterialTheme.typography.bodySmall)}
+                                    Column{ TText(ev.title, style=MaterialTheme.typography.bodyLarge); TText(ev.location, style=MaterialTheme.typography.bodySmall); TText("${formatDate(ev.dateMillis)} ${formatTime(ev.startTimeMillis)}", style=MaterialTheme.typography.bodySmall)}
                                     Icon(Icons.Default.Notifications, contentDescription=null)
                                 }
                             }
                         }
                         Spacer(Modifier.height(16.dp))
                     }
-                    Text("Daily Itinerary", style=MaterialTheme.typography.titleMedium)
-                    Text("Tap a day to plan events", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                    TText("Daily Itinerary", style=MaterialTheme.typography.titleMedium)
+                    TText("Tap a day to plan events", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                     Spacer(Modifier.height(8.dp))
                 }
                 val days = generateDays()
@@ -185,28 +186,28 @@ fun DashboardScreen(
                             Column(Modifier.padding(16.dp)){
                                 Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween, verticalAlignment=Alignment.CenterVertically){
                                     Column{
-                                        Text(formatDate(day, "EEEE, MMM d"), style=MaterialTheme.typography.titleMedium)
-                                        if(portForDay!=null) Text("📍 ${portForDay.name}", style=MaterialTheme.typography.bodyMedium, color=MaterialTheme.colorScheme.primary, fontWeight=FontWeight.Bold)
-                                        else Text("🌊 Sea Day", style=MaterialTheme.typography.bodySmall)
+                                        TText(formatDate(day, "EEEE, MMM d"), style=MaterialTheme.typography.titleMedium)
+                                        if(portForDay!=null) TText("📍 ${portForDay.name}", style=MaterialTheme.typography.bodyMedium, color=MaterialTheme.colorScheme.primary, fontWeight=FontWeight.Bold)
+                                        else TText("🌊 Sea Day", style=MaterialTheme.typography.bodySmall)
                                     }
-                                    Badge(containerColor=MaterialTheme.colorScheme.secondary){ Text("${dayEvents.size}") }
+                                    Badge(containerColor=MaterialTheme.colorScheme.secondary){ TText("${dayEvents.size}") }
                                 }
                                 Spacer(Modifier.height(8.dp))
-                                if(dayEvents.isEmpty()) Text("No events yet — tap to add", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                                if(dayEvents.isEmpty()) TText("No events yet — tap to add", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                                 else {
                                     dayEvents.take(3).forEach{ ev ->
                                         Row(verticalAlignment=Alignment.CenterVertically){
                                             Box(Modifier.size(8.dp).background(MaterialTheme.colorScheme.secondary, CircleShape))
                                             Spacer(Modifier.width(8.dp))
-                                            Text("${formatTime(ev.startTimeMillis)} ${ev.title}", style=MaterialTheme.typography.bodySmall, maxLines=1)
-                                            if(ev.location.isNotEmpty()) Text(" • ${ev.location}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines=1)
+                                            TText("${formatTime(ev.startTimeMillis)} ${ev.title}", style=MaterialTheme.typography.bodySmall, maxLines=1)
+                                            if(ev.location.isNotEmpty()) TText(" • ${ev.location}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant, maxLines=1)
                                         }
                                     }
-                                    if(dayEvents.size>3) Text("+ ${dayEvents.size-3} more", style=MaterialTheme.typography.bodySmall)
+                                    if(dayEvents.size>3) TText("+ ${dayEvents.size-3} more", style=MaterialTheme.typography.bodySmall)
                                 }
                                 if(portForDay!=null){
                                     Spacer(Modifier.height(8.dp))
-                                    OutlinedButton(onClick={ onNavigateToWeather(portForDay) }, modifier=Modifier.fillMaxWidth()){ Icon(Icons.Default.WbSunny,null, Modifier.size(16.dp)); Spacer(Modifier.width(8.dp)); Text("Weather for ${portForDay.name}")}
+                                    OutlinedButton(onClick={ onNavigateToWeather(portForDay) }, modifier=Modifier.fillMaxWidth()){ Icon(Icons.Default.WbSunny,null, Modifier.size(16.dp)); Spacer(Modifier.width(8.dp)); TText("Weather for ${portForDay.name}")}
                                 }
                             }
                         }
@@ -230,18 +231,18 @@ fun DashboardScreen(
         val days = generateDays()
         AlertDialog(
             onDismissRequest={ showAddEvent=false },
-            title={ Text("Add Event")},
+            title={ TText("Add Event")},
             text={
                 Column(verticalArrangement=Arrangement.spacedBy(8.dp)){
-                    OutlinedTextField(value=title, onValueChange={title=it}, label={ Text("Title *")}, modifier=Modifier.fillMaxWidth())
-                    OutlinedTextField(value=location, onValueChange={location=it}, label={ Text("Location")}, modifier=Modifier.fillMaxWidth())
+                    OutlinedTextField(value=title, onValueChange={title=it}, label={ TText("Title *")}, modifier=Modifier.fillMaxWidth())
+                    OutlinedTextField(value=location, onValueChange={location=it}, label={ TText("Location")}, modifier=Modifier.fillMaxWidth())
                     Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                        OutlinedTextField(value=hour, onValueChange={hour=it}, label={ Text("Hour")}, modifier=Modifier.weight(1f))
-                        OutlinedTextField(value=minute, onValueChange={minute=it}, label={ Text("Min")}, modifier=Modifier.weight(1f))
-                        OutlinedTextField(value=reminder, onValueChange={reminder=it}, label={ Text("Remind min")}, modifier=Modifier.weight(1f))
+                        OutlinedTextField(value=hour, onValueChange={hour=it}, label={ TText("Hour")}, modifier=Modifier.weight(1f))
+                        OutlinedTextField(value=minute, onValueChange={minute=it}, label={ TText("Min")}, modifier=Modifier.weight(1f))
+                        OutlinedTextField(value=reminder, onValueChange={reminder=it}, label={ TText("Remind min")}, modifier=Modifier.weight(1f))
                     }
                     // date picker simplified
-                    Text("Date:", style=MaterialTheme.typography.labelMedium)
+                    TText("Date:", style=MaterialTheme.typography.labelMedium)
                     LazyColumn(modifier=Modifier.height(120.dp)){
                         items(days){ d ->
                             val sel = d==dateChoice
@@ -252,7 +253,7 @@ fun DashboardScreen(
                             )
                         }
                     }
-                    OutlinedTextField(value=category, onValueChange={category=it}, label={ Text("Category")}, modifier=Modifier.fillMaxWidth())
+                    OutlinedTextField(value=category, onValueChange={category=it}, label={ TText("Category")}, modifier=Modifier.fillMaxWidth())
                 }
             },
             confirmButton={
@@ -262,9 +263,9 @@ fun DashboardScreen(
                         onAddEvent(title, dateChoice, h, m, location, category, rem, "")
                         showAddEvent=false
                     }
-                }){ Text("Save & Notify")}
+                }){ TText("Save & Notify")}
             },
-            dismissButton={ TextButton(onClick={ showAddEvent=false }){ Text("Cancel")}}
+            dismissButton={ TextButton(onClick={ showAddEvent=false }){ TText("Cancel")}}
         )
     }
 }

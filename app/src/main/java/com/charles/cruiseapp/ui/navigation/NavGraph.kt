@@ -1,6 +1,7 @@
 package com.charles.cruiseapp.ui.navigation
 
 sealed class Screen(val route: String){
+    object OnboardingLanguage: Screen("onboarding_language")
     object Dashboard: Screen("dashboard")
     object CruiseSetup: Screen("cruise_setup")
     object DayDetail: Screen("day_detail/{dateMillis}"){ fun create(date: Long) = "day_detail/$date" }

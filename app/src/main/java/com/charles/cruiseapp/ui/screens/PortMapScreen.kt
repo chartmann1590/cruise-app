@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.screens
 
+import com.charles.cruiseapp.ui.translation.TText
 import android.Manifest
 import android.content.Context
 import android.content.Intent
@@ -69,7 +70,7 @@ fun PortMapScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Port Map • ${ports.size} stops") },
+                title = { TText("Port Map • ${ports.size} stops") },
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Default.ArrowBack, null) } },
                 actions = {
                     IconButton(onClick = {
@@ -96,20 +97,20 @@ fun PortMapScreen(
                     val p = selectedPort!!
                     Card(Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.large, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
                         Column(Modifier.padding(12.dp)) {
-                            Text("🏝️ ${p.name}", style = MaterialTheme.typography.titleMedium)
+                            TText("🏝️ ${p.name}", style = MaterialTheme.typography.titleMedium)
                             if (p.country.isNotEmpty()) Text(p.country, style = MaterialTheme.typography.bodySmall)
-                            Text("${formatDate(p.arrivalDate)} → ${formatDate(p.departureDate)}", style = MaterialTheme.typography.bodySmall)
-                            Text("${p.latitude}, ${p.longitude}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            TText("${formatDate(p.arrivalDate)} → ${formatDate(p.departureDate)}", style = MaterialTheme.typography.bodySmall)
+                            TText("${p.latitude}, ${p.longitude}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             Spacer(Modifier.height(8.dp))
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                 Button(onClick = { onWeatherClick(p) }, modifier = Modifier.weight(1f)) {
-                                    Icon(Icons.Default.WbSunny, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("Weather")
+                                    Icon(Icons.Default.WbSunny, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("Weather")
                                 }
                                 OutlinedButton(onClick = {
                                     val uri = Uri.parse("geo:${p.latitude},${p.longitude}?q=${p.latitude},${p.longitude}(${Uri.encode(p.name)})")
                                     val intent = Intent(Intent.ACTION_VIEW, uri)
                                     try { context.startActivity(intent) } catch (_: Exception) {}
-                                }) { Icon(Icons.Default.Directions, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("Navigate") }
+                                }) { Icon(Icons.Default.Directions, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("Navigate") }
                             }
                         }
                     }
@@ -134,7 +135,7 @@ fun PortMapScreen(
                                 locationPerm.launchPermissionRequest()
                             }
                         },
-                        label = { Text(if (showLocationDot) "My Location ON" else "My Location") },
+                        label = { TText(if (showLocationDot) "My Location ON" else "My Location") },
                         leadingIcon = { Icon(Icons.Default.MyLocation, null, Modifier.size(16.dp)) }
                     )
                     AssistChip(
@@ -150,11 +151,11 @@ fun PortMapScreen(
                                 cm.downloadAreaAsync(context, bbox, 9, 15)
                             } catch (_: Exception) {}
                         },
-                        label = { Text("Download offline") },
+                        label = { TText("Download offline") },
                         leadingIcon = { Icon(Icons.Default.Download, null, Modifier.size(16.dp)) }
                     )
                 }
-                Text("© OpenStreetMap contributors (ODbL) • Tap Download offline before you lose signal", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                TText("© OpenStreetMap contributors (ODbL) • Tap Download offline before you lose signal", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
@@ -249,7 +250,7 @@ fun PortMapScreen(
                                             mv.controller.setZoom(10.0)
                                         }
                                     },
-                                    label = { Text("${idx + 1}. ${p.name}") },
+                                    label = { TText("${idx + 1}. ${p.name}") },
                                     leadingIcon = { Icon(Icons.Default.Place, null, Modifier.size(16.dp)) }
                                 )
                             }

@@ -32,6 +32,8 @@ class CruiseApplication : Application(), ImageLoaderFactory {
     // HotspotController is app-scoped for HotspotChatService + UI to share same state (Phase 4)
     // Lazy so it only initializes if/when the guest chat feature is used.
     val hotspotController by lazy { com.charles.cruiseapp.data.hotspot.HotspotController(applicationContext) }
+    // Translation — ML Kit on-device (free, offline after model download)
+    val translationManager by lazy { com.charles.cruiseapp.data.translation.TranslationManager(applicationContext) }
 
     override fun onCreate() {
         super.onCreate()

@@ -1,0 +1,79 @@
+name: Deploy to Play Console (Internal Testing)
+
+# Manual dispatch only — requires Play service account JSON + completed store listing.
+# The AAB must be built with production AdMob IDs (from GitHub Secrets) and signed.
+on:
+  workflow_dispatch:
+    inputs:
+      track:
+        description: 'Play track'
+        required: true
+        default: 'internal'
+        type: choice
+        options: [internal, closed, open, production]
+      release_notes:
+        description: 'Release notes (what to test)'
+        required: false
+        default: 'CruiseLoom 1.0.0 — offline-first cruise companion'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Restore google-services.json
+        env:
+          GOOGLE_B64: ${{ secrets.GOOGLE_SERVICES_JSON_B64 }}
+        run: echo "$GOOGLE_B64" | base64 -d > app/google-services.json
+
+      - name: Restore admob.properties (PRODUCTION)
+        env:
+          ADMOB_APP_ID: ${{ secrets.ADMOB_APP_ID }}
+          ADMOB_BANNER_ID: ${{ secrets.ADMOB_BANNER_ID }}
+          ADMOB_INTERSTITIAL_ID: ${{ secrets.ADMOB_INTERSTITIAL_ID }}
+        run: |
+          printf "ADMOB_APP_ID=%s\nADMOB_BANNER_ID=%s\nADMOB_INTERSTITIAL_ID=%s\n" \
+            "$ADMOB_APP_ID" "$ADMOB_BANNER_ID" "$ADMOB_INTERSTITIAL_ID" > app/admob.properties
+          echo "admob.properties restored"
+
+      - name: Restore keystore
+        env:
+          KS_B64: ${{ secrets.KEYSTORE_BASE64 }}
+          KP_B64: ${{ secrets.KEYSTORE_PROPERTIES_B64 }}
+        run: |
+          echo "$KS_B64" | base64 -d > app/upload-keystore.jks
+          echo "$KP_B64" | base64 -d > app/keystore.properties
+
+      - name: Grant execute permission
+        run: chmod +x gradlew
+
+      - name: Build signed AAB + verifyPlayReleaseConfiguration
+        run: ./gradlew bundleRelease --stacktrace
+
+      - name: Deploy to Play Console
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.charles.cruiseapp
+          releaseFiles: app/build/outputs/bundle/release/app-release.aab
+          track: ${{ inputs.track }}
+          whatsNew: |
+            ${{ inputs.release_notes }}
+          status: draft
+
+      - name: Summary
+        run: |
+          echo "Uploaded to track: ${{ inputs.track }}"
+          ls -lh app/build/outputs/bundle/release/app-release.aab

@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.screens
 
+import com.charles.cruiseapp.ui.translation.TText
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
@@ -60,7 +61,7 @@ fun PlaceDetailScreen(
 
     Scaffold(bottomBar = { BannerAd(modifier = Modifier.fillMaxWidth().navigationBarsPadding()) }) { pad ->
         if (place == null) {
-            Box(Modifier.padding(pad).fillMaxSize(), contentAlignment = Alignment.Center) { Text("Not found") }
+            Box(Modifier.padding(pad).fillMaxSize(), contentAlignment = Alignment.Center) { TText("Not found") }
             return@Scaffold
         }
         val p = place!!
@@ -103,8 +104,7 @@ fun PlaceDetailScreen(
 
                 Column(Modifier.align(Alignment.BottomStart).padding(horizontal = 20.dp, vertical = 18.dp)) {
                     if (port != null) {
-                        Text(
-                            "🏝️ NEAR ${port!!.name.uppercase()}",
+                        TText("🏝️ NEAR ${port!!.name.uppercase()}",
                             style = MaterialTheme.typography.labelMedium,
                             color = Color.White.copy(alpha = 0.85f),
                             fontWeight = FontWeight.Bold,
@@ -145,8 +145,7 @@ fun PlaceDetailScreen(
                     }
 
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text(
-                            "ABOUT",
+                        TText("ABOUT",
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
@@ -161,7 +160,7 @@ fun PlaceDetailScreen(
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 CircularProgressIndicator(modifier = Modifier.size(14.dp), strokeWidth = 2.dp)
                                 Spacer(Modifier.width(8.dp))
-                                Text("Loading more...", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                TText("Loading more...", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                         }
                     }
@@ -180,7 +179,7 @@ fun PlaceDetailScreen(
                     ) {
                         Icon(Icons.Default.EventAvailable, contentDescription = null, modifier = Modifier.size(20.dp))
                         Spacer(Modifier.width(8.dp))
-                        Text("Add to Itinerary", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                        TText("Add to Itinerary", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                     }
                 }
             }

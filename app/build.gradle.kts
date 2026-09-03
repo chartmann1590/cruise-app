@@ -196,6 +196,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:23.6.0")
     implementation("com.google.android.ump:user-messaging-platform:4.0.0")
 
+    // ML Kit — on-device translation (free, no API key, offline after model download)
+    implementation("com.google.mlkit:translate:17.0.3")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

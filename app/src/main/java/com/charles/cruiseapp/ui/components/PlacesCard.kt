@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.components
 
+import com.charles.cruiseapp.ui.translation.TText
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
@@ -45,7 +46,7 @@ fun PlacesCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text("🌴 Things to Do", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                TText("🌴 Things to Do", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onTertiaryContainer)
                 Icon(
                     if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
                     contentDescription = if (expanded) "Collapse" else "Expand",
@@ -59,12 +60,12 @@ fun PlacesCard(
                         loading -> {
                             CircularProgressIndicator(color = MaterialTheme.colorScheme.onTertiaryContainer)
                             Spacer(Modifier.height(8.dp))
-                            Text("Finding nearby attractions...", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                            TText("Finding nearby attractions...", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onTertiaryContainer)
                         }
                         places.isEmpty() -> {
-                            Text(error ?: "No nearby attractions found yet.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                            TText(error ?: "No nearby attractions found yet.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onTertiaryContainer)
                             Spacer(Modifier.height(8.dp))
-                            Button(onClick = onRetry) { Text("Retry") }
+                            Button(onClick = onRetry) { TText("Retry") }
                         }
                         else -> {
                             if (error != null) {
@@ -110,10 +111,10 @@ private fun PlaceRow(place: PlaceOfInterest, onOpen: () -> Unit, onAdd: () -> Un
             Column(Modifier.weight(1f)) {
                 Text(place.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                 if (place.address != null) {
-                    Text("📍 ${place.address}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, maxLines = 1)
+                    TText("📍 ${place.address}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, maxLines = 1)
                 }
                 Text(place.extract, style = MaterialTheme.typography.bodySmall, maxLines = 4, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text("Tap for details", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                TText("Tap for details", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
             }
             Spacer(Modifier.width(4.dp))
             IconButton(onClick = onAdd) {

@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.screens
 
+import com.charles.cruiseapp.ui.translation.TText
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.clickable
@@ -70,7 +71,7 @@ fun ShipCatalogScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Ship Deck Maps") },
+                title = { TText("Ship Deck Maps") },
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Default.ArrowBack, null) } },
                 actions = {
                     IconButton(onClick = {
@@ -91,8 +92,8 @@ fun ShipCatalogScreen(
                 OutlinedTextField(
                     value = search,
                     onValueChange = { search = it },
-                    label = { Text("Search ship") },
-                    placeholder = { Text("e.g. Symphony, Mardi Gras, Prima") },
+                    label = { TText("Search ship") },
+                    placeholder = { TText("e.g. Symphony, Mardi Gras, Prima") },
                     leadingIcon = { Icon(Icons.Default.Search, null) },
                     trailingIcon = { if (search.isNotEmpty()) IconButton(onClick = { search = "" }) { Icon(Icons.Default.Clear, null) } },
                     modifier = Modifier.fillMaxWidth()
@@ -106,10 +107,10 @@ fun ShipCatalogScreen(
                                 Icon(Icons.Default.Star, null, tint = MaterialTheme.colorScheme.primary)
                                 Spacer(Modifier.width(8.dp))
                                 Column(Modifier.weight(1f)) {
-                                    Text("Suggested for your cruise: ${match.displayName}", style = MaterialTheme.typography.titleSmall)
-                                    Text("${match.line} • ${match.deckCount} decks • CC0 offline after download", style = MaterialTheme.typography.bodySmall)
+                                    TText("Suggested for your cruise: ${match.displayName}", style = MaterialTheme.typography.titleSmall)
+                                    TText("${match.line} • ${match.deckCount} decks • CC0 offline after download", style = MaterialTheme.typography.bodySmall)
                                 }
-                                Button(onClick = { onOpenDeck(match.id) }) { Text("View") }
+                                Button(onClick = { onOpenDeck(match.id) }) { TText("View") }
                             }
                         }
                         Spacer(Modifier.height(8.dp))
@@ -118,20 +119,20 @@ fun ShipCatalogScreen(
                 if (loading) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) { CircularProgressIndicator(Modifier.size(24.dp)) }
                     Spacer(Modifier.height(8.dp))
-                    Text("Loading ships…", style = MaterialTheme.typography.bodySmall)
+                    TText("Loading ships…", style = MaterialTheme.typography.bodySmall)
                 }
                 if (error != null) {
                     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)) {
                         Column(Modifier.padding(12.dp)) {
-                            Text("Error: $error", color = MaterialTheme.colorScheme.onErrorContainer)
+                            TText("Error: $error", color = MaterialTheme.colorScheme.onErrorContainer)
                             TextButton(onClick = {
                                 scope.launch { loading = true; val r = repo.loadCatalog(true); catalog = r.getOrNull(); error = r.exceptionOrNull()?.message; loading = false }
-                            }) { Text("Retry") }
+                            }) { TText("Retry") }
                         }
                     }
                 }
                 if (catalog != null) {
-                    Text("${filtered.size} ships • ${catalog!!.ships.count { it.decks.isNotEmpty() }} with offline decks", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    TText("${filtered.size} ships • ${catalog!!.ships.count { it.decks.isNotEmpty() }} with offline decks", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
             items(filtered) { ship ->
@@ -148,11 +149,11 @@ fun ShipCatalogScreen(
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                             Column(Modifier.weight(1f)) {
                                 Text(ship.displayName, style = MaterialTheme.typography.titleMedium)
-                                Text("${ship.line} • ${ship.shipClass} • ${if (total==0) "External link" else "$total decks"}", style = MaterialTheme.typography.bodySmall)
+                                TText("${ship.line} • ${ship.shipClass} • ${if (total==0) "External link" else "$total decks"}", style = MaterialTheme.typography.bodySmall)
                                 Text(ship.attribution.take(90), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2)
                             }
                             Badge(containerColor = if (isDownloaded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer) {
-                                Text(if (isDownloaded) "Offline" else if (downloaded>0) "$downloaded/$total" else if (total==0) "Link" else "Online")
+                                TText(if (isDownloaded) "Offline" else if (downloaded>0) "$downloaded/$total" else if (total==0) "Link" else "Online")
                             }
                         }
                         Spacer(Modifier.height(8.dp))
@@ -161,7 +162,7 @@ fun ShipCatalogScreen(
                                 Button(
                                     onClick = { onOpenDeck(ship.id) },
                                     modifier = Modifier.weight(1f)
-                                ) { Icon(Icons.Default.Map, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("View decks") }
+                                ) { Icon(Icons.Default.Map, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("View decks") }
                                 if (!isDownloaded) {
                                     OutlinedButton(
                                         onClick = {
@@ -182,22 +183,22 @@ fun ShipCatalogScreen(
                                     ) {
                                         if (downloadingId == ship.id) CircularProgressIndicator(Modifier.size(16.dp))
                                         else Icon(Icons.Default.Download, null, Modifier.size(16.dp))
-                                        Spacer(Modifier.width(6.dp)); Text("Download")
+                                        Spacer(Modifier.width(6.dp)); TText("Download")
                                     }
                                 } else {
-                                    AssistChip(onClick = {}, label = { Text("✓ ${total} decks offline") }, leadingIcon = { Icon(Icons.Default.CheckCircle, null, Modifier.size(16.dp)) })
+                                    AssistChip(onClick = {}, label = { TText("✓ ${total} decks offline") }, leadingIcon = { Icon(Icons.Default.CheckCircle, null, Modifier.size(16.dp)) })
                                 }
                             }
                             if (downloadingId == ship.id && progressText.isNotEmpty()) {
                                 Spacer(Modifier.height(6.dp)); Text(progressText, style = MaterialTheme.typography.bodySmall)
                                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
                             }
-                            Text("Size ~${(ship.decks.sumOf { it.bytes } / 1024)} KB • Tap View to browse & pinch-zoom. Downloaded to filesDir/decks/ — works at sea.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            TText("Size ~${(ship.decks.sumOf { it.bytes } / 1024)} KB • Tap View to browse & pinch-zoom. Downloaded to filesDir/decks/ — works at sea.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         } else {
                             OutlinedButton(onClick = {
                                 ship.externalUrl?.let { url -> try { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) } catch(_:Exception){} }
                             }, modifier = Modifier.fillMaxWidth()) {
-                                Icon(Icons.Default.OpenInNew, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("Open official deck plan")
+                                Icon(Icons.Default.OpenInNew, null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("Open official deck plan")
                             }
                         }
                     }
@@ -205,7 +206,7 @@ fun ShipCatalogScreen(
             }
             item {
                 Spacer(Modifier.height(8.dp))
-                Text("Deck images are original schematics (CC0), not official cruise line documents.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                TText("Deck images are original schematics (CC0), not official cruise line documents.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(80.dp))
             }
         }

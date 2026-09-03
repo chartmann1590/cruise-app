@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.components
 
+import com.charles.cruiseapp.ui.translation.TText
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
@@ -31,7 +32,7 @@ fun WeatherCard(forecast: ForecastResponse?, loading: Boolean, error: String?, o
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text("☀️ Weather Forecast", style=MaterialTheme.typography.titleMedium, color=MaterialTheme.colorScheme.onPrimaryContainer)
+                TText("☀️ Weather Forecast", style=MaterialTheme.typography.titleMedium, color=MaterialTheme.colorScheme.onPrimaryContainer)
                 Icon(
                     if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
                     contentDescription = if (expanded) "Collapse" else "Expand",
@@ -42,19 +43,19 @@ fun WeatherCard(forecast: ForecastResponse?, loading: Boolean, error: String?, o
                 Column {
                     Spacer(Modifier.height(8.dp))
                     when{
-                        loading -> { CircularProgressIndicator(color=MaterialTheme.colorScheme.onPrimaryContainer); Spacer(Modifier.height(8.dp)); Text("Fetching forecast...", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onPrimaryContainer) }
-                        error != null -> { Text("Error: $error", color=MaterialTheme.colorScheme.error); Spacer(Modifier.height(8.dp)); Button(onClick=onRetry){ Text("Retry") } }
-                        forecast == null -> Text("No data. Tap refresh when online.", color=MaterialTheme.colorScheme.onPrimaryContainer)
+                        loading -> { CircularProgressIndicator(color=MaterialTheme.colorScheme.onPrimaryContainer); Spacer(Modifier.height(8.dp)); TText("Fetching forecast...", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onPrimaryContainer) }
+                        error != null -> { TText("Error: $error", color=MaterialTheme.colorScheme.error); Spacer(Modifier.height(8.dp)); Button(onClick=onRetry){ TText("Retry") } }
+                        forecast == null -> TText("No data. Tap refresh when online.", color=MaterialTheme.colorScheme.onPrimaryContainer)
                         else -> {
                             val cur = forecast.current
                             if(cur!=null){
                                 Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween){
                                     Column{
-                                        Text("${wmoToEmoji(cur.weatherCode)} ${wmoToDescription(cur.weatherCode)}", style=MaterialTheme.typography.titleLarge)
+                                        TText("${wmoToEmoji(cur.weatherCode)} ${wmoToDescription(cur.weatherCode)}", style=MaterialTheme.typography.titleLarge)
                                         val tempStr = com.charles.cruiseapp.util.UnitUtils.formatTemp(cur.temperature2m, isMetric)
                                         val windStr = com.charles.cruiseapp.util.UnitUtils.formatWind(cur.windSpeed, isMetric)
-                                        Text("$tempStr  • $windStr")
-                                        cur.humidity?.let{ Text("Humidity $it%") }
+                                        TText("$tempStr  • $windStr")
+                                        cur.humidity?.let{ TText("Humidity $it%") }
                                     }
                                     cur.time?.let{ Text(it, style=MaterialTheme.typography.bodySmall)}
                                 }
@@ -62,7 +63,7 @@ fun WeatherCard(forecast: ForecastResponse?, loading: Boolean, error: String?, o
                             }
                             val daily = forecast.daily
                             if(daily?.time!=null){
-                                Text("Next ${daily.time.size} days", style=MaterialTheme.typography.labelLarge)
+                                TText("Next ${daily.time.size} days", style=MaterialTheme.typography.labelLarge)
                                 Spacer(Modifier.height(4.dp))
                                 daily.time.forEachIndexed{ i, date ->
                                     val max = daily.tempMax?.getOrNull(i) ?: 0.0
@@ -72,10 +73,10 @@ fun WeatherCard(forecast: ForecastResponse?, loading: Boolean, error: String?, o
                                     val wind = daily.windMax?.getOrNull(i)
                                     Card(Modifier.fillMaxWidth().padding(vertical=4.dp), colors=CardDefaults.cardColors(containerColor=MaterialTheme.colorScheme.surfaceVariant)){
                                         Row(Modifier.padding(12.dp).fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween){
-                                            Column{ Text(date, style=MaterialTheme.typography.bodyMedium); Text("${wmoToEmoji(code)} ${wmoToDescription(code)}", style=MaterialTheme.typography.bodySmall) }
+                                            Column{ TText(date, style=MaterialTheme.typography.bodyMedium); TText("${wmoToEmoji(code)} ${wmoToDescription(code)}", style=MaterialTheme.typography.bodySmall) }
                                             Column(horizontalAlignment=Alignment.End){
                                                 Text(com.charles.cruiseapp.util.UnitUtils.formatTempRange(min, max, isMetric), style=MaterialTheme.typography.bodyMedium)
-                                                precip?.let{ Text("Rain $it%", style=MaterialTheme.typography.bodySmall)}
+                                                precip?.let{ TText("Rain $it%", style=MaterialTheme.typography.bodySmall)}
                                                 wind?.let{
                                                     val wStr = com.charles.cruiseapp.util.UnitUtils.formatWind(it, isMetric)
                                                     Text(wStr, style=MaterialTheme.typography.bodySmall)
@@ -87,7 +88,7 @@ fun WeatherCard(forecast: ForecastResponse?, loading: Boolean, error: String?, o
                             }
                             Spacer(Modifier.height(8.dp))
                             val unitHint = if (isMetric) "°C • km/h • mm" else "°F • mph • in"
-                            Text("Units: $unitHint", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                            TText("Units: $unitHint", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }

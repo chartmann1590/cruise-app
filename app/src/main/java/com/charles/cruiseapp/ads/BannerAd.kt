@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ads
 
+import com.charles.cruiseapp.ui.translation.TText
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -59,8 +60,7 @@ fun BannerAd(
                     .background(MaterialTheme.colorScheme.surfaceVariant),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    "Ads disabled (AdConfig)",
+                TText("Ads disabled (AdConfig)",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

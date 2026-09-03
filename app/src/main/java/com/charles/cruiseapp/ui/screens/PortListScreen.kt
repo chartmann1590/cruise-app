@@ -1,5 +1,6 @@
 package com.charles.cruiseapp.ui.screens
 
+import com.charles.cruiseapp.ui.translation.TText
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -36,7 +37,7 @@ fun PortListScreen(cruise: Cruise?, portsFlow: StateFlow<List<PortStop>>, onAddP
     var error by remember{ mutableStateOf<String?>(null)}
 
     Scaffold(
-        topBar={ TopAppBar(title={ Text("Port Stops")}, navigationIcon={ IconButton(onClick=onBack){ Icon(Icons.Default.ArrowBack,null)}}) },
+        topBar={ TopAppBar(title={ TText("Port Stops")}, navigationIcon={ IconButton(onClick=onBack){ Icon(Icons.Default.ArrowBack,null)}}) },
         floatingActionButton={ FloatingActionButton(onClick={ showAdd=true }){ Icon(Icons.Default.Add,null)}},
         bottomBar = { BannerAd(modifier = Modifier.fillMaxWidth().navigationBarsPadding()) }
     ){ pad ->
@@ -52,7 +53,7 @@ fun PortListScreen(cruise: Cruise?, portsFlow: StateFlow<List<PortStop>>, onAddP
                     }
                     Spacer(Modifier.height(12.dp))
                 } else {
-                    Text("${ports.size} ports • Weather integrated", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                    TText("${ports.size} ports • Weather integrated", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                     Spacer(Modifier.height(12.dp))
                 }
             }
@@ -62,16 +63,16 @@ fun PortListScreen(cruise: Cruise?, portsFlow: StateFlow<List<PortStop>>, onAddP
                         Column(Modifier.padding(16.dp)){
                             Row(Modifier.fillMaxWidth(), horizontalArrangement=Arrangement.SpaceBetween){
                                 Column(Modifier.weight(1f)){
-                                    Text("🏝️ ${port.name}", style=MaterialTheme.typography.titleMedium)
+                                    TText("🏝️ ${port.name}", style=MaterialTheme.typography.titleMedium)
                                     if(port.country.isNotEmpty()) Text(port.country, style=MaterialTheme.typography.bodySmall)
-                                    Text("${formatDate(port.arrivalDate)} → ${formatDate(port.departureDate)}", style=MaterialTheme.typography.bodySmall)
-                                    Text("${port.latitude}, ${port.longitude}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
+                                    TText("${formatDate(port.arrivalDate)} → ${formatDate(port.departureDate)}", style=MaterialTheme.typography.bodySmall)
+                                    TText("${port.latitude}, ${port.longitude}", style=MaterialTheme.typography.bodySmall, color=MaterialTheme.colorScheme.onSurfaceVariant)
                                 }
                                 IconButton(onClick={ onDeletePort(port)} ){ Icon(Icons.Default.Delete,null, tint=MaterialTheme.colorScheme.error)}
                             }
                             Spacer(Modifier.height(8.dp))
                             Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                                Button(onClick={ onWeatherClick(port)}, modifier=Modifier.weight(1f)){ Icon(Icons.Default.WbSunny,null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); Text("Weather")}
+                                Button(onClick={ onWeatherClick(port)}, modifier=Modifier.weight(1f)){ Icon(Icons.Default.WbSunny,null, Modifier.size(16.dp)); Spacer(Modifier.width(6.dp)); TText("Weather")}
                             }
                         }
                     }
@@ -84,20 +85,20 @@ fun PortListScreen(cruise: Cruise?, portsFlow: StateFlow<List<PortStop>>, onAddP
     if(showAdd){
         AlertDialog(
             onDismissRequest={ showAdd=false },
-            title={ Text("Add Port Stop")},
+            title={ TText("Add Port Stop")},
             text={
                 Column(verticalArrangement=Arrangement.spacedBy(8.dp)){
-                    OutlinedTextField(value=name, onValueChange={name=it}, label={ Text("Port / City *")}, modifier=Modifier.fillMaxWidth(), placeholder={ Text("Enter real port name")})
+                    OutlinedTextField(value=name, onValueChange={name=it}, label={ TText("Port / City *")}, modifier=Modifier.fillMaxWidth(), placeholder={ TText("Enter real port name")})
                     Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                        OutlinedTextField(value=latStr, onValueChange={latStr=it}, label={ Text("Lat")}, modifier=Modifier.weight(1f), placeholder={ Text("Latitude")})
-                        OutlinedTextField(value=lonStr, onValueChange={lonStr=it}, label={ Text("Lon")}, modifier=Modifier.weight(1f), placeholder={ Text("Longitude")})
+                        OutlinedTextField(value=latStr, onValueChange={latStr=it}, label={ TText("Lat")}, modifier=Modifier.weight(1f), placeholder={ TText("Latitude")})
+                        OutlinedTextField(value=lonStr, onValueChange={lonStr=it}, label={ TText("Lon")}, modifier=Modifier.weight(1f), placeholder={ TText("Longitude")})
                     }
-                    OutlinedTextField(value=country, onValueChange={country=it}, label={ Text("Country")}, modifier=Modifier.fillMaxWidth())
+                    OutlinedTextField(value=country, onValueChange={country=it}, label={ TText("Country")}, modifier=Modifier.fillMaxWidth())
                     // arrival/departure offset selectors simplified
-                    Text("Arrival: ${formatDate(arrival)}  Departure: ${formatDate(departure)}", style=MaterialTheme.typography.bodySmall)
+                    TText("Arrival: ${formatDate(arrival)}  Departure: ${formatDate(departure)}", style=MaterialTheme.typography.bodySmall)
                     Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                        FilledTonalButton(onClick={ arrival += 24*60*60*1000L; departure = arrival }){ Text("Arr +1d")}
-                        FilledTonalButton(onClick={ arrival -= 24*60*60*1000L; departure = arrival }){ Text("Arr -1d")}
+                        FilledTonalButton(onClick={ arrival += 24*60*60*1000L; departure = arrival }){ TText("Arr +1d")}
+                        FilledTonalButton(onClick={ arrival -= 24*60*60*1000L; departure = arrival }){ TText("Arr -1d")}
                     }
                     Button(onClick={
                         searching=true; error=null
@@ -108,12 +109,12 @@ fun PortListScreen(cruise: Cruise?, portsFlow: StateFlow<List<PortStop>>, onAddP
                                 latStr = first.latitude.toString(); lonStr = first.longitude.toString(); country = first.country ?: ""
                             }
                         }, { err -> searching=false; error=err })
-                    }, enabled=name.isNotBlank()){ if(searching) CircularProgressIndicator(Modifier.size(16.dp)) else Icon(Icons.Default.Search,null); Spacer(Modifier.width(8.dp)); Text("Search location")}
+                    }, enabled=name.isNotBlank()){ if(searching) CircularProgressIndicator(Modifier.size(16.dp)) else Icon(Icons.Default.Search,null); Spacer(Modifier.width(8.dp)); TText("Search location")}
                     if(error!=null) Text(error!!, color=MaterialTheme.colorScheme.error, style=MaterialTheme.typography.bodySmall)
                     if(searchResults.isNotEmpty()){
-                        Text("Results:", style=MaterialTheme.typography.labelMedium)
+                        TText("Results:", style=MaterialTheme.typography.labelMedium)
                         searchResults.take(3).forEach{ r ->
-                            ListItem(headlineContent={ Text(r.name)}, supportingContent={ Text("${r.country ?: ""} ${r.admin1 ?: ""} • ${r.latitude}, ${r.longitude}")}, trailingContent={ TextButton(onClick={ latStr=r.latitude.toString(); lonStr=r.longitude.toString(); country=r.country?:""; name=r.name}){ Text("Use")} })
+                            ListItem(headlineContent={ TText(r.name)}, supportingContent={ TText("${r.country ?: ""} ${r.admin1 ?: ""} • ${r.latitude}, ${r.longitude}")}, trailingContent={ TextButton(onClick={ latStr=r.latitude.toString(); lonStr=r.longitude.toString(); country=r.country?:""; name=r.name}){ TText("Use")} })
                         }
                     }
                 }
@@ -125,9 +126,9 @@ fun PortListScreen(cruise: Cruise?, portsFlow: StateFlow<List<PortStop>>, onAddP
                         onAddPort(name, lat, lon, arrival, departure, country)
                         showAdd=false; name=""; latStr=""; lonStr=""; country=""; searchResults=emptyList()
                     }
-                }){ Text("Add Port")}
+                }){ TText("Add Port")}
             },
-            dismissButton={ TextButton(onClick={ showAdd=false }){ Text("Cancel")}}
+            dismissButton={ TextButton(onClick={ showAdd=false }){ TText("Cancel")}}
         )
     }
 }
