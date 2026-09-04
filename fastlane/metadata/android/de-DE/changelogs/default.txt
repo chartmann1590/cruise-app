@@ -1,0 +1,1 @@
+1.0.0: Erste Veröffentlichung mit Offline-Routenplaner, Übersetzung in 33 Sprachen per Google ML Kit, SeaMesh-Chat und Deckplänen.

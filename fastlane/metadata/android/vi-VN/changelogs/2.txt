@@ -1,0 +1,1 @@
+1.0.0: Phiên bản đầu tiên với lịch trình ngoại tuyến, dịch 33 ngôn ngữ bằng Google ML Kit, chat SeaMesh và sơ đồ boong tàu.

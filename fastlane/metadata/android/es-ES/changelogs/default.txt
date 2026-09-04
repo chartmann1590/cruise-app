@@ -1,0 +1,1 @@
+1.0.0: Lanzamiento inicial con planificador de itinerario sin conexión, traducción en el dispositivo con Google ML Kit en 33 idiomas, chat SeaMesh y planos de cubiertas.

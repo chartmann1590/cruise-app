@@ -1,0 +1,1 @@
+1.0.0: Rilascio iniziale con pianificatore offline, traduzione con Google ML Kit in 33 lingue, chat SeaMesh e piani nave.

@@ -1,0 +1,1 @@
+1.0.0: Første udgivelse med offline rejseplanlægger, Google ML Kit oversættelse på 33 sprog, SeaMesh chat og dæksplaner.

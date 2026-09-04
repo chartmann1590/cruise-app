@@ -1,0 +1,1 @@
+1.0.0: Lanzamiento inicial con planificador offline, traducción local en 33 idiomas, chat grupal y planos de cubiertas.

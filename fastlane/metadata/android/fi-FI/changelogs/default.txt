@@ -1,0 +1,1 @@
+1.0.0: Ensimmäinen julkaisu, jossa offline-matkasuunnittelija, 33 kielen Google ML Kit -käännös, SeaMesh-chat ja kansikartat.

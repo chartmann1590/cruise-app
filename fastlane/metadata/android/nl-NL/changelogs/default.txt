@@ -1,0 +1,1 @@
+1.0.0: Eerste release met offline reisplanner, Google ML Kit vertaling in 33 talen, SeaMesh chat en dekplattegronden.

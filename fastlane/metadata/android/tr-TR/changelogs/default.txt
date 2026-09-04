@@ -1,0 +1,1 @@
+1.0.0: Çevrimdışı seyahat planlayıcı, Google ML Kit ile 33 dilde çeviri, SeaMesh sohbet ve güverte planları ile ilk sürüm.

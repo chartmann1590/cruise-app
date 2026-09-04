@@ -1,0 +1,1 @@
+1.0.0: Första versionen med offline-resplanerare, Google ML Kit-översättning på 33 språk, SeaMesh-chatt och däckkartor.

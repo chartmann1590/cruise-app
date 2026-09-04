@@ -1,0 +1,1 @@
+1.0.0: Pierwsze wydanie z planerem offline, tłumaczeniem Google ML Kit w 33 językach, czatem SeaMesh i planami pokładów.

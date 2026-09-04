@@ -1,0 +1,1 @@
+1.0.0: Initial release with full offline itinerary planner, Google ML Kit on-device translation in 33 languages, SeaMesh party chat, guest Wi-Fi hotspot, ship deck schematics, and cached marine weather.
