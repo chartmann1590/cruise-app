@@ -1,47 +1,53 @@
 launch
 wait 15
 shot 01-launch
-adclose
 tap (?i)^english \(default\)$
 wait 2
 tap (?i)^continue$
 wait 4
-adclose
-shot 02-after-language
-taploop (?i)^(skip tour|skip|next|continue|got it|ok|allow|while using the app|only this time|not now|later|done)$
+shot 02-tour
+tap (?i)^skip tour$
 wait 3
-adclose
-shot 03-setup-or-dashboard
+shot 03-setup
 scrollto (?i)^start with my cruise
 wait 6
-adclose
-taploop (?i)^(allow|ok|got it|not now|while using the app|only this time|skip tour|done)$
-adclose
+sh for i in 1 2 3; do if dumpsys activity activities | grep -E 'mResumedActivity|topResumedActivity' | grep -q AdActivity; then sleep 7; input keyevent 4; sleep 2; fi; done
+taploop (?i)^(allow|ok|got it|not now|while using the app|only this time|done)$
 shot 04-dashboard
 swipeup
 shot 05-dashboard-scrolled
 swipedown
-tap (?i)ports
+tap (?i)^monday, dec
 wait 4
-adclose
-shot 06-ports
-tap (?i)^party
-wait 4
-adclose
-shot 07-party
-tap (?i)weather
-wait 4
-adclose
-shot 08-weather
-tap (?i)^dashboard
-wait 3
-tap (?i)settings
-wait 4
-adclose
-shot 09-settings
-swipeup
-swipeup
-shot 10-settings-bottom
+sh for i in 1 2 3; do if dumpsys activity activities | grep -E 'mResumedActivity|topResumedActivity' | grep -q AdActivity; then sleep 7; input keyevent 4; sleep 2; fi; done
+shot 06-day-detail
 back
 wait 2
-shot 11-back
+tap (?i)^ship decks$
+wait 4
+sh for i in 1 2 3; do if dumpsys activity activities | grep -E 'mResumedActivity|topResumedActivity' | grep -q AdActivity; then sleep 7; input keyevent 4; sleep 2; fi; done
+shot 07-ship-decks
+back
+wait 2
+tap (?i)^ports \(
+wait 4
+sh for i in 1 2 3; do if dumpsys activity activities | grep -E 'mResumedActivity|topResumedActivity' | grep -q AdActivity; then sleep 7; input keyevent 4; sleep 2; fi; done
+shot 08-ports
+back
+wait 2
+tap (?i)^party$
+wait 4
+sh for i in 1 2 3; do if dumpsys activity activities | grep -E 'mResumedActivity|topResumedActivity' | grep -q AdActivity; then sleep 7; input keyevent 4; sleep 2; fi; done
+shot 09-party
+back
+wait 2
+tap (?i)^settings$
+wait 4
+sh for i in 1 2 3; do if dumpsys activity activities | grep -E 'mResumedActivity|topResumedActivity' | grep -q AdActivity; then sleep 7; input keyevent 4; sleep 2; fi; done
+shot 10-settings
+swipeup
+swipeup
+shot 11-settings-bottom
+back
+wait 2
+shot 12-back
