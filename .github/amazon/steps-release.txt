@@ -12,28 +12,30 @@ taploop (?i)^(skip tour|skip|next|continue|got it|ok|allow|while using the app|o
 wait 3
 adclose
 shot 03-setup-or-dashboard
-tap (?i)^skip
-wait 3
+scrollto (?i)^start with my cruise
+wait 6
+adclose
+taploop (?i)^(allow|ok|got it|not now|while using the app|only this time|skip tour|done)$
 adclose
 shot 04-dashboard
 swipeup
 shot 05-dashboard-scrolled
 swipedown
-tap (?i)^ports$
+tap (?i)ports
 wait 4
 adclose
 shot 06-ports
-tap (?i)^party$
+tap (?i)^party
 wait 4
 adclose
 shot 07-party
-tap (?i)^weather$
+tap (?i)weather
 wait 4
 adclose
 shot 08-weather
-tap (?i)^dashboard$
+tap (?i)^dashboard
 wait 3
-tap (?i)^settings$
+tap (?i)settings
 wait 4
 adclose
 shot 09-settings
